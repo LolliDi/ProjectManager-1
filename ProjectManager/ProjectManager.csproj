@@ -35,8 +35,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,6 +64,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Styles\Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -63,6 +76,32 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Commands\LambdaCommand.cs" />
+    <Compile Include="Models\Base\IEntity.cs" />
+    <Compile Include="Models\DbModels\CostTypes.cs" />
+    <Compile Include="Models\DbModels\DateTypes.cs" />
+    <Compile Include="Models\DbModels\MaterialResoucres.cs" />
+    <Compile Include="Models\DbModels\Permissions.cs" />
+    <Compile Include="Models\DbModels\Persons.cs" />
+    <Compile Include="Models\DbContext\ProjectManagerDb.cs" />
+    <Compile Include="Models\DbModels\ProjectResources.cs" />
+    <Compile Include="Models\DbModels\Projects.cs" />
+    <Compile Include="Models\DbModels\ProjectTasks.cs" />
+    <Compile Include="Models\DbModels\Resources.cs" />
+    <Compile Include="Models\DbModels\Roles.cs" />
+    <Compile Include="Models\DbModels\SalaryTypes.cs" />
+    <Compile Include="Models\DbModels\TaskConnections.cs" />
+    <Compile Include="Models\DbModels\TaskGroups.cs" />
+    <Compile Include="Models\DbModels\Tasks.cs" />
+    <Compile Include="Models\DbModels\TaskTypes.cs" />
+    <Compile Include="Models\DbModels\Users.cs" />
+    <Compile Include="Models\DbModels\WeekDays.cs" />
+    <Compile Include="Models\DbModels\WorkingCalendars.cs" />
+    <Compile Include="Models\DbModels\WorkingCalendarWeekends.cs" />
+    <Compile Include="Models\DbModels\WorkingResources.cs" />
+    <Compile Include="Models\Repositories\Base\IRepository.cs" />
+    <Compile Include="Models\Repositories\Repository.cs" />
+    <Compile Include="ViewModels\Base\ViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -86,6 +125,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -96,11 +136,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Behaviours\" />
-    <Folder Include="Commands\" />
-    <Folder Include="Models\" />
     <Folder Include="Services\" />
-    <Folder Include="Styles\" />
-    <Folder Include="ViewModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
