@@ -4,9 +4,34 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectManager"
+        xmlns:views="clr-namespace:ProjectManager.Views"
+        xmlns:viewmodels="clr-namespace:ProjectManager.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <viewmodels:MainViewModel/>
+    </Window.DataContext>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <Button Content="Перейти во ViewModel1"
+                    Command="{Binding Path=ToViewModel1Commmand}"/>
+            <Button Content="Перейти во ViewModel2"
+                    Command="{Binding Path=ToViewModel2Commmand}"/>
+        </StackPanel>
+        <ContentControl Content="{Binding Path=CurrentViewModel}"
+                        Grid.Row="1">
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type viewmodels:ViewModel1}">
+                    <views:View1/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:ViewModel2}">
+                    <views:View2/>
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
     </Grid>
 </Window>
