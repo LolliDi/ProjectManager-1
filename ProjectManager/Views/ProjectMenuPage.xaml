@@ -6,6 +6,13 @@
              xmlns:local="clr-namespace:ProjectManager.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="Button" BasedOn="{StaticResource SButton}">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="20 10"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+    </UserControl.Resources>
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -24,6 +31,6 @@
             <Button Content="Паспорт проекта"
                     Command="{Binding Navigation.ProjectPassportPage}"/>
         </StackPanel>
-        <ContentControl Grid.Row="1"/>
+        <DataGrid Grid.Row="1"/>
     </Grid>
 </UserControl>
