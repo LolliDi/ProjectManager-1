@@ -66,8 +66,89 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Views\UserAccount.xaml.cs">
-      <DependentUpon>UserAccount.xaml</DependentUpon>
+    <Compile Include="Models\CostTypes.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DateTypes.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MaterialResoucres.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Permissions.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Persons.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectManagerModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectManagerModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectManagerModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectManagerModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectManagerModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectResources.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Projects.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectTaskResources.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectTasks.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Resources.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Roles.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SalaryTypes.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaskConnections.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaskGroups.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tasks.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaskTypes.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Users.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WeekDays.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkingCalendars.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkingCalendarWeekends.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkingResources.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\View1.xaml.cs">
+      <DependentUpon>View1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\View2.xaml.cs">
+      <DependentUpon>View2.xaml</DependentUpon>
     </Compile>
     <Page Include="Styles\Style.xaml">
       <SubType>Designer</SubType>
@@ -83,37 +164,22 @@
     </Compile>
     <Compile Include="Commands\LambdaCommand.cs" />
     <Compile Include="Models\Base\IEntity.cs" />
-    <Compile Include="Models\DbModels\CostTypes.cs" />
-    <Compile Include="Models\DbModels\DateTypes.cs" />
-    <Compile Include="Models\DbModels\MaterialResoucres.cs" />
-    <Compile Include="Models\DbModels\Permissions.cs" />
-    <Compile Include="Models\DbModels\Persons.cs" />
-    <Compile Include="Models\DbContext\ProjectManagerDb.cs" />
-    <Compile Include="Models\DbModels\ProjectResources.cs" />
-    <Compile Include="Models\DbModels\Projects.cs" />
-    <Compile Include="Models\DbModels\ProjectTasks.cs" />
-    <Compile Include="Models\DbModels\Resources.cs" />
-    <Compile Include="Models\DbModels\Roles.cs" />
-    <Compile Include="Models\DbModels\SalaryTypes.cs" />
-    <Compile Include="Models\DbModels\TaskConnections.cs" />
-    <Compile Include="Models\DbModels\TaskGroups.cs" />
-    <Compile Include="Models\DbModels\Tasks.cs" />
-    <Compile Include="Models\DbModels\TaskTypes.cs" />
-    <Compile Include="Models\DbModels\Users.cs" />
-    <Compile Include="Models\DbModels\WeekDays.cs" />
-    <Compile Include="Models\DbModels\WorkingCalendars.cs" />
-    <Compile Include="Models\DbModels\WorkingCalendarWeekends.cs" />
-    <Compile Include="Models\DbModels\WorkingResources.cs" />
     <Compile Include="Models\Repositories\Base\IRepository.cs" />
     <Compile Include="Models\Repositories\Repository.cs" />
     <Compile Include="Models\Repositories\UsersRepository.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />
-    <Compile Include="ViewModels\UserAccountViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ViewModel1.cs" />
+    <Compile Include="ViewModels\ViewModel2.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\UserAccount.xaml">
+    <Page Include="Views\View1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\View2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -136,6 +202,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Models\ProjectManagerModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProjectManagerModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\ProjectManagerModel.edmx.diagram">
+      <DependentUpon>ProjectManagerModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -151,6 +224,18 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\ProjectManagerModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProjectManagerModel.edmx</DependentUpon>
+      <LastGenOutput>ProjectManagerModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ProjectManagerModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProjectManagerModel.edmx</DependentUpon>
+      <LastGenOutput>ProjectManagerModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

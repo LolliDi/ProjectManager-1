@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3449c4316e044a059da95654d893c5c7" Name="Diagram1">
+        <EntityTypeShape EntityType="ProjectManagerModel.CostTypes" Width="1.5" PointX="1.5" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagerModel.DateTypes" Width="1.5" PointX="1.5" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagerModel.MaterialResoucres" Width="1.5" PointX="3" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagerModel.Permissions" Width="1.5" PointX="1.5" PointY="26.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagerModel.Persons" Width="1.5" PointX="5.25" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagerModel.ProjectResources" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagerModel.Projects" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagerModel.ProjectTaskResources" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagerModel.ProjectTasks" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagerModel.Resources" Width="1.5" PointX="0.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagerModel.Roles" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagerModel.SalaryTypes" Width="1.5" PointX="3.75" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagerModel.TaskConnections" Width="1.5" PointX="6" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagerModel.TaskGroups" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagerModel.Tasks" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagerModel.TaskTypes" Width="1.5" PointX="3.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagerModel.Users" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagerModel.WeekDays" Width="1.5" PointX="3.75" PointY="29.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagerModel.WorkingCalendars" Width="1.5" PointX="3.75" PointY="26.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagerModel.WorkingCalendarWeekends" Width="1.5" PointX="6" PointY="26.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagerModel.WorkingResources" Width="1.5" PointX="6" PointY="14.75" IsExpanded="true" />
+        <AssociationConnector Association="ProjectManagerModel.FK_MaterialResoucres_CostTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagerModel.FK_SalaryTypes_CostTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagerModel.FK_SalaryTypes_DateTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagerModel.FK_MaterialResoucres_Resources" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagerModel.FK_Persons_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagerModel.FK_ProjectResources_Projects" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagerModel.FK_ProjectResources_Resources" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagerModel.FK_ProjectTaskResources_ProjectResources" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagerModel.FK_ProjectTasks_Projects" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagerModel.FK_ProjectTaskResources_ProjectTasks" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagerModel.FK_ProjectTasks_Tasks" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagerModel.FK_WorkingResources_Resources" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagerModel.FK_Users_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagerModel.FK_WorkingResources_SalaryTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagerModel.FK_TaskConnections_Tasks" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagerModel.FK_TaskConnections_Tasks1" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagerModel.FK_TaskConnections_TaskTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagerModel.FK_TaskGroups_Tasks" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagerModel.FK_TaskGroups_Tasks1" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagerModel.FK_WorkingCalendarWeekends_WeekDays" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagerModel.FK_WorkingCalendarWeekends_WorkingCalendars" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagerModel.FK_WorkingResources_WorkingCalendars" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagerModel.ProjectUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagerModel.RolePermissions" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

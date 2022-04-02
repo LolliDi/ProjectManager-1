@@ -1,0 +1,1562 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ProjectManagerModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CostTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DateTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MaterialResoucres">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" />
+          <Property Name="Cost" Type="int" />
+          <Property Name="CostType" Type="int" />
+        </EntityType>
+        <EntityType Name="Permissions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Persons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" />
+          <Property Name="Age" Type="int" />
+        </EntityType>
+        <EntityType Name="ProjectResources">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Project" Type="int" />
+          <Property Name="Resource" Type="int" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatingDate" Type="date" />
+          <Property Name="User" Type="int" />
+        </EntityType>
+        <EntityType Name="ProjectTaskResources">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectTask" Type="int" />
+          <Property Name="ProjectResource" Type="int" />
+        </EntityType>
+        <EntityType Name="ProjectTasks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Project" Type="int" />
+          <Property Name="Task" Type="int" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "ProjectManager.dbo.ProjectUsers" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="ProjectUsers">
+          <Key>
+            <PropertyRef Name="Project" />
+            <PropertyRef Name="User" />
+          </Key>
+          <Property Name="Project" Type="int" Nullable="false" />
+          <Property Name="User" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Resources">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "ProjectManager.dbo.RolePermissions" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="RolePermissions">
+          <Key>
+            <PropertyRef Name="Role" />
+            <PropertyRef Name="Permission" />
+          </Key>
+          <Property Name="Role" Type="int" Nullable="false" />
+          <Property Name="Permission" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="SalaryTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CostType" Type="int" />
+          <Property Name="DateType" Type="int" />
+        </EntityType>
+        <EntityType Name="TaskConnections">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Parent" Type="int" Nullable="false" />
+          <Property Name="Child" Type="int" Nullable="false" />
+          <Property Name="Depth" Type="int" Nullable="false" />
+          <Property Name="TaskType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskGroups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Parent" Type="int" Nullable="false" />
+          <Property Name="Child" Type="int" Nullable="false" />
+          <Property Name="Depth" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="CompletionPercentage" Type="int" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="Duration" Type="int" />
+        </EntityType>
+        <EntityType Name="TaskTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WeekDays">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="WorkingCalendars">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartTime" Type="time" Precision="7" />
+          <Property Name="EndTime" Type="time" Precision="7" />
+          <Property Name="Duration" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="WorkingCalendarWeekends">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkingCalendar" Type="int" />
+          <Property Name="WeekDay" Type="int" />
+          <Property Name="IsWeekend" Type="int" />
+        </EntityType>
+        <EntityType Name="WorkingResources">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Salary" Type="int" />
+          <Property Name="SalaryType" Type="int" />
+          <Property Name="WorkingCalendar" Type="int" />
+        </EntityType>
+        <Association Name="FK_MaterialResoucres_CostTypes">
+          <End Role="CostTypes" Type="Self.CostTypes" Multiplicity="0..1" />
+          <End Role="MaterialResoucres" Type="Self.MaterialResoucres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CostTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MaterialResoucres">
+              <PropertyRef Name="CostType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialResoucres_Resources">
+          <End Role="Resources" Type="Self.Resources" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MaterialResoucres" Type="Self.MaterialResoucres" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Resources">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MaterialResoucres">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persons_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Persons" Type="Self.Persons" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Persons">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectResources_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjectResources" Type="Self.ProjectResources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectResources">
+              <PropertyRef Name="Project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectResources_Resources">
+          <End Role="Resources" Type="Self.Resources" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjectResources" Type="Self.ProjectResources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resources">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectResources">
+              <PropertyRef Name="Resource" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectTaskResources_ProjectResources">
+          <End Role="ProjectResources" Type="Self.ProjectResources" Multiplicity="0..1" />
+          <End Role="ProjectTaskResources" Type="Self.ProjectTaskResources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectResources">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectTaskResources">
+              <PropertyRef Name="ProjectResource" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectTaskResources_ProjectTasks">
+          <End Role="ProjectTasks" Type="Self.ProjectTasks" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjectTaskResources" Type="Self.ProjectTaskResources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectTasks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectTaskResources">
+              <PropertyRef Name="ProjectTask" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectTasks_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjectTasks" Type="Self.ProjectTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectTasks">
+              <PropertyRef Name="Project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectTasks_Tasks">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjectTasks" Type="Self.ProjectTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectTasks">
+              <PropertyRef Name="Task" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectUsers_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjectUsers" Type="Self.ProjectUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectUsers">
+              <PropertyRef Name="Project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectUsers_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjectUsers" Type="Self.ProjectUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectUsers">
+              <PropertyRef Name="User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolePermissions_Permissions">
+          <End Role="Permissions" Type="Self.Permissions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RolePermissions" Type="Self.RolePermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permissions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RolePermissions">
+              <PropertyRef Name="Permission" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolePermissions_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RolePermissions" Type="Self.RolePermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RolePermissions">
+              <PropertyRef Name="Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalaryTypes_CostTypes">
+          <End Role="CostTypes" Type="Self.CostTypes" Multiplicity="0..1" />
+          <End Role="SalaryTypes" Type="Self.SalaryTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CostTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalaryTypes">
+              <PropertyRef Name="CostType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalaryTypes_DateTypes">
+          <End Role="DateTypes" Type="Self.DateTypes" Multiplicity="0..1" />
+          <End Role="SalaryTypes" Type="Self.SalaryTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DateTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalaryTypes">
+              <PropertyRef Name="DateType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskConnections_Tasks">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+          <End Role="TaskConnections" Type="Self.TaskConnections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskConnections">
+              <PropertyRef Name="Parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskConnections_Tasks1">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+          <End Role="TaskConnections" Type="Self.TaskConnections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskConnections">
+              <PropertyRef Name="Child" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskConnections_TaskTypes">
+          <End Role="TaskTypes" Type="Self.TaskTypes" Multiplicity="1" />
+          <End Role="TaskConnections" Type="Self.TaskConnections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskConnections">
+              <PropertyRef Name="TaskType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskGroups_Tasks">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+          <End Role="TaskGroups" Type="Self.TaskGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskGroups">
+              <PropertyRef Name="Parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskGroups_Tasks1">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+          <End Role="TaskGroups" Type="Self.TaskGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskGroups">
+              <PropertyRef Name="Child" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkingCalendarWeekends_WeekDays">
+          <End Role="WeekDays" Type="Self.WeekDays" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WorkingCalendarWeekends" Type="Self.WorkingCalendarWeekends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WeekDays">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkingCalendarWeekends">
+              <PropertyRef Name="WeekDay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkingCalendarWeekends_WorkingCalendars">
+          <End Role="WorkingCalendars" Type="Self.WorkingCalendars" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WorkingCalendarWeekends" Type="Self.WorkingCalendarWeekends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkingCalendars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkingCalendarWeekends">
+              <PropertyRef Name="WorkingCalendar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkingResources_Resources">
+          <End Role="Resources" Type="Self.Resources" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WorkingResources" Type="Self.WorkingResources" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Resources">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkingResources">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkingResources_SalaryTypes">
+          <End Role="SalaryTypes" Type="Self.SalaryTypes" Multiplicity="0..1" />
+          <End Role="WorkingResources" Type="Self.WorkingResources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalaryTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkingResources">
+              <PropertyRef Name="SalaryType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkingResources_WorkingCalendars">
+          <End Role="WorkingCalendars" Type="Self.WorkingCalendars" Multiplicity="0..1" />
+          <End Role="WorkingResources" Type="Self.WorkingResources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkingCalendars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkingResources">
+              <PropertyRef Name="WorkingCalendar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ProjectManagerModelContainer">
+          <EntitySet Name="CostTypes" EntityType="Self.CostTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DateTypes" EntityType="Self.DateTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaterialResoucres" EntityType="Self.MaterialResoucres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Permissions" EntityType="Self.Permissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Persons" EntityType="Self.Persons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectResources" EntityType="Self.ProjectResources" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectTaskResources" EntityType="Self.ProjectTaskResources" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectTasks" EntityType="Self.ProjectTasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Resources" EntityType="Self.Resources" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalaryTypes" EntityType="Self.SalaryTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskConnections" EntityType="Self.TaskConnections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskGroups" EntityType="Self.TaskGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskTypes" EntityType="Self.TaskTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WeekDays" EntityType="Self.WeekDays" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkingCalendars" EntityType="Self.WorkingCalendars" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkingCalendarWeekends" EntityType="Self.WorkingCalendarWeekends" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkingResources" EntityType="Self.WorkingResources" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectUsers" EntityType="Self.ProjectUsers" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ProjectUsers].[Project] AS [Project], 
+    [ProjectUsers].[User] AS [User]
+    FROM [dbo].[ProjectUsers] AS [ProjectUsers]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="RolePermissions" EntityType="Self.RolePermissions" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RolePermissions].[Role] AS [Role], 
+    [RolePermissions].[Permission] AS [Permission]
+    FROM [dbo].[RolePermissions] AS [RolePermissions]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_MaterialResoucres_CostTypes" Association="Self.FK_MaterialResoucres_CostTypes">
+            <End Role="CostTypes" EntitySet="CostTypes" />
+            <End Role="MaterialResoucres" EntitySet="MaterialResoucres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialResoucres_Resources" Association="Self.FK_MaterialResoucres_Resources">
+            <End Role="Resources" EntitySet="Resources" />
+            <End Role="MaterialResoucres" EntitySet="MaterialResoucres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persons_Users" Association="Self.FK_Persons_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Persons" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectResources_Projects" Association="Self.FK_ProjectResources_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectResources" EntitySet="ProjectResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectResources_Resources" Association="Self.FK_ProjectResources_Resources">
+            <End Role="Resources" EntitySet="Resources" />
+            <End Role="ProjectResources" EntitySet="ProjectResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectTaskResources_ProjectResources" Association="Self.FK_ProjectTaskResources_ProjectResources">
+            <End Role="ProjectResources" EntitySet="ProjectResources" />
+            <End Role="ProjectTaskResources" EntitySet="ProjectTaskResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectTaskResources_ProjectTasks" Association="Self.FK_ProjectTaskResources_ProjectTasks">
+            <End Role="ProjectTasks" EntitySet="ProjectTasks" />
+            <End Role="ProjectTaskResources" EntitySet="ProjectTaskResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectTasks_Projects" Association="Self.FK_ProjectTasks_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectTasks" EntitySet="ProjectTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectTasks_Tasks" Association="Self.FK_ProjectTasks_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="ProjectTasks" EntitySet="ProjectTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectUsers_Projects" Association="Self.FK_ProjectUsers_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectUsers" EntitySet="ProjectUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectUsers_Users" Association="Self.FK_ProjectUsers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ProjectUsers" EntitySet="ProjectUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolePermissions_Permissions" Association="Self.FK_RolePermissions_Permissions">
+            <End Role="Permissions" EntitySet="Permissions" />
+            <End Role="RolePermissions" EntitySet="RolePermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolePermissions_Roles" Association="Self.FK_RolePermissions_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="RolePermissions" EntitySet="RolePermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalaryTypes_CostTypes" Association="Self.FK_SalaryTypes_CostTypes">
+            <End Role="CostTypes" EntitySet="CostTypes" />
+            <End Role="SalaryTypes" EntitySet="SalaryTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalaryTypes_DateTypes" Association="Self.FK_SalaryTypes_DateTypes">
+            <End Role="DateTypes" EntitySet="DateTypes" />
+            <End Role="SalaryTypes" EntitySet="SalaryTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskConnections_Tasks" Association="Self.FK_TaskConnections_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="TaskConnections" EntitySet="TaskConnections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskConnections_Tasks1" Association="Self.FK_TaskConnections_Tasks1">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="TaskConnections" EntitySet="TaskConnections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskConnections_TaskTypes" Association="Self.FK_TaskConnections_TaskTypes">
+            <End Role="TaskTypes" EntitySet="TaskTypes" />
+            <End Role="TaskConnections" EntitySet="TaskConnections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskGroups_Tasks" Association="Self.FK_TaskGroups_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="TaskGroups" EntitySet="TaskGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskGroups_Tasks1" Association="Self.FK_TaskGroups_Tasks1">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="TaskGroups" EntitySet="TaskGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkingCalendarWeekends_WeekDays" Association="Self.FK_WorkingCalendarWeekends_WeekDays">
+            <End Role="WeekDays" EntitySet="WeekDays" />
+            <End Role="WorkingCalendarWeekends" EntitySet="WorkingCalendarWeekends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkingCalendarWeekends_WorkingCalendars" Association="Self.FK_WorkingCalendarWeekends_WorkingCalendars">
+            <End Role="WorkingCalendars" EntitySet="WorkingCalendars" />
+            <End Role="WorkingCalendarWeekends" EntitySet="WorkingCalendarWeekends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkingResources_Resources" Association="Self.FK_WorkingResources_Resources">
+            <End Role="Resources" EntitySet="Resources" />
+            <End Role="WorkingResources" EntitySet="WorkingResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkingResources_SalaryTypes" Association="Self.FK_WorkingResources_SalaryTypes">
+            <End Role="SalaryTypes" EntitySet="SalaryTypes" />
+            <End Role="WorkingResources" EntitySet="WorkingResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkingResources_WorkingCalendars" Association="Self.FK_WorkingResources_WorkingCalendars">
+            <End Role="WorkingCalendars" EntitySet="WorkingCalendars" />
+            <End Role="WorkingResources" EntitySet="WorkingResources" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProjectManagerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CostTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MaterialResoucres" Relationship="Self.FK_MaterialResoucres_CostTypes" FromRole="CostTypes" ToRole="MaterialResoucres" />
+          <NavigationProperty Name="SalaryTypes" Relationship="Self.FK_SalaryTypes_CostTypes" FromRole="CostTypes" ToRole="SalaryTypes" />
+        </EntityType>
+        <EntityType Name="DateTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SalaryTypes" Relationship="Self.FK_SalaryTypes_DateTypes" FromRole="DateTypes" ToRole="SalaryTypes" />
+        </EntityType>
+        <EntityType Name="MaterialResoucres">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="Cost" Type="Int32" />
+          <Property Name="CostType" Type="Int32" />
+          <NavigationProperty Name="CostTypes" Relationship="Self.FK_MaterialResoucres_CostTypes" FromRole="MaterialResoucres" ToRole="CostTypes" />
+          <NavigationProperty Name="Resources" Relationship="Self.FK_MaterialResoucres_Resources" FromRole="MaterialResoucres" ToRole="Resources" />
+        </EntityType>
+        <EntityType Name="Permissions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Roles" Relationship="Self.RolePermissions" FromRole="Permissions" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="Persons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="Int32" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Persons_Users" FromRole="Persons" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="ProjectResources">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Project" Type="Int32" />
+          <Property Name="Resource" Type="Int32" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_ProjectResources_Projects" FromRole="ProjectResources" ToRole="Projects" />
+          <NavigationProperty Name="Resources" Relationship="Self.FK_ProjectResources_Resources" FromRole="ProjectResources" ToRole="Resources" />
+          <NavigationProperty Name="ProjectTaskResources" Relationship="Self.FK_ProjectTaskResources_ProjectResources" FromRole="ProjectResources" ToRole="ProjectTaskResources" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatingDate" Type="DateTime" Precision="0" />
+          <Property Name="User" Type="Int32" />
+          <NavigationProperty Name="ProjectResources" Relationship="Self.FK_ProjectResources_Projects" FromRole="Projects" ToRole="ProjectResources" />
+          <NavigationProperty Name="ProjectTasks" Relationship="Self.FK_ProjectTasks_Projects" FromRole="Projects" ToRole="ProjectTasks" />
+          <NavigationProperty Name="Users" Relationship="Self.ProjectUsers" FromRole="Projects" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="ProjectTaskResources">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectTask" Type="Int32" />
+          <Property Name="ProjectResource" Type="Int32" />
+          <NavigationProperty Name="ProjectResources" Relationship="Self.FK_ProjectTaskResources_ProjectResources" FromRole="ProjectTaskResources" ToRole="ProjectResources" />
+          <NavigationProperty Name="ProjectTasks" Relationship="Self.FK_ProjectTaskResources_ProjectTasks" FromRole="ProjectTaskResources" ToRole="ProjectTasks" />
+        </EntityType>
+        <EntityType Name="ProjectTasks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Project" Type="Int32" />
+          <Property Name="Task" Type="Int32" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_ProjectTasks_Projects" FromRole="ProjectTasks" ToRole="Projects" />
+          <NavigationProperty Name="ProjectTaskResources" Relationship="Self.FK_ProjectTaskResources_ProjectTasks" FromRole="ProjectTasks" ToRole="ProjectTaskResources" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK_ProjectTasks_Tasks" FromRole="ProjectTasks" ToRole="Tasks" />
+        </EntityType>
+        <EntityType Name="Resources">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MaterialResoucres" Relationship="Self.FK_MaterialResoucres_Resources" FromRole="Resources" ToRole="MaterialResoucres" />
+          <NavigationProperty Name="ProjectResources" Relationship="Self.FK_ProjectResources_Resources" FromRole="Resources" ToRole="ProjectResources" />
+          <NavigationProperty Name="WorkingResources" Relationship="Self.FK_WorkingResources_Resources" FromRole="Resources" ToRole="WorkingResources" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Roles" FromRole="Roles" ToRole="Users" />
+          <NavigationProperty Name="Permissions" Relationship="Self.RolePermissions" FromRole="Roles" ToRole="Permissions" />
+        </EntityType>
+        <EntityType Name="SalaryTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CostType" Type="Int32" />
+          <Property Name="DateType" Type="Int32" />
+          <NavigationProperty Name="CostTypes" Relationship="Self.FK_SalaryTypes_CostTypes" FromRole="SalaryTypes" ToRole="CostTypes" />
+          <NavigationProperty Name="DateTypes" Relationship="Self.FK_SalaryTypes_DateTypes" FromRole="SalaryTypes" ToRole="DateTypes" />
+          <NavigationProperty Name="WorkingResources" Relationship="Self.FK_WorkingResources_SalaryTypes" FromRole="SalaryTypes" ToRole="WorkingResources" />
+        </EntityType>
+        <EntityType Name="TaskConnections">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Parent" Type="Int32" Nullable="false" />
+          <Property Name="Child" Type="Int32" Nullable="false" />
+          <Property Name="Depth" Type="Int32" Nullable="false" />
+          <Property Name="TaskType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK_TaskConnections_Tasks" FromRole="TaskConnections" ToRole="Tasks" />
+          <NavigationProperty Name="Tasks1" Relationship="Self.FK_TaskConnections_Tasks1" FromRole="TaskConnections" ToRole="Tasks" />
+          <NavigationProperty Name="TaskTypes" Relationship="Self.FK_TaskConnections_TaskTypes" FromRole="TaskConnections" ToRole="TaskTypes" />
+        </EntityType>
+        <EntityType Name="TaskGroups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Parent" Type="Int32" Nullable="false" />
+          <Property Name="Child" Type="Int32" Nullable="false" />
+          <Property Name="Depth" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK_TaskGroups_Tasks" FromRole="TaskGroups" ToRole="Tasks" />
+          <NavigationProperty Name="Tasks1" Relationship="Self.FK_TaskGroups_Tasks1" FromRole="TaskGroups" ToRole="Tasks" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CompletionPercentage" Type="Int32" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="Duration" Type="Int32" />
+          <NavigationProperty Name="ProjectTasks" Relationship="Self.FK_ProjectTasks_Tasks" FromRole="Tasks" ToRole="ProjectTasks" />
+          <NavigationProperty Name="TaskConnections" Relationship="Self.FK_TaskConnections_Tasks" FromRole="Tasks" ToRole="TaskConnections" />
+          <NavigationProperty Name="TaskConnections1" Relationship="Self.FK_TaskConnections_Tasks1" FromRole="Tasks" ToRole="TaskConnections" />
+          <NavigationProperty Name="TaskGroups" Relationship="Self.FK_TaskGroups_Tasks" FromRole="Tasks" ToRole="TaskGroups" />
+          <NavigationProperty Name="TaskGroups1" Relationship="Self.FK_TaskGroups_Tasks1" FromRole="Tasks" ToRole="TaskGroups" />
+        </EntityType>
+        <EntityType Name="TaskTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TaskConnections" Relationship="Self.FK_TaskConnections_TaskTypes" FromRole="TaskTypes" ToRole="TaskConnections" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Role" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Persons" Relationship="Self.FK_Persons_Users" FromRole="Users" ToRole="Persons" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
+          <NavigationProperty Name="Projects" Relationship="Self.ProjectUsers" FromRole="Users" ToRole="Projects" />
+        </EntityType>
+        <EntityType Name="WeekDays">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="WorkingCalendarWeekends" Relationship="Self.FK_WorkingCalendarWeekends_WeekDays" FromRole="WeekDays" ToRole="WorkingCalendarWeekends" />
+        </EntityType>
+        <EntityType Name="WorkingCalendars">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartTime" Type="Time" Precision="7" />
+          <Property Name="EndTime" Type="Time" Precision="7" />
+          <Property Name="Duration" Type="Time" Precision="7" />
+          <NavigationProperty Name="WorkingCalendarWeekends" Relationship="Self.FK_WorkingCalendarWeekends_WorkingCalendars" FromRole="WorkingCalendars" ToRole="WorkingCalendarWeekends" />
+          <NavigationProperty Name="WorkingResources" Relationship="Self.FK_WorkingResources_WorkingCalendars" FromRole="WorkingCalendars" ToRole="WorkingResources" />
+        </EntityType>
+        <EntityType Name="WorkingCalendarWeekends">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkingCalendar" Type="Int32" />
+          <Property Name="WeekDay" Type="Int32" />
+          <Property Name="IsWeekend" Type="Int32" />
+          <NavigationProperty Name="WeekDays" Relationship="Self.FK_WorkingCalendarWeekends_WeekDays" FromRole="WorkingCalendarWeekends" ToRole="WeekDays" />
+          <NavigationProperty Name="WorkingCalendars" Relationship="Self.FK_WorkingCalendarWeekends_WorkingCalendars" FromRole="WorkingCalendarWeekends" ToRole="WorkingCalendars" />
+        </EntityType>
+        <EntityType Name="WorkingResources">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Salary" Type="Int32" />
+          <Property Name="SalaryType" Type="Int32" />
+          <Property Name="WorkingCalendar" Type="Int32" />
+          <NavigationProperty Name="Resources" Relationship="Self.FK_WorkingResources_Resources" FromRole="WorkingResources" ToRole="Resources" />
+          <NavigationProperty Name="SalaryTypes" Relationship="Self.FK_WorkingResources_SalaryTypes" FromRole="WorkingResources" ToRole="SalaryTypes" />
+          <NavigationProperty Name="WorkingCalendars" Relationship="Self.FK_WorkingResources_WorkingCalendars" FromRole="WorkingResources" ToRole="WorkingCalendars" />
+        </EntityType>
+        <Association Name="FK_MaterialResoucres_CostTypes">
+          <End Role="CostTypes" Type="Self.CostTypes" Multiplicity="0..1" />
+          <End Role="MaterialResoucres" Type="Self.MaterialResoucres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CostTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MaterialResoucres">
+              <PropertyRef Name="CostType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalaryTypes_CostTypes">
+          <End Role="CostTypes" Type="Self.CostTypes" Multiplicity="0..1" />
+          <End Role="SalaryTypes" Type="Self.SalaryTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CostTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalaryTypes">
+              <PropertyRef Name="CostType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalaryTypes_DateTypes">
+          <End Role="DateTypes" Type="Self.DateTypes" Multiplicity="0..1" />
+          <End Role="SalaryTypes" Type="Self.SalaryTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DateTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalaryTypes">
+              <PropertyRef Name="DateType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialResoucres_Resources">
+          <End Role="Resources" Type="Self.Resources" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MaterialResoucres" Type="Self.MaterialResoucres" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Resources">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MaterialResoucres">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persons_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Persons" Type="Self.Persons" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Persons">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectResources_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjectResources" Type="Self.ProjectResources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectResources">
+              <PropertyRef Name="Project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectResources_Resources">
+          <End Role="Resources" Type="Self.Resources" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjectResources" Type="Self.ProjectResources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resources">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectResources">
+              <PropertyRef Name="Resource" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectTaskResources_ProjectResources">
+          <End Role="ProjectResources" Type="Self.ProjectResources" Multiplicity="0..1" />
+          <End Role="ProjectTaskResources" Type="Self.ProjectTaskResources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectResources">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectTaskResources">
+              <PropertyRef Name="ProjectResource" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectTasks_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjectTasks" Type="Self.ProjectTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectTasks">
+              <PropertyRef Name="Project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectTaskResources_ProjectTasks">
+          <End Role="ProjectTasks" Type="Self.ProjectTasks" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjectTaskResources" Type="Self.ProjectTaskResources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectTasks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectTaskResources">
+              <PropertyRef Name="ProjectTask" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectTasks_Tasks">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjectTasks" Type="Self.ProjectTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectTasks">
+              <PropertyRef Name="Task" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkingResources_Resources">
+          <End Role="Resources" Type="Self.Resources" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WorkingResources" Type="Self.WorkingResources" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Resources">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkingResources">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkingResources_SalaryTypes">
+          <End Role="SalaryTypes" Type="Self.SalaryTypes" Multiplicity="0..1" />
+          <End Role="WorkingResources" Type="Self.WorkingResources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalaryTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkingResources">
+              <PropertyRef Name="SalaryType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskConnections_Tasks">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+          <End Role="TaskConnections" Type="Self.TaskConnections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskConnections">
+              <PropertyRef Name="Parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskConnections_Tasks1">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+          <End Role="TaskConnections" Type="Self.TaskConnections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskConnections">
+              <PropertyRef Name="Child" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskConnections_TaskTypes">
+          <End Role="TaskTypes" Type="Self.TaskTypes" Multiplicity="1" />
+          <End Role="TaskConnections" Type="Self.TaskConnections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskConnections">
+              <PropertyRef Name="TaskType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskGroups_Tasks">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+          <End Role="TaskGroups" Type="Self.TaskGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskGroups">
+              <PropertyRef Name="Parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskGroups_Tasks1">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+          <End Role="TaskGroups" Type="Self.TaskGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskGroups">
+              <PropertyRef Name="Child" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkingCalendarWeekends_WeekDays">
+          <End Role="WeekDays" Type="Self.WeekDays" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WorkingCalendarWeekends" Type="Self.WorkingCalendarWeekends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WeekDays">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkingCalendarWeekends">
+              <PropertyRef Name="WeekDay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkingCalendarWeekends_WorkingCalendars">
+          <End Role="WorkingCalendars" Type="Self.WorkingCalendars" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WorkingCalendarWeekends" Type="Self.WorkingCalendarWeekends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkingCalendars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkingCalendarWeekends">
+              <PropertyRef Name="WorkingCalendar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkingResources_WorkingCalendars">
+          <End Role="WorkingCalendars" Type="Self.WorkingCalendars" Multiplicity="0..1" />
+          <End Role="WorkingResources" Type="Self.WorkingResources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkingCalendars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkingResources">
+              <PropertyRef Name="WorkingCalendar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjectUsers">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+        </Association>
+        <Association Name="RolePermissions">
+          <End Role="Permissions" Type="Self.Permissions" Multiplicity="*" />
+          <End Role="Roles" Type="Self.Roles" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="ProjectManagerContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CostTypes" EntityType="Self.CostTypes" />
+          <EntitySet Name="DateTypes" EntityType="Self.DateTypes" />
+          <EntitySet Name="MaterialResoucres" EntityType="Self.MaterialResoucres" />
+          <EntitySet Name="Permissions" EntityType="Self.Permissions" />
+          <EntitySet Name="Persons" EntityType="Self.Persons" />
+          <EntitySet Name="ProjectResources" EntityType="Self.ProjectResources" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" />
+          <EntitySet Name="ProjectTaskResources" EntityType="Self.ProjectTaskResources" />
+          <EntitySet Name="ProjectTasks" EntityType="Self.ProjectTasks" />
+          <EntitySet Name="Resources" EntityType="Self.Resources" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="SalaryTypes" EntityType="Self.SalaryTypes" />
+          <EntitySet Name="TaskConnections" EntityType="Self.TaskConnections" />
+          <EntitySet Name="TaskGroups" EntityType="Self.TaskGroups" />
+          <EntitySet Name="Tasks" EntityType="Self.Tasks" />
+          <EntitySet Name="TaskTypes" EntityType="Self.TaskTypes" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="WeekDays" EntityType="Self.WeekDays" />
+          <EntitySet Name="WorkingCalendars" EntityType="Self.WorkingCalendars" />
+          <EntitySet Name="WorkingCalendarWeekends" EntityType="Self.WorkingCalendarWeekends" />
+          <EntitySet Name="WorkingResources" EntityType="Self.WorkingResources" />
+          <AssociationSet Name="FK_MaterialResoucres_CostTypes" Association="Self.FK_MaterialResoucres_CostTypes">
+            <End Role="CostTypes" EntitySet="CostTypes" />
+            <End Role="MaterialResoucres" EntitySet="MaterialResoucres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalaryTypes_CostTypes" Association="Self.FK_SalaryTypes_CostTypes">
+            <End Role="CostTypes" EntitySet="CostTypes" />
+            <End Role="SalaryTypes" EntitySet="SalaryTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalaryTypes_DateTypes" Association="Self.FK_SalaryTypes_DateTypes">
+            <End Role="DateTypes" EntitySet="DateTypes" />
+            <End Role="SalaryTypes" EntitySet="SalaryTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialResoucres_Resources" Association="Self.FK_MaterialResoucres_Resources">
+            <End Role="Resources" EntitySet="Resources" />
+            <End Role="MaterialResoucres" EntitySet="MaterialResoucres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persons_Users" Association="Self.FK_Persons_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Persons" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectResources_Projects" Association="Self.FK_ProjectResources_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectResources" EntitySet="ProjectResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectResources_Resources" Association="Self.FK_ProjectResources_Resources">
+            <End Role="Resources" EntitySet="Resources" />
+            <End Role="ProjectResources" EntitySet="ProjectResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectTaskResources_ProjectResources" Association="Self.FK_ProjectTaskResources_ProjectResources">
+            <End Role="ProjectResources" EntitySet="ProjectResources" />
+            <End Role="ProjectTaskResources" EntitySet="ProjectTaskResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectTasks_Projects" Association="Self.FK_ProjectTasks_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectTasks" EntitySet="ProjectTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectTaskResources_ProjectTasks" Association="Self.FK_ProjectTaskResources_ProjectTasks">
+            <End Role="ProjectTasks" EntitySet="ProjectTasks" />
+            <End Role="ProjectTaskResources" EntitySet="ProjectTaskResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectTasks_Tasks" Association="Self.FK_ProjectTasks_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="ProjectTasks" EntitySet="ProjectTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkingResources_Resources" Association="Self.FK_WorkingResources_Resources">
+            <End Role="Resources" EntitySet="Resources" />
+            <End Role="WorkingResources" EntitySet="WorkingResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkingResources_SalaryTypes" Association="Self.FK_WorkingResources_SalaryTypes">
+            <End Role="SalaryTypes" EntitySet="SalaryTypes" />
+            <End Role="WorkingResources" EntitySet="WorkingResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskConnections_Tasks" Association="Self.FK_TaskConnections_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="TaskConnections" EntitySet="TaskConnections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskConnections_Tasks1" Association="Self.FK_TaskConnections_Tasks1">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="TaskConnections" EntitySet="TaskConnections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskConnections_TaskTypes" Association="Self.FK_TaskConnections_TaskTypes">
+            <End Role="TaskTypes" EntitySet="TaskTypes" />
+            <End Role="TaskConnections" EntitySet="TaskConnections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskGroups_Tasks" Association="Self.FK_TaskGroups_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="TaskGroups" EntitySet="TaskGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskGroups_Tasks1" Association="Self.FK_TaskGroups_Tasks1">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="TaskGroups" EntitySet="TaskGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkingCalendarWeekends_WeekDays" Association="Self.FK_WorkingCalendarWeekends_WeekDays">
+            <End Role="WeekDays" EntitySet="WeekDays" />
+            <End Role="WorkingCalendarWeekends" EntitySet="WorkingCalendarWeekends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkingCalendarWeekends_WorkingCalendars" Association="Self.FK_WorkingCalendarWeekends_WorkingCalendars">
+            <End Role="WorkingCalendars" EntitySet="WorkingCalendars" />
+            <End Role="WorkingCalendarWeekends" EntitySet="WorkingCalendarWeekends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkingResources_WorkingCalendars" Association="Self.FK_WorkingResources_WorkingCalendars">
+            <End Role="WorkingCalendars" EntitySet="WorkingCalendars" />
+            <End Role="WorkingResources" EntitySet="WorkingResources" />
+          </AssociationSet>
+          <AssociationSet Name="ProjectUsers" Association="Self.ProjectUsers">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="RolePermissions" Association="Self.RolePermissions">
+            <End Role="Permissions" EntitySet="Permissions" />
+            <End Role="Roles" EntitySet="Roles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ProjectManagerModelContainer" CdmEntityContainer="ProjectManagerContext">
+          <EntitySetMapping Name="CostTypes">
+            <EntityTypeMapping TypeName="ProjectManagerModel.CostTypes">
+              <MappingFragment StoreEntitySet="CostTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DateTypes">
+            <EntityTypeMapping TypeName="ProjectManagerModel.DateTypes">
+              <MappingFragment StoreEntitySet="DateTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaterialResoucres">
+            <EntityTypeMapping TypeName="ProjectManagerModel.MaterialResoucres">
+              <MappingFragment StoreEntitySet="MaterialResoucres">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="CostType" ColumnName="CostType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permissions">
+            <EntityTypeMapping TypeName="ProjectManagerModel.Permissions">
+              <MappingFragment StoreEntitySet="Permissions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Persons">
+            <EntityTypeMapping TypeName="ProjectManagerModel.Persons">
+              <MappingFragment StoreEntitySet="Persons">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectResources">
+            <EntityTypeMapping TypeName="ProjectManagerModel.ProjectResources">
+              <MappingFragment StoreEntitySet="ProjectResources">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Project" ColumnName="Project" />
+                <ScalarProperty Name="Resource" ColumnName="Resource" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="ProjectManagerModel.Projects">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreatingDate" ColumnName="CreatingDate" />
+                <ScalarProperty Name="User" ColumnName="User" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectTaskResources">
+            <EntityTypeMapping TypeName="ProjectManagerModel.ProjectTaskResources">
+              <MappingFragment StoreEntitySet="ProjectTaskResources">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ProjectTask" ColumnName="ProjectTask" />
+                <ScalarProperty Name="ProjectResource" ColumnName="ProjectResource" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectTasks">
+            <EntityTypeMapping TypeName="ProjectManagerModel.ProjectTasks">
+              <MappingFragment StoreEntitySet="ProjectTasks">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Project" ColumnName="Project" />
+                <ScalarProperty Name="Task" ColumnName="Task" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resources">
+            <EntityTypeMapping TypeName="ProjectManagerModel.Resources">
+              <MappingFragment StoreEntitySet="Resources">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="ProjectManagerModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalaryTypes">
+            <EntityTypeMapping TypeName="ProjectManagerModel.SalaryTypes">
+              <MappingFragment StoreEntitySet="SalaryTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CostType" ColumnName="CostType" />
+                <ScalarProperty Name="DateType" ColumnName="DateType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskConnections">
+            <EntityTypeMapping TypeName="ProjectManagerModel.TaskConnections">
+              <MappingFragment StoreEntitySet="TaskConnections">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Parent" ColumnName="Parent" />
+                <ScalarProperty Name="Child" ColumnName="Child" />
+                <ScalarProperty Name="Depth" ColumnName="Depth" />
+                <ScalarProperty Name="TaskType" ColumnName="TaskType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskGroups">
+            <EntityTypeMapping TypeName="ProjectManagerModel.TaskGroups">
+              <MappingFragment StoreEntitySet="TaskGroups">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Parent" ColumnName="Parent" />
+                <ScalarProperty Name="Child" ColumnName="Child" />
+                <ScalarProperty Name="Depth" ColumnName="Depth" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="ProjectManagerModel.Tasks">
+              <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CompletionPercentage" ColumnName="CompletionPercentage" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskTypes">
+            <EntityTypeMapping TypeName="ProjectManagerModel.TaskTypes">
+              <MappingFragment StoreEntitySet="TaskTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ProjectManagerModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WeekDays">
+            <EntityTypeMapping TypeName="ProjectManagerModel.WeekDays">
+              <MappingFragment StoreEntitySet="WeekDays">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkingCalendars">
+            <EntityTypeMapping TypeName="ProjectManagerModel.WorkingCalendars">
+              <MappingFragment StoreEntitySet="WorkingCalendars">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkingCalendarWeekends">
+            <EntityTypeMapping TypeName="ProjectManagerModel.WorkingCalendarWeekends">
+              <MappingFragment StoreEntitySet="WorkingCalendarWeekends">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="WorkingCalendar" ColumnName="WorkingCalendar" />
+                <ScalarProperty Name="WeekDay" ColumnName="WeekDay" />
+                <ScalarProperty Name="IsWeekend" ColumnName="IsWeekend" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkingResources">
+            <EntityTypeMapping TypeName="ProjectManagerModel.WorkingResources">
+              <MappingFragment StoreEntitySet="WorkingResources">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="SalaryType" ColumnName="SalaryType" />
+                <ScalarProperty Name="WorkingCalendar" ColumnName="WorkingCalendar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ProjectUsers" TypeName="ProjectManagerModel.ProjectUsers" StoreEntitySet="ProjectUsers">
+            <EndProperty Name="Projects">
+              <ScalarProperty Name="Id" ColumnName="Project" />
+            </EndProperty>
+            <EndProperty Name="Users">
+              <ScalarProperty Name="Id" ColumnName="User" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="RolePermissions" TypeName="ProjectManagerModel.RolePermissions" StoreEntitySet="RolePermissions">
+            <EndProperty Name="Permissions">
+              <ScalarProperty Name="Id" ColumnName="Permission" />
+            </EndProperty>
+            <EndProperty Name="Roles">
+              <ScalarProperty Name="Id" ColumnName="Role" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
