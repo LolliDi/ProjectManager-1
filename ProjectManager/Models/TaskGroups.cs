@@ -12,7 +12,7 @@ namespace ProjectManager.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TaskGroups
+    public partial class TaskGroups : IEntity
     {
         public int Id { get; set; }
         public int Parent { get; set; }

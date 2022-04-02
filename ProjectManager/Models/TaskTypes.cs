@@ -12,7 +12,7 @@ namespace ProjectManager.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TaskTypes
+    public partial class TaskTypes : IEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TaskTypes()

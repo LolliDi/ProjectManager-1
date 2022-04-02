@@ -64,6 +64,84 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\CostTypes.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DateTypes.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MaterialResoucres.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Permissions.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Persons.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectManagerModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectManagerModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectManagerModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectManagerModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectManagerModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectResources.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Projects.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectTaskResources.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectTasks.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Resources.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Roles.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SalaryTypes.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaskConnections.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaskGroups.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tasks.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaskTypes.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Users.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WeekDays.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkingCalendars.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkingCalendarWeekends.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkingResources.cs">
+      <DependentUpon>ProjectManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Views\View1.xaml.cs">
       <DependentUpon>View1.xaml</DependentUpon>
     </Compile>
@@ -84,83 +162,8 @@
     </Compile>
     <Compile Include="Commands\LambdaCommand.cs" />
     <Compile Include="Models\Base\IEntity.cs" />
-    <Compile Include="Models\CostTypes.cs">
-      <DependentUpon>ProjectManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DateTypes.cs">
-      <DependentUpon>ProjectManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MaterialResoucres.cs">
-      <DependentUpon>ProjectManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Permissions.cs">
-      <DependentUpon>ProjectManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Persons.cs">
-      <DependentUpon>ProjectManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProjectManager.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProjectManager.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProjectManager.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProjectManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProjectManager.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProjectManager.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProjectResources.cs">
-      <DependentUpon>ProjectManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Projects.cs">
-      <DependentUpon>ProjectManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProjectTasks.cs">
-      <DependentUpon>ProjectManager.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Repositories\Base\IRepository.cs" />
     <Compile Include="Models\Repositories\Repository.cs" />
-    <Compile Include="Models\Resources.cs">
-      <DependentUpon>ProjectManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Roles.cs">
-      <DependentUpon>ProjectManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SalaryTypes.cs">
-      <DependentUpon>ProjectManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TaskConnections.cs">
-      <DependentUpon>ProjectManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TaskGroups.cs">
-      <DependentUpon>ProjectManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Tasks.cs">
-      <DependentUpon>ProjectManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TaskTypes.cs">
-      <DependentUpon>ProjectManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Users.cs">
-      <DependentUpon>ProjectManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\WeekDays.cs">
-      <DependentUpon>ProjectManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\WorkingCalendars.cs">
-      <DependentUpon>ProjectManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\WorkingCalendarWeekends.cs">
-      <DependentUpon>ProjectManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\WorkingResources.cs">
-      <DependentUpon>ProjectManager.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\Base\ViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModel1.cs" />
@@ -196,12 +199,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Models\ProjectManager.edmx">
+    <EntityDeploy Include="Models\ProjectManagerModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ProjectManager.Designer.cs</LastGenOutput>
+      <LastGenOutput>ProjectManagerModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Models\ProjectManager.edmx.diagram">
-      <DependentUpon>ProjectManager.edmx</DependentUpon>
+    <None Include="Models\ProjectManagerModel.edmx.diagram">
+      <DependentUpon>ProjectManagerModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -220,15 +223,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\ProjectManager.Context.tt">
+    <Content Include="Models\ProjectManagerModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ProjectManager.edmx</DependentUpon>
-      <LastGenOutput>ProjectManager.Context.cs</LastGenOutput>
+      <DependentUpon>ProjectManagerModel.edmx</DependentUpon>
+      <LastGenOutput>ProjectManagerModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\ProjectManager.tt">
+    <Content Include="Models\ProjectManagerModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ProjectManager.edmx</DependentUpon>
-      <LastGenOutput>ProjectManager.cs</LastGenOutput>
+      <DependentUpon>ProjectManagerModel.edmx</DependentUpon>
+      <LastGenOutput>ProjectManagerModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

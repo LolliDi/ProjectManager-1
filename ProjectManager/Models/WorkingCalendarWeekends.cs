@@ -12,7 +12,7 @@ namespace ProjectManager.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class WorkingCalendarWeekends
+    public partial class WorkingCalendarWeekends : IEntity
     {
         public int Id { get; set; }
         public Nullable<int> WorkingCalendar { get; set; }

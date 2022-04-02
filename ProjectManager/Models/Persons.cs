@@ -12,7 +12,7 @@ namespace ProjectManager.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Persons
+    public partial class Persons : IEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

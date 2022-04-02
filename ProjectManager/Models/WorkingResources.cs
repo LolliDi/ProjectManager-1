@@ -12,7 +12,7 @@ namespace ProjectManager.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class WorkingResources
+    public partial class WorkingResources : IEntity
     {
         public int Id { get; set; }
         public Nullable<int> Salary { get; set; }

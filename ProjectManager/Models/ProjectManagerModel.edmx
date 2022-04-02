@@ -62,12 +62,14 @@
           <Property Name="CreatingDate" Type="date" />
           <Property Name="User" Type="int" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6013: Первичный ключ в таблице или представлении "ProjectManager.dbo.ProjectTaskResources" не определен, его не удалось вывести. Эта таблица или представление исключены. Чтобы использовать сущность, необходимо проверить схему, добавить правильные ключи и раскомментировать ее.
         <EntityType Name="ProjectTaskResources">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProjectTask" Type="int" />
           <Property Name="ProjectResource" Type="int" />
-        </EntityType>-->
+        </EntityType>
         <EntityType Name="ProjectTasks">
           <Key>
             <PropertyRef Name="Id" />
@@ -266,12 +268,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Ошибки, обнаруженные при создании:
-ошибка 6004: Невозможно найти таблицу "ProjectManager.dbo.ProjectTaskResources", на которую ссылается связь.
-        <Association Name="FK_ProjectTaskResources_ProjectResources" />-->
-        <!--Ошибки, обнаруженные при создании:
-ошибка 6004: Невозможно найти таблицу "ProjectManager.dbo.ProjectTaskResources", на которую ссылается связь.
-        <Association Name="FK_ProjectTaskResources_ProjectTasks" />-->
+        <Association Name="FK_ProjectTaskResources_ProjectResources">
+          <End Role="ProjectResources" Type="Self.ProjectResources" Multiplicity="0..1" />
+          <End Role="ProjectTaskResources" Type="Self.ProjectTaskResources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectResources">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectTaskResources">
+              <PropertyRef Name="ProjectResource" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectTaskResources_ProjectTasks">
+          <End Role="ProjectTasks" Type="Self.ProjectTasks" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjectTaskResources" Type="Self.ProjectTaskResources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectTasks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectTaskResources">
+              <PropertyRef Name="ProjectTask" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProjectTasks_Projects">
           <End Role="Projects" Type="Self.Projects" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -526,6 +548,7 @@
           <EntitySet Name="Persons" EntityType="Self.Persons" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProjectResources" EntityType="Self.ProjectResources" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectTaskResources" EntityType="Self.ProjectTaskResources" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProjectTasks" EntityType="Self.ProjectTasks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Resources" EntityType="Self.Resources" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
@@ -570,6 +593,14 @@
           <AssociationSet Name="FK_ProjectResources_Resources" Association="Self.FK_ProjectResources_Resources">
             <End Role="Resources" EntitySet="Resources" />
             <End Role="ProjectResources" EntitySet="ProjectResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectTaskResources_ProjectResources" Association="Self.FK_ProjectTaskResources_ProjectResources">
+            <End Role="ProjectResources" EntitySet="ProjectResources" />
+            <End Role="ProjectTaskResources" EntitySet="ProjectTaskResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectTaskResources_ProjectTasks" Association="Self.FK_ProjectTaskResources_ProjectTasks">
+            <End Role="ProjectTasks" EntitySet="ProjectTasks" />
+            <End Role="ProjectTaskResources" EntitySet="ProjectTaskResources" />
           </AssociationSet>
           <AssociationSet Name="FK_ProjectTasks_Projects" Association="Self.FK_ProjectTasks_Projects">
             <End Role="Projects" EntitySet="Projects" />
@@ -709,6 +740,7 @@
           <Property Name="Resource" Type="Int32" />
           <NavigationProperty Name="Projects" Relationship="Self.FK_ProjectResources_Projects" FromRole="ProjectResources" ToRole="Projects" />
           <NavigationProperty Name="Resources" Relationship="Self.FK_ProjectResources_Resources" FromRole="ProjectResources" ToRole="Resources" />
+          <NavigationProperty Name="ProjectTaskResources" Relationship="Self.FK_ProjectTaskResources_ProjectResources" FromRole="ProjectResources" ToRole="ProjectTaskResources" />
         </EntityType>
         <EntityType Name="Projects">
           <Key>
@@ -722,6 +754,16 @@
           <NavigationProperty Name="ProjectTasks" Relationship="Self.FK_ProjectTasks_Projects" FromRole="Projects" ToRole="ProjectTasks" />
           <NavigationProperty Name="Users" Relationship="Self.ProjectUsers" FromRole="Projects" ToRole="Users" />
         </EntityType>
+        <EntityType Name="ProjectTaskResources">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectTask" Type="Int32" />
+          <Property Name="ProjectResource" Type="Int32" />
+          <NavigationProperty Name="ProjectResources" Relationship="Self.FK_ProjectTaskResources_ProjectResources" FromRole="ProjectTaskResources" ToRole="ProjectResources" />
+          <NavigationProperty Name="ProjectTasks" Relationship="Self.FK_ProjectTaskResources_ProjectTasks" FromRole="ProjectTaskResources" ToRole="ProjectTasks" />
+        </EntityType>
         <EntityType Name="ProjectTasks">
           <Key>
             <PropertyRef Name="Id" />
@@ -730,6 +772,7 @@
           <Property Name="Project" Type="Int32" />
           <Property Name="Task" Type="Int32" />
           <NavigationProperty Name="Projects" Relationship="Self.FK_ProjectTasks_Projects" FromRole="ProjectTasks" ToRole="Projects" />
+          <NavigationProperty Name="ProjectTaskResources" Relationship="Self.FK_ProjectTaskResources_ProjectTasks" FromRole="ProjectTasks" ToRole="ProjectTaskResources" />
           <NavigationProperty Name="Tasks" Relationship="Self.FK_ProjectTasks_Tasks" FromRole="ProjectTasks" ToRole="Tasks" />
         </EntityType>
         <EntityType Name="Resources">
@@ -956,6 +999,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProjectTaskResources_ProjectResources">
+          <End Role="ProjectResources" Type="Self.ProjectResources" Multiplicity="0..1" />
+          <End Role="ProjectTaskResources" Type="Self.ProjectTaskResources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectResources">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectTaskResources">
+              <PropertyRef Name="ProjectResource" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProjectTasks_Projects">
           <End Role="Projects" Type="Self.Projects" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -967,6 +1022,20 @@
             </Principal>
             <Dependent Role="ProjectTasks">
               <PropertyRef Name="Project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectTaskResources_ProjectTasks">
+          <End Role="ProjectTasks" Type="Self.ProjectTasks" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjectTaskResources" Type="Self.ProjectTaskResources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectTasks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectTaskResources">
+              <PropertyRef Name="ProjectTask" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1130,7 +1199,7 @@
           <End Role="Permissions" Type="Self.Permissions" Multiplicity="*" />
           <End Role="Roles" Type="Self.Roles" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="ProjectManagerDb" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ProjectManagerContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CostTypes" EntityType="Self.CostTypes" />
           <EntitySet Name="DateTypes" EntityType="Self.DateTypes" />
           <EntitySet Name="MaterialResoucres" EntityType="Self.MaterialResoucres" />
@@ -1138,6 +1207,7 @@
           <EntitySet Name="Persons" EntityType="Self.Persons" />
           <EntitySet Name="ProjectResources" EntityType="Self.ProjectResources" />
           <EntitySet Name="Projects" EntityType="Self.Projects" />
+          <EntitySet Name="ProjectTaskResources" EntityType="Self.ProjectTaskResources" />
           <EntitySet Name="ProjectTasks" EntityType="Self.ProjectTasks" />
           <EntitySet Name="Resources" EntityType="Self.Resources" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
@@ -1179,9 +1249,17 @@
             <End Role="Resources" EntitySet="Resources" />
             <End Role="ProjectResources" EntitySet="ProjectResources" />
           </AssociationSet>
+          <AssociationSet Name="FK_ProjectTaskResources_ProjectResources" Association="Self.FK_ProjectTaskResources_ProjectResources">
+            <End Role="ProjectResources" EntitySet="ProjectResources" />
+            <End Role="ProjectTaskResources" EntitySet="ProjectTaskResources" />
+          </AssociationSet>
           <AssociationSet Name="FK_ProjectTasks_Projects" Association="Self.FK_ProjectTasks_Projects">
             <End Role="Projects" EntitySet="Projects" />
             <End Role="ProjectTasks" EntitySet="ProjectTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectTaskResources_ProjectTasks" Association="Self.FK_ProjectTaskResources_ProjectTasks">
+            <End Role="ProjectTasks" EntitySet="ProjectTasks" />
+            <End Role="ProjectTaskResources" EntitySet="ProjectTaskResources" />
           </AssociationSet>
           <AssociationSet Name="FK_ProjectTasks_Tasks" Association="Self.FK_ProjectTasks_Tasks">
             <End Role="Tasks" EntitySet="Tasks" />
@@ -1245,7 +1323,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище ProjectManagerModelContainer" CdmEntityContainer="ProjectManagerDb">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ProjectManagerModelContainer" CdmEntityContainer="ProjectManagerContext">
           <EntitySetMapping Name="CostTypes">
             <EntityTypeMapping TypeName="ProjectManagerModel.CostTypes">
               <MappingFragment StoreEntitySet="CostTypes">
@@ -1307,6 +1385,15 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CreatingDate" ColumnName="CreatingDate" />
                 <ScalarProperty Name="User" ColumnName="User" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectTaskResources">
+            <EntityTypeMapping TypeName="ProjectManagerModel.ProjectTaskResources">
+              <MappingFragment StoreEntitySet="ProjectTaskResources">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ProjectTask" ColumnName="ProjectTask" />
+                <ScalarProperty Name="ProjectResource" ColumnName="ProjectResource" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

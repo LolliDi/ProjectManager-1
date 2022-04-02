@@ -13,10 +13,10 @@ namespace ProjectManager.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ProjectManagerDb : DbContext
+    public partial class ProjectManagerContext : DbContext
     {
-        public ProjectManagerDb()
-            : base("name=ProjectManagerDb")
+        public ProjectManagerContext()
+            : base("name=ProjectManagerContext")
         {
         }
     
@@ -32,6 +32,7 @@ namespace ProjectManager.Models
         public virtual DbSet<Persons> Persons { get; set; }
         public virtual DbSet<ProjectResources> ProjectResources { get; set; }
         public virtual DbSet<Projects> Projects { get; set; }
+        public virtual DbSet<ProjectTaskResources> ProjectTaskResources { get; set; }
         public virtual DbSet<ProjectTasks> ProjectTasks { get; set; }
         public virtual DbSet<Resources> Resources { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }

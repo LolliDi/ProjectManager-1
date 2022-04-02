@@ -12,14 +12,13 @@ namespace ProjectManager.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class MaterialResoucres : IEntity
+    public partial class ProjectTaskResources : IEntity
     {
         public int Id { get; set; }
-        public Nullable<int> Count { get; set; }
-        public Nullable<int> Cost { get; set; }
-        public Nullable<int> CostType { get; set; }
+        public Nullable<int> ProjectTask { get; set; }
+        public Nullable<int> ProjectResource { get; set; }
     
-        public virtual CostTypes CostTypes { get; set; }
-        public virtual Resources Resources { get; set; }
+        public virtual ProjectResources ProjectResources { get; set; }
+        public virtual ProjectTasks ProjectTasks { get; set; }
     }
 }

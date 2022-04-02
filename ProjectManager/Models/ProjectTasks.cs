@@ -12,13 +12,21 @@ namespace ProjectManager.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ProjectTasks
+    public partial class ProjectTasks : IEntity
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ProjectTasks()
+        {
+            this.ProjectTaskResources = new HashSet<ProjectTaskResources>();
+        }
+    
         public int Id { get; set; }
         public Nullable<int> Project { get; set; }
         public Nullable<int> Task { get; set; }
     
         public virtual Projects Projects { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProjectTaskResources> ProjectTaskResources { get; set; }
         public virtual Tasks Tasks { get; set; }
     }
 }
