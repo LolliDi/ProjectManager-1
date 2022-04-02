@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="ProjectManager.Views.UserAccount"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProjectManager.Views" xmlns:viewmodels="clr-namespace:ProjectManager.ViewModels"            
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <viewmodels:UserAccountViewModel/>
+    </UserControl.DataContext>
+    <Grid Background="White">
+        <StackPanel>
+            <TextBlock Text="Информация о пользователе" HorizontalAlignment="Center"/>
+            <GroupBox Header="Псевдоним">
+                <TextBlock Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
+            </GroupBox>
+            <GroupBox Header="Роль">
+                <TextBlock Text="{Binding Role, UpdateSourceTrigger=PropertyChanged}"/>
+            </GroupBox>
+            <GroupBox Header="Имя">
+                <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+            </GroupBox>
+            <GroupBox Header="Фамилия">
+                <TextBlock Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}"/>
+            </GroupBox>
+            <GroupBox Header="Отчество">
+                <TextBlock Text="{Binding Patronymic, UpdateSourceTrigger=PropertyChanged}"/>
+            </GroupBox>
+            <GroupBox Header="Возраст">
+                <TextBlock Text="{Binding Age, UpdateSourceTrigger=PropertyChanged}"/>
+            </GroupBox>
+            <Button x:Name="btnRedact" Content="Редактировать"/>
+            <Button x:Name="btnBack" Content="Назад"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

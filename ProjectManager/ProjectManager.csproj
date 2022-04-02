@@ -44,8 +44,10 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -64,6 +66,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Views\UserAccount.xaml.cs">
+      <DependentUpon>UserAccount.xaml</DependentUpon>
+    </Compile>
     <Page Include="Styles\Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -101,11 +106,17 @@
     <Compile Include="Models\DbModels\WorkingResources.cs" />
     <Compile Include="Models\Repositories\Base\IRepository.cs" />
     <Compile Include="Models\Repositories\Repository.cs" />
+    <Compile Include="Models\Repositories\UsersRepository.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />
+    <Compile Include="ViewModels\UserAccountViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\UserAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
