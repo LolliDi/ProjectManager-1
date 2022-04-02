@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace ProjectManager.Models.Repositories
 {
-    class UsersRepository
+    class UsersRepository : Repository<Users>
     {
+        public UsersRepository(ProjectManagerContext context) : base(context) { }
+
+        public override IQueryable<Users> Items => context.Set<Users>().Include(item => item.Persons).Include(item => item.Roles);
     }
 }
