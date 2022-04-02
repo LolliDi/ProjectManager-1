@@ -21,6 +21,7 @@ namespace ProjectManager.ViewModels
             ToViewModel1Commmand = new LambdaCommand(parameter => CurrentViewModel = new ViewModel1());
             ToViewModel2Commmand = new LambdaCommand(parameter => CurrentViewModel = new ViewModel2());
             ToUserAccountViewModel = new LambdaCommand(parameter => CurrentViewModel = new UserAccountViewModel(user));
+            ToViewModelAuto = new LambdaCommand(parameter => CurrentViewModel = new AuthorizationViewModel());
         }
         private ViewModel currentViewModel;
         public ViewModel CurrentViewModel
@@ -31,5 +32,6 @@ namespace ProjectManager.ViewModels
         public ICommand ToViewModel1Commmand { get; set; }
         public ICommand ToViewModel2Commmand { get; set; }
         public ICommand ToUserAccountViewModel { get; set; }
+        public ICommand ToViewModelAuto { get; set; }
     }
 }

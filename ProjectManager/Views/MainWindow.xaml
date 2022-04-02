@@ -23,6 +23,8 @@
                     Command="{Binding Path=ToViewModel2Commmand}"/>
             <Button Content="Перейти в UserAccountViewModel"
                     Command="{Binding Path=ToUserAccountViewModel}"/>
+            <Button Content="Перейти во Aouthorization"
+                    Command="{Binding Path=ToViewModelAuto}"/>
         </StackPanel>
         <ContentControl Content="{Binding Path=CurrentViewModel}"
                         Grid.Row="1">
@@ -34,8 +36,10 @@
                     <views:View2/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type viewmodels:UserAccountViewModel}">
-                    
                     <views:UserAccount/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:AuthorizationViewModel}">
+                    <views:AuthorizationPage/>
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>
