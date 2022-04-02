@@ -1,22 +1,34 @@
-﻿using System;
+﻿using ProjectManager.Models.Repositories;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Input;
 using ProjectManager.Models;
 
 namespace ProjectManager.ViewModels
 {
     class UserAccountViewModel : ViewModel
     {
+        private Users user;
+        public UserAccountViewModel(Users user)
+        {
+            this.user = user;
+        }
+        public Users User
+        {
+            get
+            {
+                return this.user;
+            }
 
-        private List<Users> users = new List<Users>();
-        private List<Persons> persons = new List<Persons>();
-        private CollectionViewSource userDataViewSource;
-
-        public ICollectionView UserCollectionView => userDataViewSource.View;
+            set
+            {
+                this.user = value;
+            }
+        }
     }
 }

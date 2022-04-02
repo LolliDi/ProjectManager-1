@@ -8,13 +8,13 @@ namespace ProjectManager.Models.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class, IEntity, new()
     {
-        private readonly ProjectManagerContext context;
+        protected readonly ProjectManagerContext context;
         public Repository(ProjectManagerContext context)
         {
             this.context = context;
         }
 
-        public IQueryable<T> Items => context.Set<T>();
+        public virtual IQueryable<T> Items => context.Set<T>();
 
         public T Add(T entity)
         {
