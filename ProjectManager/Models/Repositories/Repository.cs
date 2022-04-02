@@ -8,8 +8,8 @@ namespace ProjectManager.Models.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class, IEntity, new()
     {
-        private readonly ProjectManagerDb context;
-        public Repository(ProjectManagerDb context)
+        private readonly ProjectManagerContext context;
+        public Repository(ProjectManagerContext context)
         {
             this.context = context;
         }
