@@ -6,16 +6,20 @@
              xmlns:local="clr-namespace:ProjectManager.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock>Вход</TextBlock>
-            <GroupBox Header="Логин">
-                <TextBox  Width="150" Text="{Binding GetLogin}"></TextBox>
-            </GroupBox>
-            <GroupBox Header="Пароль">
-                <TextBox  Width="150" Text="{Binding GetPass}"></TextBox>
-            </GroupBox>
-            <Button Command="{Binding }">Войти</Button>
-        </StackPanel>
+    <Grid Background="White">
+        <Border>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            
+                <TextBlock>Вход</TextBlock>
+                <GroupBox Header="Логин">
+                    <TextBox  Width="150" Text="{Binding GetLogin}"></TextBox>
+                </GroupBox>
+                <GroupBox Header="Пароль">
+                    <TextBox  Width="150" Text="{Binding GetPass}"></TextBox>
+                </GroupBox>
+                <Button Command="{Binding }">Войти</Button>
+            
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

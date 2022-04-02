@@ -2,13 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:ProjectManager">
 
-    <Style TargetType="TextBlock" x:Key="AddUserTextBlock">
+    <Style TargetType="TextBlock" >
         <Setter Property="FontFamily" Value="Raleway"/>
         <Setter Property="FontSize" Value="24"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="TextAlignment" Value="Center"/>
     </Style>
-    <!--<Style TargetType="local:PlaceTextBox">
+    <Style TargetType="local:PlaceTextBox">
         <Setter Property="Background" Value="White"/>
         <Setter Property="Width" Value="376"/>
         <Setter Property="Height" Value="62"/>
@@ -27,13 +27,12 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>-->
-    <Style TargetType="Border" x:Key="AddUserBorder">
+    </Style>
+    <Style TargetType="Border" >
         <Setter Property="CornerRadius" Value="36"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Background" Value="#FAFAFA"/>
-        <Setter Property="Height" Value="767"/>
-        <Setter Property="Width" Value="552"/>
+
     </Style>
     <Style TargetType="Button" x:Key="AddUserButton">
         <Setter Property="Width" Value="235"/>
