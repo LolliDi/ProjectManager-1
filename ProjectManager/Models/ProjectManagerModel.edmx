@@ -756,9 +756,9 @@
         </EntityType>
         <EntityType Name="ProjectTaskResources">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProjectTask" Type="Int32" />
           <Property Name="ProjectResource" Type="Int32" />
           <NavigationProperty Name="ProjectResources" Relationship="Self.FK_ProjectTaskResources_ProjectResources" FromRole="ProjectTaskResources" ToRole="ProjectResources" />
@@ -1391,7 +1391,7 @@
           <EntitySetMapping Name="ProjectTaskResources">
             <EntityTypeMapping TypeName="ProjectManagerModel.ProjectTaskResources">
               <MappingFragment StoreEntitySet="ProjectTaskResources">
-                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Id" ColumnName="id" />
                 <ScalarProperty Name="ProjectTask" ColumnName="ProjectTask" />
                 <ScalarProperty Name="ProjectResource" ColumnName="ProjectResource" />
               </MappingFragment>
