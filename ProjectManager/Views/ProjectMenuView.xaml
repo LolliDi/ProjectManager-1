@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjectManager.Views"
+             xmlns:viewmodels="clr-namespace:ProjectManager.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="1080" d:DesignWidth="1920">
     
@@ -17,9 +18,17 @@
                         <VisualBrush Visual="{Binding ElementName=mask}" />
                     </Grid.OpacityMask>
                     <Border Name="mask" Background="#FAFAFA" BorderThickness="0" CornerRadius="20"/>
+                    <ItemsPresenter/>
                 </Grid>
             </Border>
+
         </ControlTemplate>
+        <DataTemplate x:Key="ProjectItem">
+            <Border CornerRadius="20" Background="White" Width = "1127" Height ="150px" Margin="10">
+                <TextBlock FontSize="56" Text="{Binding Name}"></TextBlock>
+            </Border>
+            
+        </DataTemplate>
     </UserControl.Resources>
 
     <Grid Background="White">
@@ -41,7 +50,9 @@
         <StackPanel Grid.Row="1">
             <ListBox
                 Height="835" Margin="56"  
-                Template="{DynamicResource ArrowedItemsControl}">
+                Template="{DynamicResource ArrowedItemsControl}"
+                ItemsSource="{Binding ProjectList}"
+                ItemTemplate="{DynamicResource ProjectItem }">
             </ListBox>
         </StackPanel>
         <Grid Grid.Row="1" Grid.Column="1" Height="835" Margin="56">
