@@ -32,7 +32,7 @@
             <RowDefinition Height="22*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <TextBlock FontSize="40" Height ="47" Margin="101, 0">Список проектов</TextBlock>
+            <TextBlock FontSize="40" FontWeight="Bold" Height ="47" Margin="101, 0">Список проектов</TextBlock>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="708, 0">
                 <Button Style="{StaticResource SButton}" Width="307" Height="62">Добавить проект</Button>
                 <Button Style="{StaticResource SButton}" Width="307" Height="62" Margin="54, 0">Выйти</Button>
