@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="ProjectManager.Views.ProjectMenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProjectManager.Views"
+             xmlns:viewmodels="clr-namespace:ProjectManager.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="1080" d:DesignWidth="1920">
+    
+    <UserControl.Resources>
+        <ControlTemplate x:Key="ArrowedItemsControl" TargetType="{x:Type ItemsControl}">
+            <Border
+            BorderThickness="2"
+            CornerRadius="15">
+                <Grid>
+                    <Grid.OpacityMask>
+                        <VisualBrush Visual="{Binding ElementName=mask}" />
+                    </Grid.OpacityMask>
+                    <Border Name="mask" Background="#FAFAFA" BorderThickness="0" CornerRadius="20"/>
+                    <ItemsPresenter/>
+                </Grid>
+            </Border>
+
+        </ControlTemplate>
+        <DataTemplate x:Key="ProjectItem">
+            <Border CornerRadius="20" Background="White" Width = "1127" Height ="150px" Margin="10">
+                <TextBlock FontSize="56" Text="{Binding Name}"></TextBlock>
+            </Border>
+            
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="113*"/>
+            <ColumnDefinition Width="47*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="22*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <TextBlock FontSize="40" FontWeight="Bold" Height ="47" Margin="101, 0">Список проектов</TextBlock>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="708, 0">
+                <Button Style="{StaticResource SButton}" Width="307" Height="62">Добавить проект</Button>
+                <Button Style="{StaticResource SButton}" Width="307" Height="62" Margin="54, 0">Выйти</Button>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <ListBox
+                Height="835" Margin="56"  
+                Template="{DynamicResource ArrowedItemsControl}"
+                ItemsSource="{Binding ProjectList}"
+                ItemTemplate="{DynamicResource ProjectItem }">
+            </ListBox>
+        </StackPanel>
+        <Grid Grid.Row="1" Grid.Column="1" Height="835" Margin="56">
+            <Grid.OpacityMask>
+                <VisualBrush Visual="{Binding ElementName=mask}" />
+            </Grid.OpacityMask>
+            <Border Name="mask" Background="#FAFAFA" BorderThickness="0" CornerRadius="20"/>
+            <StackPanel Orientation="Vertical" Margin="10">
+                <TextBlock FontSize="32" TextAlignment="Center" TextWrapping="Wrap" Text="{Binding SelectedProjectTitle, FallbackValue='Пустое название'}"/>
+                <TextBlock FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedProjectDate, FallbackValue='Дата создания: 00.00.0000 00:00:00'}"/>
+                <ScrollViewer Height="650" >
+                    <TextBlock FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedProjectUsers, FallbackValue='Список пользователей:'}"/>
+                </ScrollViewer>
+                <Button Width="212" Height="62" Margin="10" VerticalAlignment="Bottom" Style="{StaticResource SButton}">Открыть</Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
