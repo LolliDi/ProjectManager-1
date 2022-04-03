@@ -17,10 +17,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel>
-            <Button Content="Перейти во ViewModel1"
-                    Command="{Binding Path=ToViewModel1Commmand}"/>
-            <Button Content="Перейти во ViewModel2"
-                    Command="{Binding Path=ToViewModel2Commmand}"/>
             <Button Content="Перейти в UserAccountViewModel"
                     Command="{Binding Path=ToUserAccountViewModel}"/>
             <Button Content="Перейти в ProjectMenuViewModel"
@@ -31,12 +27,6 @@
         <ContentControl Content="{Binding Path=CurrentViewModel}"
                         Grid.Row="1">
             <ContentControl.Resources>
-                <DataTemplate DataType="{x:Type viewmodels:ViewModel1}">
-                    <views:View1/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type viewmodels:ViewModel2}">
-                    <views:View2/>
-                </DataTemplate>
                 <DataTemplate DataType="{x:Type viewmodels:UserAccountViewModel}">
                     <views:UserAccount/>
                 </DataTemplate>

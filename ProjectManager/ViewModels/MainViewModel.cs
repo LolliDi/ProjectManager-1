@@ -20,8 +20,6 @@ namespace ProjectManager.ViewModels
             Repository<Projects> repositoryPr = new Repository<Projects>(new ProjectManagerContext());
             Users user = repository.Get(1);
             List<Projects> projects = new List<Projects>() { repositoryPr.Get(1) };
-            ToViewModel1Commmand = new LambdaCommand(parameter => CurrentViewModel = new ViewModel1());
-            ToViewModel2Commmand = new LambdaCommand(parameter => CurrentViewModel = new ViewModel2());
             ToUserAccountViewModel = new LambdaCommand(parameter => CurrentViewModel = new UserAccountViewModel(user));
             ToProjectMenuViewModel = new LambdaCommand(parameter => CurrentViewModel = new ProjectMenuViewModel(projects));
             ToViewModelAuto = new LambdaCommand(parameter => CurrentViewModel = new AuthorizationViewModel());
@@ -32,8 +30,6 @@ namespace ProjectManager.ViewModels
             get => currentViewModel;
             set => Set(ref currentViewModel, ref value);
         }
-        public ICommand ToViewModel1Commmand { get; set; }
-        public ICommand ToViewModel2Commmand { get; set; }
         public ICommand ToUserAccountViewModel { get; set; }
         public ICommand ToProjectMenuViewModel { get; set; }
         public ICommand ToViewModelAuto { get; set; }
