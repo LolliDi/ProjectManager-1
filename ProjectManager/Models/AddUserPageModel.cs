@@ -18,6 +18,7 @@ namespace ProjectManager.Models
         public static string login = "";
         public static string password = "";
         public static int age = 0;
+        public static string ageText = "";
         public static string selectedRole = "";
         public static List<string> dataRoles = (new RolesRepository(new Models.ProjectManagerContext())).Items.Select(x => x.Name).ToList();
 

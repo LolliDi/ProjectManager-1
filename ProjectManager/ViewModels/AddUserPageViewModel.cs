@@ -15,7 +15,8 @@ namespace ProjectManager.ViewModels
 {
     class AddUserPageViewModel : ViewModel
     {
-        static RolesRepository rolesRepository = new RolesRepository(new Models.ProjectManagerContext());
+        static UsersRepository usersRepository = new UsersRepository(new ProjectManagerContext());
+        static RolesRepository rolesRepository = new RolesRepository(new ProjectManagerContext());
         public ICommand BackPageCommand { get; set; }
         public ICommand AddUserCommand { get; set; }
         public AddUserPageViewModel()
@@ -68,8 +69,9 @@ namespace ProjectManager.ViewModels
                 {
                     throw new Exception(messageError);
                 }
-                
 
+                usersRepository.Add(new Users() { Username = Login, Password = Password, Role = (rolesRepository.Items.FirstOrDefault(x => x.Name == SelectedRole)).Id });
+                MessageBox.Show("Пользователь успешно добавлен.", "Вау!Ё", MessageBoxButton.OK, MessageBoxImage.Information);
                 //сохранение в бд
 
             }
@@ -131,31 +133,33 @@ namespace ProjectManager.ViewModels
         }
         public string SelectedRole
         {
-            get => Models.AddUserPageModel.selectedRole;
+            get => AddUserPageModel.selectedRole;
             set
             {
-                Models.AddUserPageModel.selectedRole = value;
+                AddUserPageModel.selectedRole = value;
             }
         }
         public string Age
         {
-            get => ""+ Models.AddUserPageModel.age;
+            get => ""+ AddUserPageModel.ageText;
             set
             {
                 try
                 {
                     if (value.Length > 0)
                     {
-                        Models.AddUserPageModel.age = int.Parse(value);
+                        AddUserPageModel.age = int.Parse(value);
+                        AddUserPageModel.ageText = value;
                     }
                     else
                     {
-                        Models.AddUserPageModel.age = 0;
+                        AddUserPageModel.age = 0;
+                        AddUserPageModel.ageText = "";
                     }
                 }
                 catch
                 {
-                    AddUserPageModel.age = AddUserPageModel.age;
+                    
                 }
             }
         }
@@ -183,7 +187,6 @@ namespace ProjectManager.ViewModels
         public static List<string> DataRoles
         {
             get => AddUserPageModel.dataRoles;
-            
         }
 
 
