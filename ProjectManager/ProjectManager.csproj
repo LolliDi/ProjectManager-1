@@ -147,6 +147,7 @@
     </Compile>
     <Compile Include="ViewModels\AddUserPageViewModel.cs" />
     <Compile Include="ViewModels\UserAccountViewModel.cs" />
+    <Compile Include="ViewModels\UsersViewPageViewModel.cs" />
     <Compile Include="Views\AddUserPage.xaml.cs">
       <DependentUpon>AddUserPage.xaml</DependentUpon>
     </Compile>
@@ -156,6 +157,9 @@
     <Compile Include="ViewModels\ProjectMenuViewModel.cs" />
     <Compile Include="Views\ProjectMenuView.xaml.cs">
       <DependentUpon>ProjectMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UsersViewPage.xaml.cs">
+      <DependentUpon>UsersViewPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\View1.xaml.cs">
       <DependentUpon>View1.xaml</DependentUpon>
@@ -206,6 +210,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ProjectMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UsersViewPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

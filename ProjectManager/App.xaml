@@ -93,7 +93,31 @@
              
             </Style.Triggers>
         </Style>
-
+        <Style TargetType="Border" x:Key="ShadowBorder" BasedOn="{StaticResource SBorder}">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Gray" BlurRadius="17"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Border" x:Key="CapturedBorder" BasedOn="{StaticResource SBorder}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX="1.05" ScaleY="1.05"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Color="Gray" BlurRadius="17"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Background" Value="#60FFD9"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
 
     </Application.Resources>
 </Application>

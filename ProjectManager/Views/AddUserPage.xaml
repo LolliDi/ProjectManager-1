@@ -8,9 +8,9 @@
              d:DesignHeight="850" d:DesignWidth="800">
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <Border Style="{StaticResource SBorder}" Height="767" Width="552">
+            <Border Style="{StaticResource ShadowBorder}" Height="767" Width="552">
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                    <TextBlock HorizontalAlignment="Center" FontSize="32" Margin="14" Style="{StaticResource STBLOCK}">Добавить пользователя</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Margin="14" Style="{StaticResource STBLOCK}">Добавить пользователя</TextBlock>
                     <GroupBox BorderBrush="{Binding LoginBorderColor}" Width="390" Margin="0">
                         <local:PlaceTextBox Text="{Binding Path=Login}"  PlaceText="Логин*" Style="{StaticResource PlaceTextBoxNormal}" Margin="0,5,0,0"/>
                     </GroupBox>

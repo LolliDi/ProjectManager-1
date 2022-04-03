@@ -25,7 +25,8 @@ namespace ProjectManager.ViewModels
             ToUserAccountViewModel = new LambdaCommand(parameter => CurrentViewModel = new UserAccountViewModel(user));
             ToProjectMenuViewModel = new LambdaCommand(parameter => CurrentViewModel = new ProjectMenuViewModel(projects));
             ToViewModelAuto = new LambdaCommand(parameter => CurrentViewModel = new AuthorizationViewModel());
-            ToAddUserPage = new LambdaCommand(parameter => CurrentViewModel = new AddUserPageViewModel());
+            ToAddUserPage = new LambdaCommand(x => CurrentViewModel = new AddUserPageViewModel());
+            ToUsersViewPage = new LambdaCommand(x => CurrentViewModel = new UsersViewPageViewModel());
         }
         private ViewModel currentViewModel;
         public ViewModel CurrentViewModel
@@ -39,5 +40,6 @@ namespace ProjectManager.ViewModels
         public ICommand ToProjectMenuViewModel { get; set; }
         public ICommand ToViewModelAuto { get; set; }
         public ICommand ToAddUserPage { get; set; }
+        public ICommand ToUsersViewPage { get; set; }
     }
 }
