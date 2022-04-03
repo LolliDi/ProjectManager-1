@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectManager.Models.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,7 @@ namespace ProjectManager.Models
         public static string password = "";
         public static int age = 0;
         public static string selectedRole = "";
+        public static List<string> dataRoles = (new RolesRepository(new Models.ProjectManagerContext())).Items.Select(x => x.Name).ToList();
 
 
         public static SolidColorBrush standartColor = new SolidColorBrush(Color.FromRgb(250, 250, 250)); //цвета границ

@@ -1,4 +1,6 @@
 ﻿using ProjectManager.Commands;
+using ProjectManager.Models;
+using ProjectManager.Models.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,13 +15,14 @@ namespace ProjectManager.ViewModels
 {
     class AddUserPageViewModel : ViewModel
     {
-        public static event PropertyChangedEventHandler propChanged;
+        static RolesRepository rolesRepository = new RolesRepository(new Models.ProjectManagerContext());
         public ICommand BackPageCommand { get; set; }
         public ICommand AddUserCommand { get; set; }
         public AddUserPageViewModel()
         {
             BackPageCommand = new LambdaCommand(BackPage);
             AddUserCommand = new LambdaCommand(AddUser);
+            
         }
 
         public void BackPage(object obj)
@@ -60,11 +63,13 @@ namespace ProjectManager.ViewModels
                 {
                     RoleBorderColor = Models.AddUserPageModel.standartColor;
                 }
-                if(messageError.Length > 0)
+
+                if (messageError.Length > 0)
                 {
                     throw new Exception(messageError);
                 }
                 
+
                 //сохранение в бд
 
             }
@@ -150,40 +155,36 @@ namespace ProjectManager.ViewModels
                 }
                 catch
                 {
-                    Models.AddUserPageModel.age = Models.AddUserPageModel.age;
+                    AddUserPageModel.age = AddUserPageModel.age;
                 }
             }
         }
 
         public SolidColorBrush RoleBorderColor
         {
-            get => Models.AddUserPageModel.roleBorderColor;
-            set => Set(ref Models.AddUserPageModel.roleBorderColor, ref value, "RoleBorderColor");
+            get => AddUserPageModel.roleBorderColor;
+            set => Set(ref AddUserPageModel.roleBorderColor, ref value, "RoleBorderColor");
         }
         public SolidColorBrush LoginBorderColor
         {
-            get => Models.AddUserPageModel.loginBorderColor;
+            get => AddUserPageModel.loginBorderColor;
             set
             {
-                Set(ref Models.AddUserPageModel.loginBorderColor, ref value, "LoginBorderColor");
+                Set(ref AddUserPageModel.loginBorderColor, ref value, "LoginBorderColor");
             }
         }
         public SolidColorBrush PasswordBorderColor
         {
-            get => Models.AddUserPageModel.passwordBorderColor;
-            set => Set(ref Models.AddUserPageModel.passwordBorderColor, ref value, "PasswordBorderColor");
+            get => AddUserPageModel.passwordBorderColor;
+            set => Set(ref AddUserPageModel.passwordBorderColor, ref value, "PasswordBorderColor");
 
         }
 
-        //static List<Roles> dataRoles;
-        //public static List<string> DataRoles
-        //{
-        //    get => dataRoles;
-        //    set
-        //    {
-        //        dataRoles = 
-        //    }
-        //}
+        public static List<string> DataRoles
+        {
+            get => AddUserPageModel.dataRoles;
+            
+        }
 
 
     }

@@ -109,6 +109,7 @@
     <Compile Include="Models\ProjectTasks.cs">
       <DependentUpon>ProjectManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Repositories\RolesRepository.cs" />
     <Compile Include="Models\Resources.cs">
       <DependentUpon>ProjectManagerModel.tt</DependentUpon>
     </Compile>
