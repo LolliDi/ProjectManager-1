@@ -24,7 +24,7 @@
             <Button Content="Перейти во Aouthorization"
                     Command="{Binding Path=ToViewModelAuto}"/>
         </StackPanel>
-        <ContentControl Content="{Binding Path=CurrentViewModel}"
+        <ContentControl Content="{Binding Path=NavigationService.CurrentViewModel}"
                         Grid.Row="1">
             <ContentControl.Resources>
                 <DataTemplate DataType="{x:Type viewmodels:UserAccountViewModel}">

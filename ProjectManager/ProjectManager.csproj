@@ -144,7 +144,11 @@
     <Compile Include="Models\WorkingResources.cs">
       <DependentUpon>ProjectManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\NavigationService.cs" />
     <Compile Include="ViewModels\UserAccountViewModel.cs" />
+    <Compile Include="Views\ProjectMenuPage.xaml.cs">
+      <DependentUpon>ProjectMenuPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserAccount.xaml.cs">
       <DependentUpon>UserAccount.xaml</DependentUpon>
     </Compile>
@@ -184,6 +188,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ProjectMenuPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\UserAccount.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -229,7 +237,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Behaviours\" />
-    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
