@@ -27,6 +27,8 @@
                     Command="{Binding Path=ToProjectMenuViewModel}"/>
             <Button Content="Перейти во Aouthorization"
                     Command="{Binding Path=ToViewModelAuto}"/>
+            <Button Content="Добавить пользователя"
+                    Command="{Binding Path=ToAddUserPage}"/>
         </StackPanel>
         <ContentControl Content="{Binding Path=CurrentViewModel}"
                         Grid.Row="1">
@@ -45,6 +47,9 @@
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type viewmodels:AuthorizationViewModel}">
                     <views:AuthorizationPage/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:AddUserPageViewModel}">
+                    <views:AddUserPage/>
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>

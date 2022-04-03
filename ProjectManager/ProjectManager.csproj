@@ -66,6 +66,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\AddUserPageModel.cs" />
     <Compile Include="Models\CostTypes.cs">
       <DependentUpon>ProjectManagerModel.tt</DependentUpon>
     </Compile>
@@ -144,7 +145,11 @@
     <Compile Include="Models\WorkingResources.cs">
       <DependentUpon>ProjectManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AddUserPageViewModel.cs" />
     <Compile Include="ViewModels\UserAccountViewModel.cs" />
+    <Compile Include="Views\AddUserPage.xaml.cs">
+      <DependentUpon>AddUserPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserAccount.xaml.cs">
       <DependentUpon>UserAccount.xaml</DependentUpon>
     </Compile>
@@ -159,6 +164,10 @@
       <DependentUpon>View2.xaml</DependentUpon>
     </Compile>
     <Page Include="Styles\Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddUserPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
