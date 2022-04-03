@@ -15,15 +15,14 @@ namespace ProjectManager.ViewModels
 {
     class AddUserPageViewModel : ViewModel
     {
-        static UsersRepository usersRepository = new UsersRepository(new ProjectManagerContext());
-        static RolesRepository rolesRepository = new RolesRepository(new ProjectManagerContext());
-        public ICommand BackPageCommand { get; set; }
-        public ICommand AddUserCommand { get; set; }
+        static UsersRepository usersRepository = new UsersRepository(new ProjectManagerContext()); //пользователи
+        static Repository<Roles> rolesRepository = new Repository<Roles>(new ProjectManagerContext());
+        public ICommand BackPageCommand { get; set; } //для кнопки отмена
+        public ICommand AddUserCommand { get; set; } //для конопки добавить пользователя
         public AddUserPageViewModel()
         {
             BackPageCommand = new LambdaCommand(BackPage);
             AddUserCommand = new LambdaCommand(AddUser);
-            
         }
 
         public void BackPage(object obj)
@@ -31,49 +30,69 @@ namespace ProjectManager.ViewModels
             //закрыть страницу с добавлением пользователя
         }
 
+        public void CheckErrorText(ref string messageError, string checkString, short id, string error) //проверка на пустоту строки + меняем цвет обязательных полей,
+        {                                                                                               //если они пустые
+            SolidColorBrush red = AddUserPageModel.redColor;
+            SolidColorBrush gray = AddUserPageModel.standartColor;
+            if(checkString.Length<1)
+            {
+                messageError += error + "\n";
+                switch (id)
+                {
+                    case 0:
+                        LoginBorderColor = red;
+                        return;
+                    case 1:
+                        PasswordBorderColor = red;
+                        return;
+                    case 2:
+                        RoleBorderColor = red;
+                        return;
+                    default: break;
+                }
+            }
+            else
+            {
+                switch (id)
+                {
+                    case 0:
+                        LoginBorderColor = gray;
+                        return;
+                    case 1:
+                        PasswordBorderColor = gray;
+                        return;
+                    case 2:
+                        RoleBorderColor = gray;
+                        return;
+                    default: break;
+                }
+            }
+        }
+
         public void AddUser(object obj)
         {
-            string messageError = "";
+            string messageError = ""; //сообщение ошибки, будет заполняться по мере появления ошибок
             try
             {
-                if (Login.Length < 1)
-                {
-                    messageError += "Введите логин\n";
-                    
-                    LoginBorderColor = Models.AddUserPageModel.redColor;
-                }
-                else
-                {
-                    LoginBorderColor = Models.AddUserPageModel.standartColor;
-                }
-                if (Password.Length < 1)
-                {
-                    messageError += "Введите пароль\n";
-                    PasswordBorderColor = Models.AddUserPageModel.redColor;
-                }
-                else
-                {
-                    PasswordBorderColor = Models.AddUserPageModel.standartColor;
-                }
-                if (SelectedRole.Length < 1)
-                {
-                    messageError += "выберите роль\n";
-                    RoleBorderColor = Models.AddUserPageModel.redColor;
-                }
-                else
-                {
-                    RoleBorderColor = Models.AddUserPageModel.standartColor;
-                }
+                CheckErrorText(ref messageError, Login, 0, "Введите логин"); //проверка обязательных данных
+                CheckErrorText(ref messageError, Password, 1, "Введите пароль");
+                CheckErrorText(ref messageError, SelectedRole, 2, "Выберите роль");
 
-                if (messageError.Length > 0)
+                if (messageError.Length > 0) //выбиваем ошибку, если что то не заполнено
                 {
                     throw new Exception(messageError);
                 }
 
-                usersRepository.Add(new Users() { Username = Login, Password = Password, Role = (rolesRepository.Items.FirstOrDefault(x => x.Name == SelectedRole)).Id });
-                MessageBox.Show("Пользователь успешно добавлен.", "Вау!Ё", MessageBoxButton.OK, MessageBoxImage.Information);
-                //сохранение в бд
+                usersRepository.Add(new Users() { Username = Login, Password = Password, Role = (rolesRepository.Items.FirstOrDefault(x => x.Name == SelectedRole)).Id }); //бобавили основные данные
+                
+                if(Name.Length > 0||LastName.Length>0||Patronymic.Length>0||Age.Length>0) //если есть дополнительные данные
+                {
+                    int idUser = usersRepository.Items.FirstOrDefault(x=>x.Username == Login).Id; //получаем ид этого усера
+                    Repository<Persons> person = new Repository<Persons>(new ProjectManagerContext());
+                    person.Add(new Persons() { Age = Convert.ToInt32(Age), Name = Name, Patronymic = Patronymic, Surname = LastName, Id = idUser });
+                }
 
+                MessageBox.Show("Пользователь успешно добавлен.", "Вау!Ё", MessageBoxButton.OK, MessageBoxImage.Information); 
             }
             catch (Exception ex)
             {
@@ -83,52 +102,52 @@ namespace ProjectManager.ViewModels
         }
        
 
-        public string Name
+        public string Name //далее свойства для работы с данными и цветами
         {
-            get => Models.AddUserPageModel.name;
+            get => AddUserPageModel.name;
             set
             {
-                Models.AddUserPageModel.name = value;
+                AddUserPageModel.name = value;
             }
         }
         public string LastName
         {
-            get => Models.AddUserPageModel.lastName;
+            get => AddUserPageModel.lastName;
             set
             {
-                Models.AddUserPageModel.lastName = value;
+                AddUserPageModel.lastName = value;
             }
         }
         public string Patronymic
         {
-            get => Models.AddUserPageModel.patronymic;
+            get => AddUserPageModel.patronymic;
             set 
             {
-                Models.AddUserPageModel.patronymic = value;
+                AddUserPageModel.patronymic = value;
             }
         }
         public string Email
         {
-            get => Models.AddUserPageModel.email;
+            get => AddUserPageModel.email;
             set
             {
-                Models.AddUserPageModel.email = value;
+                AddUserPageModel.email = value;
             }
         }
         public string Login
         {
-            get => Models.AddUserPageModel.login;
+            get => AddUserPageModel.login;
             set
             {
-                Models.AddUserPageModel.login = value;
+                AddUserPageModel.login = value;
             }
         }
         public string Password
         {
-            get => Models.AddUserPageModel.password;
+            get => AddUserPageModel.password;
             set
             {
-                Models.AddUserPageModel.password = value;
+                AddUserPageModel.password = value;
             }
         }
         public string SelectedRole
@@ -139,7 +158,7 @@ namespace ProjectManager.ViewModels
                 AddUserPageModel.selectedRole = value;
             }
         }
-        public string Age
+        public string Age // ввод возраста с обработкой ввода символов
         {
             get => ""+ AddUserPageModel.ageText;
             set
