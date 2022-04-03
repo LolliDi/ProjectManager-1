@@ -11,11 +11,11 @@
             <Border Style="{StaticResource SBorder}" Height="767" Width="552">
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                     <TextBlock HorizontalAlignment="Center" FontSize="32" Margin="14" Style="{StaticResource STBLOCK}">Добавить пользователя</TextBlock>
-                    <GroupBox BorderBrush="{Binding LoginBorderColor}" Width="390" Margin="2">
-                        <local:PlaceTextBox Text="{Binding Path=Login}"  PlaceText="Логин" Style="{StaticResource PlaceTextBoxNormal}"/>
+                    <GroupBox BorderBrush="{Binding LoginBorderColor}" Width="390" Margin="0">
+                        <local:PlaceTextBox Text="{Binding Path=Login}"  PlaceText="Логин" Style="{StaticResource PlaceTextBoxNormal}" Margin="0,5,0,0"/>
                     </GroupBox>
                     <GroupBox BorderBrush="{Binding PasswordBorderColor}" Width="390" Margin="0">
-                        <local:PlaceTextBox Text="{Binding Password}" PlaceText="Пароль" Style="{StaticResource PlaceTextBoxNormal}"/>
+                        <local:PlaceTextBox Text="{Binding Password}" PlaceText="Пароль" Style="{StaticResource PlaceTextBoxNormal}" Margin="0,5,0,0"/>
                     </GroupBox>
                     <local:PlaceTextBox Text="{Binding Name}" PlaceText="Имя" Style="{StaticResource PlaceTextBoxNormal}"/>
                     <local:PlaceTextBox Text="{Binding LastName}" PlaceText="Фамилия" Style="{StaticResource PlaceTextBoxNormal}"/>
