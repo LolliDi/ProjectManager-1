@@ -23,13 +23,13 @@
                     HorizontalAlignment="Center"
                     Margin="10">
             <Button Content="Ресурсы"
-                    Command="{Binding Navigation.ResourcePage}"/>
+                    Command="{Binding ToResourcePageCommand}"/>
             <Button Content="Отчеты"
-                    Command="{Binding Navigation.ReportsPage}"/>
+                    Command="{Binding ToReportsPageCommand}"/>
             <Button Content="Диаграмма Ганта"
-                    Command="{Binding Navigation.GanttChartPage}"/>
+                    Command="{Binding ToGanttChartPageCommand}"/>
             <Button Content="Паспорт проекта"
-                    Command="{Binding Navigation.ProjectPassportPage}"/>
+                    Command="{Binding ToProjectPassportPageCommand}"/>
         </StackPanel>
         <DataGrid Grid.Row="1"/>
     </Grid>

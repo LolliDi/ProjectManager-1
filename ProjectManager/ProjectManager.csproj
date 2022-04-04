@@ -145,9 +145,10 @@
       <DependentUpon>ProjectManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="ViewModels\TasksMenuViewModel.cs" />
     <Compile Include="ViewModels\UserAccountViewModel.cs" />
-    <Compile Include="Views\ProjectMenuPage.xaml.cs">
-      <DependentUpon>ProjectMenuPage.xaml</DependentUpon>
+    <Compile Include="Views\TasksMenuPage.xaml.cs">
+      <DependentUpon>TasksMenuPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserAccount.xaml.cs">
       <DependentUpon>UserAccount.xaml</DependentUpon>
@@ -188,7 +189,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\ProjectMenuPage.xaml">
+    <Page Include="Views\TasksMenuPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
