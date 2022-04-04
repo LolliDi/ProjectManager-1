@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ProjectManager.Models;
 using ProjectManager.Models.Repositories;
+using ProjectManager.Services;
 
 namespace ProjectManager.ViewModels
 {
@@ -14,7 +15,7 @@ namespace ProjectManager.ViewModels
         private readonly IRepository<Projects> projectsRepository;
         private List<Projects> projectList;
         private Users currentUser;
-        public ProjectMenuViewModel(Users currentUser, IRepository<Projects> projectsRepository)
+        public ProjectMenuViewModel(NavigationService navigationService, Users currentUser, IRepository<Projects> projectsRepository)
         {
             this.currentUser = currentUser;
             this.projectsRepository = projectsRepository;
