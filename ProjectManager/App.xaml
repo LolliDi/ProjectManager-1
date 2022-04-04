@@ -135,5 +135,10 @@
             </Style.Triggers>
         </Style>
 
+
+        <Style TargetType="TextBox" x:Key="STextBox">
+            <Setter Property="FontFamily" Value="Raleway"/>
+            <Setter Property="FontSize" Value="32"/>
+        </Style>
     </Application.Resources>
 </Application>

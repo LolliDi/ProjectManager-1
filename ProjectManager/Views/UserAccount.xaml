@@ -10,25 +10,25 @@
     <Grid Background="White">
         <StackPanel>
             <GroupBox Header="Логин">
-                <TextBlock Text="{Binding User.Username}"/>
+                <TextBlock Text="{Binding User.Username}" Style="{StaticResource STBLOCK}"/>
             </GroupBox>
             <GroupBox Header="Роль">
-                <TextBlock Text="{Binding User.Roles.Name}"/>
+                <TextBlock Text="{Binding User.Roles.Name}" Style="{StaticResource STBLOCK}"/>
             </GroupBox>
             <GroupBox Header="Имя">
-                <TextBox Text="{Binding User.Persons.Name}"/>
+                <TextBox Text="{Binding User.Persons.Name}" Style="{StaticResource STextBox}"/>
             </GroupBox>
             <GroupBox Header="Фамилия">
-                <TextBox Text="{Binding User.Persons.Surname}"/>
+                <TextBox Text="{Binding User.Persons.Surname}" Style="{StaticResource STextBox}"/>
             </GroupBox>
             <GroupBox Header="Отчество">
-                <TextBox Text="{Binding User.Persons.Patronymic}"/>
+                <TextBox Text="{Binding User.Persons.Patronymic}" Style="{StaticResource STextBox}"/>
             </GroupBox>
             <GroupBox Header="Возраст">
-                <TextBox Text="{Binding User.Persons.Age}"/>
+                <TextBox Text="{Binding User.Persons.Age}" Style="{StaticResource STextBox}"/>
             </GroupBox>
-            <Button x:Name="btnRedact" Content="Редактировать"/>
-            <Button x:Name="btnBack" Content="Назад"/>
+            <Button x:Name="btnRedact" Content="Редактировать" Style="{StaticResource SButton}" Margin="0 5 0 5"/>
+            <Button x:Name="btnBack" Content="Назад" Command="{Binding Path=Back}" Style="{StaticResource SButton}" />
         </StackPanel>
     </Grid>
 </UserControl>
