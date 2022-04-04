@@ -23,7 +23,7 @@ namespace ProjectManager.ViewModels
 
             ToUserAccountViewModel = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new UserAccountViewModel(user));
             ToProjectMenuViewModel = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new ProjectMenuViewModel(NavigationService, user, projectsRepository));
-            ToViewModelAuto = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new AuthorizationViewModel());
+            ToViewModelAuto = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new AuthorizationViewModel(NavigationService));
         }
 
         private readonly IRepository<Users> usersRepository;
