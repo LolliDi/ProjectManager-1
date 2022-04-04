@@ -17,14 +17,12 @@ namespace ProjectManager.ViewModels
     {
         private Users user;
         NavigationService NavigationService;
-        private readonly IRepository<Projects> projectsRepository;
         public ICommand Back { get; set; }
         public UserAccountViewModel(Users user, NavigationService NavigationService)
         {
-            projectsRepository = new Repository<Projects>(new ProjectManagerContext());
             this.user = user;
             this.NavigationService = NavigationService;
-            Back = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new ProjectMenuViewModel(NavigationService,user, projectsRepository));
+            Back = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new ProjectMenuViewModel(NavigationService,user));
         }
         public Users User
         {
