@@ -14,7 +14,7 @@
                     <TextBlock Margin="0 164 0 39 " Style="{StaticResource STBLOCK}">Вход</TextBlock>
                     <local:PlaceTextBox Margin="0 0 0 61" Width="367" PlaceText ="Логин" Text="{Binding GetLogin}"></local:PlaceTextBox>
                     <local:PlaceTextBox Margin="0 0 0 61" Width="367" PlaceText ="Пароль" Text="{Binding GetPass}"></local:PlaceTextBox>
-                    <Button Margin="0 0 0 235" Style="{StaticResource SButton}" Height="62" Width="235"  Command="{Binding AutoCommand}">Войти</Button>
+                    <Button Margin="0 0 0 235" Height="62" Width="235"  Command="{Binding AutoCommand}">Войти</Button>
                 </StackPanel>
             </Border>
         </StackPanel>

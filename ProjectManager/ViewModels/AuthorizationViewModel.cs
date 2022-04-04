@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using ProjectManager.Services;
 
 namespace ProjectManager.ViewModels
 {
@@ -49,14 +50,15 @@ namespace ProjectManager.ViewModels
                 else
                 {
                     var permisions = user.Roles.Permissions;
+                    NavigationService navigationService = new NavigationService();
                     if (permisions.Where(x => x.Id == 1).Any())
                     {
-                        //вас кидает к админу
+                        navigationService = new NavigationService() { CurrentViewModel = new UserAccountViewModel(user) };
                     }
                     else 
-                    { 
-                        //в основное меню
-                    }
+                    {
+                        navigationService = new NavigationService() {CurrentViewModel = new UserAccountViewModel(user)};
+                    }                    
                 }
             }
             else 
