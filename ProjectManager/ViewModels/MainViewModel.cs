@@ -17,11 +17,11 @@ namespace ProjectManager.ViewModels
         {
             usersRepository = new Repository<Users>(new ProjectManagerContext());
             projectsRepository = new Repository<Projects>(new ProjectManagerContext());
-            NavigationService = new NavigationService() { CurrentViewModel = new UserAccountViewModel(null) };
+            NavigationService = new NavigationService() { CurrentViewModel = new UserAccountViewModel(null, null) };
 
             Users user = usersRepository.Get(3);
 
-            ToUserAccountViewModel = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new UserAccountViewModel(user));
+            ToUserAccountViewModel = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new UserAccountViewModel(user, NavigationService, projectsRepository));
             ToProjectMenuViewModel = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new ProjectMenuViewModel(user, projectsRepository));
             ToViewModelAuto = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new AuthorizationViewModel(NavigationService));
         }

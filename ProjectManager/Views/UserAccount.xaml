@@ -28,7 +28,7 @@
                 <TextBox Text="{Binding User.Persons.Age}"/>
             </GroupBox>
             <Button x:Name="btnRedact" Content="Редактировать"/>
-            <Button x:Name="btnBack" Content="Назад"/>
+            <Button x:Name="btnBack" Content="Назад" Co/>
         </StackPanel>
     </Grid>
 </UserControl>
