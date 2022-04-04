@@ -51,6 +51,11 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#b8ffee"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
         
         <!-- ОБРАЩЕНИЕ К ДАНЕ, НАХУЙ, ТУПОЕ ТЫ ЖИВОТНОЕ, БЛЯДЬ, ЕСЛИ ТРОНЕШЬ ХОТЬ ОДИН СТИЛЬ СНИЗУ - Я ВЫЕБУ НЕ ТОЛЬКО ТВОЮ МАТЬ, НО И ВСЮ 
