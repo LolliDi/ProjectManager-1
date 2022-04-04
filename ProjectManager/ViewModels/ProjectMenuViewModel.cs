@@ -16,11 +16,11 @@ namespace ProjectManager.ViewModels
         private List<Projects> projectList;
         private Users currentUser;
         private NavigationService navigationService;
-        public ProjectMenuViewModel(NavigationService navigationService, Users currentUser, IRepository<Projects> projectsRepository)
+        public ProjectMenuViewModel(NavigationService navigationService, Users currentUser)
         {
             this.currentUser = currentUser;
-            this.projectsRepository = projectsRepository;
             this.navigationService = navigationService;
+            projectsRepository = new Repository<Projects>(new ProjectManagerContext());
             ProjectList = projectsRepository.Items.ToList();
         }
 
@@ -33,7 +33,14 @@ namespace ProjectManager.ViewModels
                 if (currentUser.Roles.Id == 1)
                     projectList = projectsRepository.Items.ToList();
                 else if (currentUser.Roles.Id == 3)
-                    projectList = projectsRepository.Items.Where(x => x.Users.Contains(currentUser)).ToList();
+                {
+                    foreach(Projects pr in projectsRepository.Items) // Единственный способ, которым заработало
+                    {
+                        projectList = new List<Projects>();
+                        if (pr.Users.Where(x => x.Id == currentUser.Id).Any())
+                            projectList.Add(pr);
+                    }
+                }
                 else
                     projectList = null;
             }

@@ -16,13 +16,12 @@ namespace ProjectManager.ViewModels
         public MainViewModel()
         {
             usersRepository = new Repository<Users>(new ProjectManagerContext());
-            projectsRepository = new Repository<Projects>(new ProjectManagerContext());
             NavigationService = new NavigationService() { CurrentViewModel = new UserAccountViewModel(null) };
 
-            Users user = usersRepository.Get(3);
+            Users user = usersRepository.Get(2);
 
             ToUserAccountViewModel = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new UserAccountViewModel(user));
-            ToProjectMenuViewModel = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new ProjectMenuViewModel(NavigationService, user, projectsRepository));
+            ToProjectMenuViewModel = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new ProjectMenuViewModel(NavigationService, user));
             ToViewModelAuto = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new AuthorizationViewModel(NavigationService));
         }
 
