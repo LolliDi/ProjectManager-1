@@ -24,7 +24,7 @@ namespace ProjectManager.ViewModels
             projectsRepository = new Repository<Projects>(new ProjectManagerContext());
             this.user = user;
             this.NavigationService = NavigationService;
-            Back = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new ProjectMenuViewModel(user, projectsRepository));
+            Back = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new ProjectMenuViewModel(NavigationService,user, projectsRepository));
         }
         public Users User
         {
