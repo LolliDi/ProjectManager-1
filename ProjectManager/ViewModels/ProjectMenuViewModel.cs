@@ -4,22 +4,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProjectManager.Models;
+using ProjectManager.Models.Repositories;
 
 namespace ProjectManager.ViewModels
 {
     class ProjectMenuViewModel : ViewModel
     {
         private int selectedId = 0;
-        public ProjectMenuViewModel(List<Projects> projectList)
+        private readonly IRepository<Projects> projectsRepository;
+        private List<Projects> projectList;
+        private Users currentUser;
+        public ProjectMenuViewModel(Users currentUser, IRepository<Projects> projectsRepository)
         {
-            this.projectList = projectList;
+            this.currentUser = currentUser;
+            this.projectsRepository = projectsRepository;
+            ProjectList = projectsRepository.Items.ToList();
         }
 
-        private List<Projects> projectList;
+
         public List<Projects> ProjectList
         {
             get => projectList;
-            set => projectList = value;
+            set 
+            {
+                if (currentUser.Roles.Id == 1)
+                    projectList = projectsRepository.Items.ToList();
+                else if (currentUser.Roles.Id == 3)
+                    projectList = projectsRepository.Items.Where(x => x.Users.Contains(currentUser)).ToList();
+                else
+                    projectList = null;
+            }
         }
 
         public int SelectedProject
@@ -30,12 +44,12 @@ namespace ProjectManager.ViewModels
 
         public string SelectedProjectTitle
         {
-            get => projectList[selectedId].Name;
+            get => projectList == null ? null : projectList[selectedId].Name;
         }
 
         public string SelectedProjectDate
         {
-            get => projectList[selectedId].CreatingDate.ToString();
+            get => projectList == null ? null : projectList[selectedId].CreatingDate.ToString();
         }
 
         public string SelectedProjectUsers
@@ -43,9 +57,12 @@ namespace ProjectManager.ViewModels
             get
             {
                 string userList = "Список пользователей: ";
-                foreach(Users user in projectList[selectedId].Users)
+                if (projectList != null)
                 {
-                    userList += "\n" + user.Username;
+                    foreach (Users user in projectList[selectedId].Users)
+                    {
+                        userList += "\n" + user.Username;
+                    }
                 }
                 return userList;
             }
