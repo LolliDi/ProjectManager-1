@@ -11,7 +11,8 @@ namespace ProjectManager.ViewModels
 {
     class ProjectMenuViewModel : ViewModel
     {
-        private int selectedId = 0;
+        private string selectedProjectName, selectedProjectDate, selectedProjectUsers;
+        private int selectedId = -1;
         private readonly IRepository<Projects> projectsRepository;
         private List<Projects> projectList;
         private Users currentUser;
@@ -20,6 +21,9 @@ namespace ProjectManager.ViewModels
         {
             this.currentUser = currentUser;
             this.navigationService = navigationService;
+            selectedProjectName = "Выберите проект";
+            selectedProjectDate = "";
+            selectedProjectUsers = "";
             projectsRepository = new Repository<Projects>(new ProjectManagerContext());
             ProjectList = projectsRepository.Items.ToList();
         }
@@ -49,33 +53,44 @@ namespace ProjectManager.ViewModels
         public int SelectedProject
         {
             get => selectedId;
-            set => selectedId = value;
+            set
+            {
+                selectedId = value;
+                SelectedProjectTitle = projectList[selectedId].Name.ToString();
+                SelectedProjectDate = projectList[selectedId].CreatingDate.ToString();
+                SelectedProjectUsers = CreateUserList();
+            }
         }
 
         public string SelectedProjectTitle
         {
-            get => projectList == null ? null : projectList[selectedId].Name;
+            get => selectedProjectName;
+            set => Set(ref selectedProjectName, ref value);
         }
 
         public string SelectedProjectDate
         {
-            get => projectList == null ? null : projectList[selectedId].CreatingDate.ToString();
+            get => selectedProjectDate;
+            set => Set(ref selectedProjectDate, ref value);
         }
 
         public string SelectedProjectUsers
         {
-            get
+            get => selectedProjectUsers;
+            set => Set(ref selectedProjectUsers, ref value);
+        }
+
+        private string CreateUserList()
+        {
+            string userList = "Список пользователей: ";
+            if (projectList != null)
             {
-                string userList = "Список пользователей: ";
-                if (projectList != null)
+                foreach (Users user in projectList[selectedId].Users)
                 {
-                    foreach (Users user in projectList[selectedId].Users)
-                    {
-                        userList += "\n" + user.Username;
-                    }
+                    userList += "\n" + user.Username;
                 }
-                return userList;
             }
+            return userList;
         }
 
     }

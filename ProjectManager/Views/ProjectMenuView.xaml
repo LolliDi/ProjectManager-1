@@ -64,8 +64,8 @@
             </Grid.OpacityMask>
             <Border Name="mask" Background="#FAFAFA" BorderThickness="0" CornerRadius="20"/>
             <StackPanel Orientation="Vertical" Margin="10">
-                <TextBlock FontSize="32" TextAlignment="Center" TextWrapping="Wrap" Text="{Binding SelectedProjectTitle, FallbackValue='Пустое название'}"/>
-                <TextBlock FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedProjectDate, FallbackValue='Дата создания: 00.00.0000 00:00:00'}"/>
+                <TextBlock x:Name="selectedProjectName" FontSize="32" TextAlignment="Center" TextWrapping="Wrap" Text="{Binding SelectedProjectTitle, FallbackValue='Пустое название'}"/>
+                <TextBlock x:Name="selectedProjectDate" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedProjectDate, FallbackValue='Дата создания: 00.00.0000 00:00:00'}"/>
                 <ScrollViewer Height="650" >
                     <TextBlock FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedProjectUsers, FallbackValue='Список пользователей:'}"/>
                 </ScrollViewer>
