@@ -49,9 +49,9 @@
                 <Button Style="{StaticResource SButton}" Width="307" Height="62" Margin="54, 0">Выйти</Button>
             </StackPanel>
         </StackPanel>
-        <StackPanel Grid.Row="1">
+        <StackPanel Grid.Row="1" Margin="56" >
             <ListBox
-                Height="835" Margin="56"  
+                Height="835" 
                 Template="{DynamicResource ArrowedItemsControl}"
                 ItemsSource="{Binding ProjectList}"
                 ItemTemplate="{DynamicResource ProjectItem }"
