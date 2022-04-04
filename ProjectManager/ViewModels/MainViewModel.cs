@@ -1,6 +1,7 @@
 ﻿using ProjectManager.Commands;
 using ProjectManager.Models;
 using ProjectManager.Models.Repositories;
+using ProjectManager.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,26 +15,24 @@ namespace ProjectManager.ViewModels
     {
         public MainViewModel()
         {
-            var r = new ProjectManagerContext();
-            var f = r.Users.First();
-            Repository<Users> repository = new Repository<Users>(new ProjectManagerContext());
-            Repository<Projects> repositoryPr = new Repository<Projects>(new ProjectManagerContext());
-            Users user = repository.Get(1);
-            List<Projects> projects = new List<Projects>() { repositoryPr.Get(1) };
-            ToViewModel1Commmand = new LambdaCommand(parameter => CurrentViewModel = new ViewModel1());
-            ToViewModel2Commmand = new LambdaCommand(parameter => CurrentViewModel = new ViewModel2());
-            ToUserAccountViewModel = new LambdaCommand(parameter => CurrentViewModel = new UserAccountViewModel(user));
-            ToProjectMenuViewModel = new LambdaCommand(parameter => CurrentViewModel = new ProjectMenuViewModel(projects));
+            usersRepository = new Repository<Users>(new ProjectManagerContext());
+            projectsRepository = new Repository<Projects>(new ProjectManagerContext());
+            NavigationService = new NavigationService() { CurrentViewModel = new UserAccountViewModel(null) };
+
+            Users user = usersRepository.Get(1);
+            List<Projects> projects = projectsRepository.Items.ToList();
+
+            ToUserAccountViewModel = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new UserAccountViewModel(user));
+            ToProjectMenuViewModel = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new ProjectMenuViewModel(projects));
+            ToViewModelAuto = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new AuthorizationViewModel());
         }
-        private ViewModel currentViewModel;
-        public ViewModel CurrentViewModel
-        {
-            get => currentViewModel;
-            set => Set(ref currentViewModel, ref value);
-        }
-        public ICommand ToViewModel1Commmand { get; set; }
-        public ICommand ToViewModel2Commmand { get; set; }
+
+        private readonly IRepository<Users> usersRepository;
+        private readonly IRepository<Projects> projectsRepository;
+
+        public NavigationService NavigationService { get; set; }
         public ICommand ToUserAccountViewModel { get; set; }
         public ICommand ToProjectMenuViewModel { get; set; }
+        public ICommand ToViewModelAuto { get; set; }
     }
 }
