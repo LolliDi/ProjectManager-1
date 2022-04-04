@@ -54,11 +54,11 @@ namespace ProjectManager.ViewModels
                     var permisions = user.Roles.Permissions;
                     if (permisions.Where(x => x.Id == 1).Any())
                     {
-                        navigationService.CurrentViewModel = new UserAccountViewModel(user) ;
+                        navigationService.CurrentViewModel = new UserAccountViewModel(user, navigationService) ;
                     }
                     else 
                     {
-                        navigationService.CurrentViewModel = new UserAccountViewModel(user);
+                        navigationService.CurrentViewModel = new UserAccountViewModel(user, navigationService);
                     }                    
                 }
             }
