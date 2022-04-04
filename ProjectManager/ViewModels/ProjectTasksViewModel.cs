@@ -10,9 +10,9 @@ using System.Windows.Input;
 
 namespace ProjectManager.ViewModels
 {
-    class TasksMenuViewModel : ViewModel
+    class ProjectTasksViewModel : ViewModel
     {
-        public TasksMenuViewModel(NavigationService navigationService, Projects project)
+        public ProjectTasksViewModel(NavigationService navigationService, Projects project)
         {
             NavigationService = navigationService;
 
