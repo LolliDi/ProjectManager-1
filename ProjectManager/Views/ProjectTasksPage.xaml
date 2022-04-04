@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <Style TargetType="Button" BasedOn="{StaticResource SButton}">
+        <Style x:Key="MenuSButton" TargetType="Button" BasedOn="{StaticResource SButton}">
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="Padding" Value="20 10"/>
             <Setter Property="Margin" Value="5"/>
@@ -27,15 +27,85 @@
                     Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     Margin="10">
-            
+
+            <Button Content="Задачи"
+                    Command="{Binding ToProjectTasksPageCommand}">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource MenuSButton}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsProjectTasksPageSelected}" Value="True">
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="BorderThickness" Value="2"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Button Content="Ресурсы"
-                    Command="{Binding ToResourcePageCommand}"/>
+                    Command="{Binding ToProjectResourcePageCommand}">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource MenuSButton}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsProjectResourcePageSelected}" Value="True">
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="BorderThickness" Value="2"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Button Content="Отчеты"
-                    Command="{Binding ToReportsPageCommand}"/>
+                    Command="{Binding ToReportsPageCommand}">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource MenuSButton}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsReportsPageSelected}" Value="True">
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="BorderThickness" Value="2"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Button Content="Паспорт проекта"
-                    Command="{Binding ToProjectPassportPageCommand}"/>
-            
+                    Command="{Binding ToProjectPassportPageCommand}">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource MenuSButton}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsProjectPassportPageSelected}" Value="True">
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="BorderThickness" Value="2"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Content="Меню администратора"
+                    Command="{Binding ToAdminPageCommand}">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource MenuSButton}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsAdminPageSelected}" Value="True">
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="BorderThickness" Value="2"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
         </StackPanel>
+
+        <ContentControl Grid.Row="1"
+                        Content="{Binding NavigationService.CurrentViewModel}">
+        </ContentControl>
+
+        <GridSplitter Width="0" 
+                      Grid.Row="1"/>
         <DataGrid Grid.Row="1"/>
         <TextBlock Text="Диаграмма Ганта"
                    Grid.Column="1"

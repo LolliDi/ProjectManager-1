@@ -179,6 +179,10 @@
     <Compile Include="Views\UsersViewPage.xaml.cs">
       <DependentUpon>UsersViewPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="CustomControls\GanttChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
