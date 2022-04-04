@@ -13,9 +13,11 @@ namespace ProjectManager.ViewModels
 {
     class AuthorizationViewModel : ViewModel
     {
-        public AuthorizationViewModel()
+        NavigationService navigationService;
+        public AuthorizationViewModel(NavigationService navigationService)
         {
             AutoCommand = new LambdaCommand(Verefication);
+            this.navigationService = navigationService;
         }
 
         UsersRepository usersRepository = new UsersRepository(new Models.ProjectManagerContext());
@@ -50,14 +52,13 @@ namespace ProjectManager.ViewModels
                 else
                 {
                     var permisions = user.Roles.Permissions;
-                    NavigationService navigationService = new NavigationService();
                     if (permisions.Where(x => x.Id == 1).Any())
                     {
-                        navigationService = new NavigationService() { CurrentViewModel = new UserAccountViewModel(user) };
+                        navigationService.CurrentViewModel = new UserAccountViewModel(user) ;
                     }
                     else 
                     {
-                        navigationService = new NavigationService() {CurrentViewModel = new UserAccountViewModel(user)};
+                        navigationService.CurrentViewModel = new UserAccountViewModel(user);
                     }                    
                 }
             }
