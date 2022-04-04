@@ -15,10 +15,12 @@ namespace ProjectManager.ViewModels
         private readonly IRepository<Projects> projectsRepository;
         private List<Projects> projectList;
         private Users currentUser;
+        private NavigationService navigationService;
         public ProjectMenuViewModel(NavigationService navigationService, Users currentUser, IRepository<Projects> projectsRepository)
         {
             this.currentUser = currentUser;
             this.projectsRepository = projectsRepository;
+            this.navigationService = navigationService;
             ProjectList = projectsRepository.Items.ToList();
         }
 
