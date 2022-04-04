@@ -28,7 +28,6 @@ namespace ProjectManager.ViewModels
         }
 
         private readonly IRepository<Users> usersRepository;
-        private readonly IRepository<Projects> projectsRepository;
 
         public NavigationService NavigationService { get; set; }
         public ICommand ToUserAccountViewModel { get; set; }
