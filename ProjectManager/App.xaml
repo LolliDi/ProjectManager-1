@@ -14,7 +14,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
-                        <Border BorderBrush="#CFCFCF" BorderThickness="1" CornerRadius="10" Background="{TemplateBinding Background}">
+                        <Border BorderThickness="1" CornerRadius="10" Background="{TemplateBinding Background}">
                             <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
                         </Border>
                     </ControlTemplate>
@@ -51,6 +51,100 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#b8ffee"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+
+        
+        
+        
+        <Style TargetType="local:PlaceTextBox" BasedOn="{StaticResource {x:Type local:PlaceTextBox}}" x:Key="PlaceTextBoxNormal">
+            <Setter Property="Width" Value="376"/>
+            <Setter Property="Height" Value="62"/>
+            <Setter Property="Margin" Value="0,6"/>
+            <Setter Property="Padding" Value="14,0"/>
+        </Style>
+        <Style TargetType="Button" BasedOn="{StaticResource SButton}" x:Key="AddUserButton">
+            <Setter Property="Width" Value="235"/>
+            <Setter Property="Height" Value="62"/>
+            <Setter Property="Margin" Value="9,28"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="0" 
+                                CornerRadius="10" 
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>        <!--Триггеры для кнопки, можете перенести их в SButton, только отсюда удалите-->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX="1.05" ScaleY="1.05"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Color="Gray" BlurRadius="5"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Background" Value="#60FFD9"/>
+                </Trigger>
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX="0.9" ScaleY="0.9"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Color="Gray" BlurRadius="5"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+             
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="Border" x:Key="ShadowBorder" BasedOn="{StaticResource SBorder}">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Gray" BlurRadius="17"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Border" x:Key="CapturedBorder" BasedOn="{StaticResource SBorder}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX="1.05" ScaleY="1.05"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Color="Gray" BlurRadius="17"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Background" Value="#60FFD9"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <Style TargetType="TextBox" x:Key="STextBox">
+            <Setter Property="FontFamily" Value="Raleway"/>
+            <Setter Property="FontSize" Value="32"/>
         </Style>
     </Application.Resources>
 </Application>

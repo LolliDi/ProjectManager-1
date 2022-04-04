@@ -66,6 +66,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\AddUserPageModel.cs" />
     <Compile Include="Models\CostTypes.cs">
       <DependentUpon>ProjectManagerModel.tt</DependentUpon>
     </Compile>
@@ -145,9 +146,27 @@
       <DependentUpon>ProjectManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="ViewModels\ProjectPassportViewModel.cs" />
+    <Compile Include="ViewModels\ReportsViewModel.cs" />
+    <Compile Include="ViewModels\ProjectResourcesViewModel.cs" />
+    <Compile Include="ViewModels\ProjectTasksViewModel.cs" />
+    <Compile Include="ViewModels\AddUserPageViewModel.cs" />
     <Compile Include="ViewModels\UserAccountViewModel.cs" />
-    <Compile Include="Views\ProjectMenuPage.xaml.cs">
-      <DependentUpon>ProjectMenuPage.xaml</DependentUpon>
+    <Compile Include="ViewModels\UsersViewPageViewModel.cs" />
+    <Compile Include="Views\AddUserPage.xaml.cs">
+      <DependentUpon>AddUserPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProjectPassportPage.xaml.cs">
+      <DependentUpon>ProjectPassportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportsPage.xaml.cs">
+      <DependentUpon>ReportsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProjectResourcesPage.xaml.cs">
+      <DependentUpon>ProjectResourcesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProjectTasksPage.xaml.cs">
+      <DependentUpon>ProjectTasksPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserAccount.xaml.cs">
       <DependentUpon>UserAccount.xaml</DependentUpon>
@@ -156,7 +175,14 @@
     <Compile Include="Views\ProjectMenuView.xaml.cs">
       <DependentUpon>ProjectMenuView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UsersViewPage.xaml.cs">
+      <DependentUpon>UsersViewPage.xaml</DependentUpon>
+    </Compile>
     <Page Include="Styles\Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddUserPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -188,7 +214,23 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\ProjectMenuPage.xaml">
+    <Page Include="Views\ProjectPassportPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReportsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProjectResourcesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UsersViewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProjectTasksPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

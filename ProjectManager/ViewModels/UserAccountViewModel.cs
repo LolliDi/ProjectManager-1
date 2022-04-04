@@ -8,15 +8,23 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 using ProjectManager.Models;
+using ProjectManager.Services;
+using ProjectManager.Commands;
 
 namespace ProjectManager.ViewModels
 {
     class UserAccountViewModel : ViewModel
     {
         private Users user;
-        public UserAccountViewModel(Users user)
+        NavigationService NavigationService;
+        private readonly IRepository<Projects> projectsRepository;
+        public ICommand Back { get; set; }
+        public UserAccountViewModel(Users user, NavigationService NavigationService)
         {
+            projectsRepository = new Repository<Projects>(new ProjectManagerContext());
             this.user = user;
+            this.NavigationService = NavigationService;
+            Back = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new ProjectMenuViewModel(NavigationService,user, projectsRepository));
         }
         public Users User
         {

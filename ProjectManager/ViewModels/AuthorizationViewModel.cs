@@ -51,20 +51,19 @@ namespace ProjectManager.ViewModels
                 }
                 else
                 {
-                    var permisions = user.Roles.Permissions;
-                    if (permisions.Where(x => x.Id == 1).Any())
+                    if (user.Roles.Permissions.Where(x => x.Id == 1).Any())
                     {
-                        navigationService.CurrentViewModel = new UserAccountViewModel(user) ;
+                        navigationService.CurrentViewModel = new UserAccountViewModel(user, navigationService) ;
                     }
                     else 
                     {
-                        navigationService.CurrentViewModel = new UserAccountViewModel(user);
+                        navigationService.CurrentViewModel = new UserAccountViewModel(user, navigationService);
                     }                    
                 }
             }
             else 
             {
-                MessageBox.Show("Есть пусты строки", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Есть пустые строки", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
