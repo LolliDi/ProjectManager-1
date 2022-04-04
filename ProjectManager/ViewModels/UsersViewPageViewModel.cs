@@ -24,7 +24,7 @@ namespace ProjectManager.ViewModels
         {
             OpenUserCommand = new LambdaCommand(OpenUser);
             DelUserCommand = new LambdaCommand(DelUser);
-            foreach(Users user in new Repository<Users>(new ProjectManagerContext()).Items.ToList())
+            foreach (Users user in new Repository<Users>(new ProjectManagerContext()).Items.ToList())
             {
                 users.Add(new UsersInfo(user));
             }
@@ -49,9 +49,9 @@ namespace ProjectManager.ViewModels
                     Users = null;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,"Пошел ты нахер, козёл",MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "Пошел ты нахер, козёл", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -75,7 +75,7 @@ namespace ProjectManager.ViewModels
             //открываем страницу редактирования
         }
 
-       
+
 
         public struct UsersInfo
         {
@@ -94,9 +94,9 @@ namespace ProjectManager.ViewModels
                         userInfo = us.Persons.Surname + " " + us.Persons.Name + " " + us.Persons.Patronymic + " " + us.Persons.Age;
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
-                    
+
                 }
             }
 
@@ -105,10 +105,10 @@ namespace ProjectManager.ViewModels
                 get => login;
                 set => login = value;
             }
-            public string UserInfo 
-            { 
-                get => userInfo; 
-                set => userInfo = value; 
+            public string UserInfo
+            {
+                get => userInfo;
+                set => userInfo = value;
             }
             public int Id
             {

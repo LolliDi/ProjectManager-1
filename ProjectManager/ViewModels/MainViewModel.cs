@@ -24,8 +24,8 @@ namespace ProjectManager.ViewModels
             ToUserAccountViewModel = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new UserAccountViewModel(user));
             ToProjectMenuViewModel = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new ProjectMenuViewModel(NavigationService, user, projectsRepository));
             ToViewModelAuto = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new AuthorizationViewModel(NavigationService));
-            ToAddUserPage = new LambdaCommand(x => NavigationService.CurrentViewModel = new AddUserPageViewModel());
-            ToUsersViewPage = new LambdaCommand(x => NavigationService.CurrentViewModel = new UsersViewPageViewModel());
+            ToAddUserPage = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new AddUserPageViewModel());
+            ToUsersViewPage = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new UsersViewPageViewModel());
         }
 
         private readonly IRepository<Users> usersRepository;
