@@ -26,7 +26,7 @@ namespace ProjectManager.ViewModels
 
         public ICommand ToBack { get; set; }
         public ICommand ToCreateProject { get; set; }
-        public ICommand ToProjectPage { get; set; }
+        public ICommand ToProjectMenu { get; set; }
 
         public ProjectListViewModel(NavigationService navigationService, Users currentUser)
         {
@@ -40,7 +40,7 @@ namespace ProjectManager.ViewModels
 
             ToBack = new LambdaCommand(GoBack);
             ToBack = new LambdaCommand(GoCreateProject);
-            ToBack = new LambdaCommand(GoProjectPage);
+            ToBack = new LambdaCommand(GoProjectMenu);
         }
 
 
@@ -125,12 +125,12 @@ namespace ProjectManager.ViewModels
 
         private void GoCreateProject(object obj)
         {
-
+            navigationService.CurrentViewModel = new CreateProjectViewModel(navigationService, currentUser);
         }
 
-        private void GoProjectPage(object obj)
+        private void GoProjectMenu(object obj)
         {
-
+            navigationService.CurrentViewModel = new ProjectMenuViewModel(navigationService, projectList[selectedId]);
         }
 
     }

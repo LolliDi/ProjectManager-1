@@ -146,6 +146,7 @@
       <DependentUpon>ProjectManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="ViewModels\CreateProjectViewModel.cs" />
     <Compile Include="ViewModels\ProjectPassportViewModel.cs" />
     <Compile Include="ViewModels\ProjectTasksViewModel.cs" />
     <Compile Include="ViewModels\ReportsViewModel.cs" />
@@ -156,6 +157,9 @@
     <Compile Include="ViewModels\UsersViewPageViewModel.cs" />
     <Compile Include="Views\AddUserPage.xaml.cs">
       <DependentUpon>AddUserPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateProjectView.xaml.cs">
+      <DependentUpon>CreateProjectView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProjectPassportPage.xaml.cs">
       <DependentUpon>ProjectPassportPage.xaml</DependentUpon>
@@ -188,6 +192,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AuthorizationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateProjectView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

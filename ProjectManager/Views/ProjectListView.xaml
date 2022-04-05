@@ -71,7 +71,8 @@
                 <ScrollViewer Height="650" >
                     <TextBlock FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedProjectUsers, FallbackValue='Список пользователей:'}"/>
                 </ScrollViewer>
-                <Button Width="212" Height="62" Margin="10" VerticalAlignment="Bottom" Style="{StaticResource SButton}">Открыть</Button>
+                <Button Width="212" Height="62" Margin="10" VerticalAlignment="Bottom" Style="{StaticResource SButton}"
+                        Command="{Binding ToProjectMenu}">Открыть</Button>
             </StackPanel>
         </Grid>
     </Grid>
