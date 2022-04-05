@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using ProjectManager.Commands;
 using ProjectManager.Models;
 using ProjectManager.Models.Repositories;
 using ProjectManager.Services;
@@ -12,11 +15,19 @@ namespace ProjectManager.ViewModels
     class ProjectMenuViewModel : ViewModel
     {
         private string selectedProjectName, selectedProjectDate, selectedProjectUsers;
+        private Visibility projectButtonVisibility;
         private int selectedId = -1;
+
         private readonly IRepository<Projects> projectsRepository;
         private List<Projects> projectList;
         private Users currentUser;
+
         private NavigationService navigationService;
+
+        public ICommand ToBack { get; set; }
+        public ICommand ToCreateProject { get; set; }
+        public ICommand ToProjectPage { get; set; }
+
         public ProjectMenuViewModel(NavigationService navigationService, Users currentUser)
         {
             this.currentUser = currentUser;
@@ -26,6 +37,10 @@ namespace ProjectManager.ViewModels
             selectedProjectUsers = "";
             projectsRepository = new Repository<Projects>(new ProjectManagerContext());
             ProjectList = projectsRepository.Items.ToList();
+
+            ToBack = new LambdaCommand(GoBack);
+            ToBack = new LambdaCommand(GoCreateProject);
+            ToBack = new LambdaCommand(GoProjectPage);
         }
 
 
@@ -59,6 +74,10 @@ namespace ProjectManager.ViewModels
                 SelectedProjectTitle = projectList[selectedId].Name.ToString();
                 SelectedProjectDate = projectList[selectedId].CreatingDate.ToString();
                 SelectedProjectUsers = CreateUserList();
+                if (selectedId == -1)
+                    ProjectButtonVisibility = Visibility.Hidden;
+                else
+                    ProjectButtonVisibility = Visibility.Visible;
             }
         }
 
@@ -80,6 +99,12 @@ namespace ProjectManager.ViewModels
             set => Set(ref selectedProjectUsers, ref value);
         }
 
+        public Visibility ProjectButtonVisibility
+        {
+            get => projectButtonVisibility;
+            set => Set(ref projectButtonVisibility, ref value);
+        }
+
         private string CreateUserList()
         {
             string userList = "Список пользователей: ";
@@ -91,6 +116,21 @@ namespace ProjectManager.ViewModels
                 }
             }
             return userList;
+        }
+
+        private void GoBack(object obj)
+        {
+            navigationService.CurrentViewModel = new AuthorizationViewModel(navigationService);
+        }
+
+        private void GoCreateProject(object obj)
+        {
+
+        }
+
+        private void GoProjectPage(object obj)
+        {
+
         }
 
     }
