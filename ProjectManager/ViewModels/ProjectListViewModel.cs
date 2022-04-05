@@ -12,7 +12,7 @@ using ProjectManager.Services;
 
 namespace ProjectManager.ViewModels
 {
-    class ProjectMenuViewModel : ViewModel
+    class ProjectListViewModel : ViewModel
     {
         private string selectedProjectName, selectedProjectDate, selectedProjectUsers;
         private Visibility projectButtonVisibility;
@@ -28,7 +28,7 @@ namespace ProjectManager.ViewModels
         public ICommand ToCreateProject { get; set; }
         public ICommand ToProjectPage { get; set; }
 
-        public ProjectMenuViewModel(NavigationService navigationService, Users currentUser)
+        public ProjectListViewModel(NavigationService navigationService, Users currentUser)
         {
             this.currentUser = currentUser;
             this.navigationService = navigationService;

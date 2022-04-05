@@ -22,7 +22,7 @@ namespace ProjectManager.ViewModels
         {
             this.user = user;
             this.NavigationService = NavigationService;
-            Back = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new ProjectMenuViewModel(NavigationService,user));
+            Back = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new ProjectListViewModel(NavigationService,user));
         }
         public Users User
         {

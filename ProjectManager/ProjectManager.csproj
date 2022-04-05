@@ -171,9 +171,9 @@
     <Compile Include="Views\UserAccount.xaml.cs">
       <DependentUpon>UserAccount.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ProjectMenuViewModel.cs" />
-    <Compile Include="Views\ProjectMenuView.xaml.cs">
-      <DependentUpon>ProjectMenuView.xaml</DependentUpon>
+    <Compile Include="ViewModels\ProjectListViewModel.cs" />
+    <Compile Include="Views\ProjectListView.xaml.cs">
+      <DependentUpon>ProjectListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UsersViewPage.xaml.cs">
       <DependentUpon>UsersViewPage.xaml</DependentUpon>
@@ -238,7 +238,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\ProjectMenuView.xaml">
+    <Page Include="Views\ProjectListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
