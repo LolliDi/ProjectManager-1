@@ -23,6 +23,8 @@
                     Command="{Binding Path=ToProjectMenuViewModel}"/>
             <Button Content="Перейти во Aouthorization"
                     Command="{Binding Path=ToViewModelAuto}"/>
+            <Button Content="Перейти в ProjectTasksPage"
+                    Command="{Binding Path=ToProjectTasksViewModel}"/>
         </StackPanel>
         <ContentControl Content="{Binding Path=NavigationService.CurrentViewModel}"
                         Grid.Row="1">
@@ -35,6 +37,9 @@
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type viewmodels:AuthorizationViewModel}">
                     <views:AuthorizationPage/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:ProjectTasksViewModel}">
+                    <views:ProjectTasksPage/>
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>

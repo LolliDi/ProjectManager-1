@@ -15,7 +15,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
                         <Border BorderBrush="#CFCFCF" BorderThickness="1" CornerRadius="10" Background="{TemplateBinding Background}">
-                            <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" SnapsToDevicePixels="True"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>

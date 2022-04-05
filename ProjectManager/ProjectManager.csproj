@@ -66,6 +66,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CustomControls\HierarchicalDataGrid\HierarchicalDataGrid.cs" />
     <Compile Include="Models\CostTypes.cs">
       <DependentUpon>ProjectManagerModel.tt</DependentUpon>
     </Compile>
@@ -169,7 +170,7 @@
     <Compile Include="Views\ProjectMenuView.xaml.cs">
       <DependentUpon>ProjectMenuView.xaml</DependentUpon>
     </Compile>
-    <Page Include="CustomControls\GanttChart.xaml">
+    <Page Include="CustomControls\HierarchicalDataGrid\HierarchicalDataGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
