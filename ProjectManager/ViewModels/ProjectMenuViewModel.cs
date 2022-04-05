@@ -14,7 +14,10 @@ namespace ProjectManager.ViewModels
     {
         public ProjectMenuViewModel(NavigationService navigationService, Projects project)
         {
-            NavigationService = navigationService;
+            MainNavigationService = navigationService;
+
+            ProjectMenuNavigationService = new NavigationService();
+            ProjectMenuNavigationService.CurrentViewModel = new ProjectTasksViewModel(ProjectMenuNavigationService, project);
 
             ToResourcePageCommand = new LambdaCommand(null);
             ToReportsPageCommand = new LambdaCommand(null);
@@ -22,7 +25,8 @@ namespace ProjectManager.ViewModels
             ToProjectPassportPageCommand = new LambdaCommand(null);
         }
 
-        public NavigationService NavigationService { get; set; }
+        public NavigationService ProjectMenuNavigationService { get; set; }
+        public NavigationService MainNavigationService { get; set; }
         public ICommand ToResourcePageCommand { get; set; }
         public ICommand ToReportsPageCommand { get; set; }
         public ICommand ToGanttChartPageCommand { get; set; }
