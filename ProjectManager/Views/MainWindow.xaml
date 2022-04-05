@@ -28,6 +28,8 @@
                 <Button Content="Список пользователей"
                     Command="{Binding Path=ToUsersViewPage}"/>
             
+            <Button Content="Перейти в ProjectTasksPage"
+                    Command="{Binding Path=ToProjectTasksViewModel}"/>
         </StackPanel>
         <ContentControl Content="{Binding Path=NavigationService.CurrentViewModel}"
                         Grid.Row="1">
@@ -46,6 +48,9 @@
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type viewmodels:UsersViewPageViewModel}">
                     <views:UsersViewPage/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:ProjectTasksViewModel}">
+                    <views:ProjectTasksPage/>
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>
