@@ -19,17 +19,72 @@ namespace ProjectManager.ViewModels
             projectTaskResourcesRepository = new Repository<ProjectTaskResources>(new ProjectManagerContext());
             projectTasksRepository = new Repository<ProjectTasks>(new ProjectManagerContext());
 
-            ToResourcePageCommand = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new ProjectResourcesViewModel(NavigationService, project));
-            ToReportsPageCommand = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new ReportsViewModel(NavigationService));
-            ToProjectPassportPageCommand = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new ProjectPassportViewModel(NavigationService));
+            InitializeTasks();
         }
 
         private readonly IRepository<ProjectTasks> projectTasksRepository;
         private readonly IRepository<ProjectTaskResources> projectTaskResourcesRepository;
 
         public NavigationService NavigationService { get; set; }
-        public ICommand ToResourcePageCommand { get; set; }
-        public ICommand ToReportsPageCommand { get; set; }
-        public ICommand ToProjectPassportPageCommand { get; set; }
+        public ICollection<Tasks> Tasks { get; set; }
+
+        private void InitializeTasks()
+        {
+            Tasks = new List<Tasks>()
+            {
+                new Tasks()
+                {
+                    Name = "Task1",
+                    Duration = 10,
+                    TaskConnections1 = new List<TaskConnections>()
+                    {
+                        new TaskConnections()
+                        {
+                            Tasks1 = new Tasks()
+                            {
+                                Name = "SubTask11",
+                                Duration = 11,
+                                TaskConnections1 = new List<TaskConnections>()
+                                {
+                                    new TaskConnections()
+                                    {
+                                        Tasks1 = new Tasks() { Name = "SubTask12", Duration = 64, }
+                                    },
+                                    new TaskConnections()
+                                    {
+                                        Tasks1 = new Tasks() { Name = "SubTask22", Duration = 20, }
+                                    },
+                                }
+
+                            }
+
+                        },
+                        new TaskConnections()
+                        {
+                            Tasks1 = new Tasks() { Name = "SubTask21", Duration = 50, }
+                        },
+                        new TaskConnections()
+                        {
+                            Tasks1 = new Tasks() { Name = "SubTask31", Duration = 94, }
+                        },
+                    }
+                },
+                new Tasks()
+                {
+                    Name = "Task2",
+                    TaskConnections1 = new List<TaskConnections>()
+                    {
+                        new TaskConnections()
+                        {
+                            Tasks1 = new Tasks() { Name = "SubTask12" }
+                        },
+                        new TaskConnections()
+                        {
+                            Tasks1 = new Tasks() { Name = "SubTask22" }
+                        },
+                    }
+                },
+            };
+        }
     }
 }

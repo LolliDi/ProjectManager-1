@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ProjectManager.Views
 {
     /// <summary>
-    /// Логика взаимодействия для ResourcesPage.xaml
+    /// Логика взаимодействия для ProjectReportPage.xaml
     /// </summary>
-    public partial class ProjectResourcesPage : UserControl
+    public partial class ProjectReportPage : UserControl
     {
-        public ProjectResourcesPage()
+        public ProjectReportPage()
         {
             InitializeComponent();
         }

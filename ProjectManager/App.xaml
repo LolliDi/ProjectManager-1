@@ -4,7 +4,9 @@
              xmlns:local="clr-namespace:ProjectManager"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-        <Style TargetType="local:PlaceTextBox">
+        <ResourceDictionary>
+
+            <Style TargetType="local:PlaceTextBox">
             <Setter Property="Background" Value="White"/>
             <Setter Property="PlaceBrush" Value="#404040"/>
             <Setter Property="Padding" Value="14,17"/>
@@ -40,7 +42,8 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border BorderThickness="0" 
+                        <Border BorderThickness="{TemplateBinding BorderThickness}" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
                                 CornerRadius="10" 
                                 Background="{TemplateBinding Background}"
                                 Padding="{TemplateBinding Padding}"
@@ -146,5 +149,7 @@
             <Setter Property="FontFamily" Value="Raleway"/>
             <Setter Property="FontSize" Value="32"/>
         </Style>
+        </ResourceDictionary>
+
     </Application.Resources>
 </Application>

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace ProjectManager.ViewModels
 {
-    class ProjectPassportViewModel : ViewModel
+    class ProjectReportViewModel : ViewModel
     {
-        public ProjectPassportViewModel(NavigationService navigationService, Projects project)
+        public ProjectReportViewModel(NavigationService navigationService, Projects project)
         {
 
         }
