@@ -25,6 +25,7 @@ namespace ProjectManager.ViewModels
             ToViewModelAuto = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new AuthorizationViewModel(NavigationService));
             ToAddUserPage = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new AddUserPageViewModel());
             ToUsersViewPage = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new UsersViewPageViewModel());
+            ToProjectTasksViewModel = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new ProjectTasksViewModel(NavigationService, null));
         }
 
         private readonly IRepository<Users> usersRepository;
@@ -35,5 +36,7 @@ namespace ProjectManager.ViewModels
         public ICommand ToViewModelAuto { get; set; }
         public ICommand ToAddUserPage { get; set; }
         public ICommand ToUsersViewPage { get; set; }
+        public ICommand ToProjectTasksViewModel { get; set; }
+
     }
 }

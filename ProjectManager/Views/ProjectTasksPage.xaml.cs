@@ -18,9 +18,9 @@ namespace ProjectManager.Views
     /// <summary>
     /// Логика взаимодействия для ProjectMenuPage.xaml
     /// </summary>
-    public partial class ProjectMenuPage : UserControl
+    public partial class ProjectTasksPage : UserControl
     {
-        public ProjectMenuPage()
+        public ProjectTasksPage()
         {
             InitializeComponent();
         }

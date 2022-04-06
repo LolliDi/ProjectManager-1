@@ -1,16 +1,100 @@
-﻿<UserControl x:Class="ProjectManager.Views.ProjectMenuPage"
+﻿<UserControl x:Class="ProjectManager.Views.ProjectTasksPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ProjectManager.Views"
+             xmlns:local="clr-namespace:ProjectManager.Views" 
+             xmlns:custom="clr-namespace:ProjectManager.CustomControls"
+             xmlns:collections="clr-namespace:System.Collections;assembly=mscorlib" 
+             xmlns:models="clr-namespace:ProjectManager.Models"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <Style TargetType="Button" BasedOn="{StaticResource SButton}">
+        <Style x:Key="MenuSButton" TargetType="Button" BasedOn="{StaticResource SButton}">
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="Padding" Value="20 10"/>
             <Setter Property="Margin" Value="5"/>
+        </Style>
+
+        <Style x:Key="HierarchicalDataGridStyle" TargetType="{x:Type custom:HierarchicalDataGrid}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderBrush" Value="#FF688CAF"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type custom:HierarchicalDataGrid}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="DG_ScrollViewer" Focusable="false">
+                                <ScrollViewer.Template>
+                                    <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Button Command="{x:Static DataGrid.SelectAllCommand}" Focusable="false" Style="{DynamicResource {ComponentResourceKey ResourceId=DataGridSelectAllButtonStyle, TypeInTargetAssembly={x:Type DataGrid}}}" Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.All}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" Width="{Binding CellsPanelHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                                            <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter" Grid.Column="1" Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Column}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                                            <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" CanContentScroll="{TemplateBinding CanContentScroll}" Grid.ColumnSpan="2" Grid.Row="1"/>
+                                            <ScrollBar x:Name="PART_VerticalScrollBar" Grid.Column="2" Maximum="{TemplateBinding ScrollableHeight}" Orientation="Vertical" Grid.Row="1" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportHeight}"/>
+                                            <Grid Grid.Column="1" Grid.Row="2">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="{Binding NonFrozenColumnsViewportHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <ScrollBar x:Name="PART_HorizontalScrollBar" Grid.Column="1" Maximum="{TemplateBinding ScrollableWidth}" Orientation="Horizontal" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportWidth}"/>
+                                        </Grid>
+                                    </Grid>
+                                    </ControlTemplate>
+                                </ScrollViewer.Template>
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsGrouping" Value="true"/>
+                        <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="{ComponentResourceKey ResourceId=DataGridSelectAllButtonStyle, TypeInTargetAssembly={x:Type DataGrid}}" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle x:Name="Border" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" SnapsToDevicePixels="True"/>
+                            <Polygon x:Name="Arrow" Fill="Black" HorizontalAlignment="Right" Margin="8,8,3,3" Opacity="0.15" Points="0,10 10,10 10,0" Stretch="Uniform" VerticalAlignment="Bottom"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Stroke" TargetName="Border" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Fill" TargetName="Border" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Visibility" TargetName="Arrow" Value="Collapsed"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </UserControl.Resources>
     <Grid Background="White">
@@ -27,16 +111,114 @@
                     Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     Margin="10">
-            
+
+            <Button Content="Задачи"
+                    Command="{Binding ToProjectTasksPageCommand}">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource MenuSButton}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsProjectTasksPageSelected}" Value="True">
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="BorderThickness" Value="2"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Button Content="Ресурсы"
-                    Command="{Binding ToResourcePageCommand}"/>
+                    Command="{Binding ToProjectResourcePageCommand}">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource MenuSButton}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsProjectResourcePageSelected}" Value="True">
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="BorderThickness" Value="2"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Button Content="Отчеты"
-                    Command="{Binding ToReportsPageCommand}"/>
+                    Command="{Binding ToReportsPageCommand}">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource MenuSButton}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsReportsPageSelected}" Value="True">
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="BorderThickness" Value="2"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Button Content="Паспорт проекта"
-                    Command="{Binding ToProjectPassportPageCommand}"/>
-            
+                    Command="{Binding ToProjectPassportPageCommand}">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource MenuSButton}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsProjectPassportPageSelected}" Value="True">
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="BorderThickness" Value="2"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Content="Меню администратора"
+                    Command="{Binding ToAdminPageCommand}">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource MenuSButton}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsAdminPageSelected}" Value="True">
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="BorderThickness" Value="2"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
         </StackPanel>
-        <DataGrid Grid.Row="1"/>
+        
+        <custom:HierarchicalDataGrid Grid.Row="1"
+                                     AutoGenerateColumns="True"
+                                     ItemsSource="{DynamicResource List}"
+                                     Style="{StaticResource HierarchicalDataGridStyle}">
+            <custom:HierarchicalDataGrid.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="GroupItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="GroupItem">
+                                        <CheckBox Content="{Binding Name}"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </custom:HierarchicalDataGrid.GroupStyle>
+            <custom:HierarchicalDataGrid.Resources>
+                <ResourceDictionary>
+                    <collections:ArrayList x:Key="List">
+                        <models:Tasks CompletionPercentage="10" Duration="6" Name="Task1"/>
+                        <models:Tasks CompletionPercentage="30" Duration="6" Name="Task2"/>
+                        <models:Tasks CompletionPercentage="40" Duration="6" Name="Task3"/>
+                        <models:Tasks CompletionPercentage="20" Duration="6" Name="Task4"/>
+                        <models:Tasks CompletionPercentage="10" Duration="6" Name="Task5"/>
+                    </collections:ArrayList>
+                </ResourceDictionary>
+            </custom:HierarchicalDataGrid.Resources>
+        </custom:HierarchicalDataGrid>
+
+        <GridSplitter Width="5"
+                      Grid.Row="1"/>
+
         <TextBlock Text="Диаграмма Ганта"
                    Grid.Column="1"
                    Grid.Row="1"
