@@ -18,7 +18,7 @@ namespace ProjectManager.ViewModels
         private Visibility projectButtonVisibility;
         private int selectedId = -1;
 
-        private readonly IRepository<Projects> projectsRepository;
+        private readonly IRepository<Projects> projectsRepository = new Repository<Projects>(new ProjectManagerContext());
         private List<Projects> projectList;
         private Users currentUser;
 
@@ -32,15 +32,16 @@ namespace ProjectManager.ViewModels
         {
             this.currentUser = currentUser;
             this.navigationService = navigationService;
+
             selectedProjectName = "Выберите проект";
             selectedProjectDate = "";
             selectedProjectUsers = "";
-            projectsRepository = new Repository<Projects>(new ProjectManagerContext());
-            ProjectList = projectsRepository.Items.ToList();
+
+            ProjectList = new List<Projects>();
 
             ToBack = new LambdaCommand(GoBack);
-            ToBack = new LambdaCommand(GoCreateProject);
-            ToBack = new LambdaCommand(GoProjectMenu);
+            ToCreateProject = new LambdaCommand(GoCreateProject);
+            ToProjectMenu = new LambdaCommand(GoProjectMenu);
         }
 
 
@@ -55,7 +56,7 @@ namespace ProjectManager.ViewModels
                 {
                     foreach(Projects pr in projectsRepository.Items) // Единственный способ, которым заработало
                     {
-                        projectList = new List<Projects>();
+                        projectList = value;
                         if (pr.Users.Where(x => x.Id == currentUser.Id).Any())
                             projectList.Add(pr);
                     }

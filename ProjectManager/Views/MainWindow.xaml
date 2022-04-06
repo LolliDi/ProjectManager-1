@@ -47,6 +47,9 @@
                 <DataTemplate DataType="{x:Type viewmodels:UsersViewPageViewModel}">
                     <views:UsersViewPage/>
                 </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:CreateProjectViewModel}">
+                    <views:CreateProjectView/>
+                </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>
     </Grid>

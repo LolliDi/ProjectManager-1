@@ -562,17 +562,9 @@
           <EntitySet Name="WorkingCalendars" EntityType="Self.WorkingCalendars" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkingCalendarWeekends" EntityType="Self.WorkingCalendarWeekends" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkingResources" EntityType="Self.WorkingResources" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ProjectUsers" EntityType="Self.ProjectUsers" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ProjectUsers].[Project] AS [Project], 
-    [ProjectUsers].[User] AS [User]
-    FROM [dbo].[ProjectUsers] AS [ProjectUsers]</DefiningQuery>
+          <EntitySet Name="ProjectUsers" EntityType="Self.ProjectUsers" store:Type="Tables" Schema="dbo">
           </EntitySet>
-          <EntitySet Name="RolePermissions" EntityType="Self.RolePermissions" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [RolePermissions].[Role] AS [Role], 
-    [RolePermissions].[Permission] AS [Permission]
-    FROM [dbo].[RolePermissions] AS [RolePermissions]</DefiningQuery>
+          <EntitySet Name="RolePermissions" EntityType="Self.RolePermissions" store:Type="Tables" Schema="dbo">
           </EntitySet>
           <AssociationSet Name="FK_MaterialResoucres_CostTypes" Association="Self.FK_MaterialResoucres_CostTypes">
             <End Role="CostTypes" EntitySet="CostTypes" />

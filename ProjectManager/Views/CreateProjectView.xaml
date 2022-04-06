@@ -3,11 +3,38 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ProjectManager.Views"
+             xmlns:local="clr-namespace:ProjectManager"
              xmlns:viewmodels="clr-namespace:ProjectManager.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+    <UserControl.Resources>
+        <DataTemplate x:Key="UserItem">
+            <StackPanel>
+                <TextBlock Text="{Binding Username}"/>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    
+    <Grid Background="White">
+        <StackPanel>
+            <GroupBox BorderBrush="{Binding TitleBorderColor}" Width="390" Margin="0" HorizontalAlignment="Left">
+                <local:PlaceTextBox Text="{Binding Path=Title}"  PlaceText="Название проекта" Style="{StaticResource PlaceTextBoxNormal}" Margin="0,5,0,0"/>
+            </GroupBox>
+            <GroupBox Header="Выберите пользователей с доступом к проекту">
+                <ListBox
+                    x:Name="UsersListBox"
+                    Height="300" 
+                    ItemsSource="{Binding UsersList}" 
+                    ItemTemplate="{DynamicResource UserItem}"
+                    SelectionMode="Multiple">
+                </ListBox>
+            </GroupBox>
+            <Button
+                CommandParameter="{Binding ElementName=UsersListBox, Path=SelectedItems}"
+                Command="{Binding ToNewProject}">Создать</Button>
+            <Button
+                Command="{Binding ToBack}">Отмена</Button>
+        </StackPanel>
+        
     </Grid>
 </UserControl>
