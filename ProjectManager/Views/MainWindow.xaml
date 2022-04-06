@@ -25,11 +25,10 @@
                     Command="{Binding Path=ToViewModelAuto}"/>
             <Button Content="Добавить пользователя"
                     Command="{Binding Path=ToAddUserPage}"/>
-                <Button Content="Список пользователей"
+            <Button Content="Список пользователей"
                     Command="{Binding Path=ToUsersViewPage}"/>
-            
-            <Button Content="Перейти в ProjectTasksPage"
-                    Command="{Binding Path=ToProjectTasksViewModel}"/>
+            <Button Content="Перейти в ProjectMenuPage"
+                    Command="{Binding Path=ToProjectMenuViewModel}"/>
         </StackPanel>
         <ContentControl Content="{Binding Path=NavigationService.CurrentViewModel}"
                         Grid.Row="1">
@@ -49,8 +48,8 @@
                 <DataTemplate DataType="{x:Type viewmodels:UsersViewPageViewModel}">
                     <views:UsersViewPage/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type viewmodels:ProjectTasksViewModel}">
-                    <views:ProjectTasksPage/>
+                <DataTemplate DataType="{x:Type viewmodels:ProjectMenuViewModel}">
+                    <views:ProjectMenuPage/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type viewmodels:CreateProjectViewModel}">
                     <views:CreateProjectView/>

@@ -66,7 +66,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CustomControls\HierarchicalDataGrid\HierarchicalDataGrid.cs" />
+    <Compile Include="CustomControls\TreeGridView\IndentToMarginConverter.cs" />
+    <Compile Include="CustomControls\TreeGridView\TreeGridView.cs" />
     <Compile Include="Models\AddUserPageModel.cs" />
     <Compile Include="Models\CostTypes.cs">
       <DependentUpon>ProjectManagerModel.tt</DependentUpon>
@@ -150,6 +151,7 @@
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="ViewModels\CreateProjectViewModel.cs" />
     <Compile Include="ViewModels\ProjectPassportViewModel.cs" />
+    <Compile Include="ViewModels\ProjectReportViewModel.cs" />
     <Compile Include="ViewModels\ProjectTasksViewModel.cs" />
     <Compile Include="ViewModels\ReportsViewModel.cs" />
     <Compile Include="ViewModels\ProjectResourcesViewModel.cs" />
@@ -160,14 +162,17 @@
     <Compile Include="Views\AddUserPage.xaml.cs">
       <DependentUpon>AddUserPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ProjectMenuPage.xaml.cs">
+      <DependentUpon>ProjectMenuPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CreateProjectView.xaml.cs">
       <DependentUpon>CreateProjectView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProjectPassportPage.xaml.cs">
       <DependentUpon>ProjectPassportPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ReportsPage.xaml.cs">
-      <DependentUpon>ReportsPage.xaml</DependentUpon>
+    <Compile Include="Views\ProjectReportPage.xaml.cs">
+      <DependentUpon>ProjectReportPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProjectResourcesPage.xaml.cs">
       <DependentUpon>ProjectResourcesPage.xaml</DependentUpon>
@@ -185,11 +190,15 @@
     <Compile Include="Views\UsersViewPage.xaml.cs">
       <DependentUpon>UsersViewPage.xaml</DependentUpon>
     </Compile>
-    <Page Include="CustomControls\HierarchicalDataGrid\HierarchicalDataGrid.xaml">
+    <Page Include="CustomControls\TreeGridView\TreeGridView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -229,11 +238,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ProjectMenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ProjectPassportPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ReportsPage.xaml">
+    <Page Include="Views\ProjectReportPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
