@@ -16,12 +16,14 @@ namespace ProjectManager.ViewModels
     {
         public ProjectTasksViewModel(NavigationService navigationService, Projects project)
         {
+            taskGroupsRepository = new Repository<TaskGroups>(new ProjectManagerContext());
             projectTaskResourcesRepository = new Repository<ProjectTaskResources>(new ProjectManagerContext());
             projectTasksRepository = new Repository<ProjectTasks>(new ProjectManagerContext());
 
-            InitializeTasks();
+            Tasks = taskGroupsRepository.Items.Where(item => item.Depth == 1).Select(item => item.Tasks).Distinct().ToList();
         }
 
+        private readonly IRepository<TaskGroups> taskGroupsRepository;
         private readonly IRepository<ProjectTasks> projectTasksRepository;
         private readonly IRepository<ProjectTaskResources> projectTaskResourcesRepository;
 

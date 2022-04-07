@@ -51,7 +51,7 @@ namespace ProjectManager.Models
             get
             {
                 var childs = new ObservableCollection<Tasks>();
-                foreach(var taskCollection in TaskConnections1)
+                foreach(var taskCollection in TaskGroups)
                 {
                     childs.Add(taskCollection.Tasks1);
                 }

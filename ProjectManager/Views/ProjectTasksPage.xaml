@@ -14,7 +14,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/CustomControls/HierarchicalDataGrid/TreeGridView.xaml"/>
+                <ResourceDictionary Source="/CustomControls/TreeGridView/TreeGridView.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -34,7 +34,7 @@
                 <HierarchicalDataTemplate ItemsSource="{Binding Childs}"/>
             </custom:TreeGridView.ItemTemplate>
             <custom:TreeGridView.Columns>
-                <GridViewColumn Header="Name" Width="150">
+                <GridViewColumn Header="Наименование задачи">
                     <GridViewColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -44,17 +44,43 @@
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>
-                <GridViewColumn Header="Duration" Width="100">
+                <GridViewColumn Header="Дата начала">
                     <GridViewColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Duration}"/>
+                            <TextBlock Text="{Binding StartDate}"
+                                       HorizontalAlignment="Right"/>
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>
+                <GridViewColumn Header="Дата конца">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding EndDate}"
+                                       HorizontalAlignment="Right"/>
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                <GridViewColumn Header="Длительность">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Duration, StringFormat='{}{0} дней'}"
+                                       HorizontalAlignment="Right"/>
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                <GridViewColumn Header="Процент завершения">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding CompletionPercentage, StringFormat='{}{0} %'}"
+                                       HorizontalAlignment="Right"/>
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+
             </custom:TreeGridView.Columns>
         </custom:TreeGridView>
 
-        <GridSplitter Grid.Row="1"/>
+        <GridSplitter Grid.Row="1" Width="5"/>
         
         <TextBlock Text="Диаграмма Ганта"
                    Grid.Column="1"

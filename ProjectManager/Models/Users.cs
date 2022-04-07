@@ -11,6 +11,7 @@ namespace ProjectManager.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class Users : IEntity
@@ -32,12 +33,7 @@ namespace ProjectManager.Models
         public virtual ICollection<Projects> Projects { get; set; }
 
         [NotMapped]
-        public bool IsAdministrator
-        {
-            get
-            {
-                return Roles.Name == "role_admin";
-            }
-        }
+        public bool IsAdministrator => Roles.Name == "role_admin";
+
     }
 }
