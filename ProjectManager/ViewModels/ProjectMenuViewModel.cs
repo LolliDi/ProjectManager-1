@@ -18,6 +18,7 @@ namespace ProjectManager.ViewModels
         {
             CurrentProject = project;
             CurrentUser = user;
+            IsAdministrator = CurrentUser.IsAdministrator;
 
             MainNavigationService = navigationService;
 
