@@ -167,7 +167,6 @@
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>
-
             </custom:TreeGridView.Columns>
         </custom:TreeGridView>
 
