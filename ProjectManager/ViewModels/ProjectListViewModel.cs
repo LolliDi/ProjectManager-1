@@ -131,7 +131,7 @@ namespace ProjectManager.ViewModels
 
         private void GoProjectMenu(object obj)
         {
-            navigationService.CurrentViewModel = new ProjectMenuViewModel(navigationService, projectList[selectedId]);
+            navigationService.CurrentViewModel = new ProjectMenuViewModel(navigationService, projectList[selectedId], currentUser);
         }
 
     }
