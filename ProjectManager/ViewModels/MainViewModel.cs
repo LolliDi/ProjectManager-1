@@ -19,7 +19,7 @@ namespace ProjectManager.ViewModels
             projectsRepository = new Repository<Projects>(new ProjectManagerContext());
             NavigationService = new NavigationService() { CurrentViewModel = new UserAccountViewModel(null, NavigationService) };
 
-            Users user = usersRepository.Get(2);
+            Users user = usersRepository.Get(1);
             Projects project = projectsRepository.Get(1);
 
             ToUserAccountViewModel = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new UserAccountViewModel(user, NavigationService));
@@ -40,6 +40,5 @@ namespace ProjectManager.ViewModels
         public ICommand ToAddUserPage { get; set; }
         public ICommand ToUsersViewPage { get; set; }
         public ICommand ToProjectMenuViewModel { get; set; }
-
     }
 }

@@ -17,6 +17,7 @@ namespace ProjectManager.ViewModels
         {
             CurrentProject = project;
             CurrentUser = user;
+            IsAdministrator = CurrentUser.IsAdministrator;
 
             MainNavigationService = navigationService;
 
@@ -31,10 +32,22 @@ namespace ProjectManager.ViewModels
             ToAuthorizationPageCommand = new LambdaCommand(OnToAuthorizationPageCommandExecute);
         }
 
+        #region Fields
+
+        private bool isAdministrator;
+
+        #endregion
+
         #region Properties
 
         public Projects CurrentProject { get; }
         public Users CurrentUser { get; }
+        public bool IsAdministrator
+        {
+            get => isAdministrator;
+            set => Set(ref isAdministrator, ref value);
+        }
+
         public NavigationService ProjectMenuNavigationService { get; set; }
         public NavigationService MainNavigationService { get; set; }
 
