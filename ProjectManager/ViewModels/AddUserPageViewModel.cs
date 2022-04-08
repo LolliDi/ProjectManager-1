@@ -15,8 +15,8 @@ namespace ProjectManager.ViewModels
 {
     class AddUserPageViewModel : ViewModel
     {
-        static UsersRepository usersRepository = new UsersRepository(new ProjectManagerContext()); //пользователи
-        static Repository<Roles> rolesRepository = new Repository<Roles>(new ProjectManagerContext());
+        static UsersRepository usersRepository = new UsersRepository(); //пользователи
+        static Repository<Roles> rolesRepository = new Repository<Roles>();
         public ICommand BackPageCommand { get; set; } //для кнопки отмена
         public ICommand AddUserCommand { get; set; } //для конопки добавить пользователя
         public AddUserPageViewModel()
@@ -88,7 +88,7 @@ namespace ProjectManager.ViewModels
                 if(Name.Length > 0||LastName.Length>0||Patronymic.Length>0||Age.Length>0) //если есть дополнительные данные
                 {
                     int idUser = usersRepository.Items.FirstOrDefault(x=>x.Username == Login).Id; //получаем ид этого усера
-                    Repository<Persons> person = new Repository<Persons>(new ProjectManagerContext());
+                    Repository<Persons> person = new Repository<Persons>();
                     person.Add(new Persons() { Age = Convert.ToInt32(Age), Name = Name, Patronymic = Patronymic, Surname = LastName, Id = idUser });
                 }
 

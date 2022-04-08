@@ -9,7 +9,6 @@ namespace ProjectManager.Models.Repositories
 {
     class ProjectsRepository : Repository<Projects>
     {
-        public ProjectsRepository(ProjectManagerContext context) : base(context) { }
         public override IQueryable<Projects> Items => context.Set<Projects>().Include(item => item.Users);
     }
 }

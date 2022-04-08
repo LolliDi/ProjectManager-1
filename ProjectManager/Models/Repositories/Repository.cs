@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjectManager.Models.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class, IEntity, new()
     {
-        protected readonly ProjectManagerContext context;
-        public Repository(ProjectManagerContext context)
+        protected readonly DbContext context;
+        public Repository()
         {
-            this.context = context;
+            this.context = App.DbContext;
         }
 
         public virtual IQueryable<T> Items => context.Set<T>();

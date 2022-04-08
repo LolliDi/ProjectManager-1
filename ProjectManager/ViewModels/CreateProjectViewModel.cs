@@ -14,7 +14,6 @@ namespace ProjectManager.ViewModels
 {
     class CreateProjectViewModel : ViewModel
     {
-        private ProjectManagerContext dbContext = new ProjectManagerContext();
         private NavigationService NavigationService;
         private Users currentUser;
         private Repository<Users> usersRepository;
@@ -35,7 +34,7 @@ namespace ProjectManager.ViewModels
             this.currentUser = currentUser;
             NavigationService = navigationService;
 
-            usersRepository = new Repository<Users>(dbContext);
+            usersRepository = new Repository<Users>();
 
             titleBorderColor = standartColor;
             UsersList = new List<Users>();
@@ -90,7 +89,7 @@ namespace ProjectManager.ViewModels
                     newProject.Users.Add((Users)item);
                 }
             }
-            ProjectsRepository projectsRepository = new ProjectsRepository(dbContext);
+            ProjectsRepository projectsRepository = new ProjectsRepository();
             projectsRepository.Add(newProject);
             NavigationService.CurrentViewModel = new ProjectListViewModel(NavigationService, currentUser);
         }

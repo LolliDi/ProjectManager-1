@@ -15,8 +15,8 @@ namespace ProjectManager.ViewModels
     {
         public MainViewModel()
         {
-            usersRepository = new Repository<Users>(new ProjectManagerContext());
-            projectsRepository = new Repository<Projects>(new ProjectManagerContext());
+            usersRepository = new Repository<Users>();
+            projectsRepository = new Repository<Projects>();
             NavigationService = new NavigationService() { CurrentViewModel = new UserAccountViewModel(null, NavigationService) };
 
             Users user = usersRepository.Get(1);
