@@ -95,6 +95,9 @@
                     <DataTemplate DataType="{x:Type viewmodels:ProjectPassportViewModel}">
                         <views:ProjectPassportPage/>
                     </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodels:ProjectReportViewModel}">
+                        <views:ProjectReportPage/>
+                    </DataTemplate>
                     <DataTemplate DataType="{x:Type viewmodels:AuthorizationViewModel}">
                         <views:AuthorizationPage/>
                     </DataTemplate>

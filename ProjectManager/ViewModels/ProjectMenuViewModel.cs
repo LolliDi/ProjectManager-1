@@ -18,7 +18,6 @@ namespace ProjectManager.ViewModels
         {
             CurrentProject = project;
             CurrentUser = user;
-            IsAdministrator = CurrentUser.IsAdministrator;
 
             MainNavigationService = navigationService;
 
@@ -35,7 +34,6 @@ namespace ProjectManager.ViewModels
 
         #region Fields
 
-        private bool isAdministrator;
 
         #endregion
 
@@ -43,11 +41,6 @@ namespace ProjectManager.ViewModels
 
         public Projects CurrentProject { get; }
         public Users CurrentUser { get; }
-        public bool IsAdministrator
-        {
-            get => isAdministrator;
-            set => Set(ref isAdministrator, ref value);
-        }
 
         public NavigationService ProjectMenuNavigationService { get; set; }
         public NavigationService MainNavigationService { get; set; }
@@ -81,7 +74,7 @@ namespace ProjectManager.ViewModels
         }
         private void OnToAdminPageCommandExecute(object parameter)
         {
-            throw new NotImplementedException();
+            MessageBox.Show("Это еще не добавили!", "Упс...", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         private void OnToAuthorizationPageCommandExecute(object parameter)
         {

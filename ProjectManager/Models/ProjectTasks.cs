@@ -9,9 +9,13 @@
 
 namespace ProjectManager.Models
 {
+    using ProjectManager.Models.Repositories;
     using System;
     using System.Collections.Generic;
-    
+    using System.Collections.ObjectModel;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
+
     public partial class ProjectTasks : IEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

@@ -72,6 +72,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CustomControls\PopupControl\PopupControl.cs" />
     <Compile Include="CustomControls\TreeGridView\IndentToMarginConverter.cs" />
     <Compile Include="CustomControls\TreeGridView\TreeGridView.cs" />
     <Compile Include="Models\AddUserPageModel.cs" />
@@ -157,6 +158,7 @@
     </Compile>
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="ViewModels\CreateProjectViewModel.cs" />
+    <Compile Include="ViewModels\FormBase\IForm.cs" />
     <Compile Include="ViewModels\ProjectPassportViewModel.cs" />
     <Compile Include="ViewModels\ProjectReportViewModel.cs" />
     <Compile Include="ViewModels\ProjectResourcesCreateViewModel.cs" />
@@ -170,25 +172,29 @@
     <Compile Include="Views\AddUserPage.xaml.cs">
       <DependentUpon>AddUserPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProjectMenuPage.xaml.cs">
+    <Compile Include="Views\ProjectMenuPage\ProjectMenuPage.xaml.cs">
       <DependentUpon>ProjectMenuPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CreateProjectView.xaml.cs">
       <DependentUpon>CreateProjectView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProjectPassportPage.xaml.cs">
+    <Compile Include="Views\ProjectMenuPage\ProjectPassportPage.xaml.cs">
       <DependentUpon>ProjectPassportPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProjectReportPage.xaml.cs">
+    <Compile Include="Views\ProjectMenuPage\ProjectReportPage.xaml.cs">
       <DependentUpon>ProjectReportPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ProjectMenuPage\ProjectResourcesPage.xaml.cs">
     <Compile Include="Views\ProjectResourcesCreatePage.xaml.cs">
       <DependentUpon>ProjectResourcesCreatePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProjectResourcesPage.xaml.cs">
       <DependentUpon>ProjectResourcesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProjectTasksPage.xaml.cs">
+    <Compile Include="Views\ProjectMenuPage\ProjectTasksPage\Forms\TaskForm.xaml.cs">
+      <DependentUpon>TaskForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProjectMenuPage\ProjectTasksPage\ProjectTasksPage.xaml.cs">
       <DependentUpon>ProjectTasksPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserAccount.xaml.cs">
@@ -201,6 +207,10 @@
     <Compile Include="Views\UsersViewPage.xaml.cs">
       <DependentUpon>UsersViewPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="CustomControls\PopupControl\PopupControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomControls\TreeGridView\TreeGridView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -249,15 +259,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\ProjectMenuPage.xaml">
+    <Page Include="Views\ProjectMenuPage\ProjectMenuPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ProjectPassportPage.xaml">
+    <Page Include="Views\ProjectMenuPage\ProjectPassportPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ProjectReportPage.xaml">
+    <Page Include="Views\ProjectMenuPage\ProjectReportPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProjectMenuPage\ProjectResourcesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -273,7 +287,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ProjectTasksPage.xaml">
+    <Page Include="Views\ProjectMenuPage\ProjectTasksPage\ProjectTasksPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
