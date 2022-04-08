@@ -50,9 +50,9 @@ namespace ProjectManager.ViewModels
             get => projectList;
             set 
             {
-                if (currentUser.Roles.Id == 1)
+                if (currentUser.Roles.Permissions.Where(x => x.Name == "permission_viewallprojects" || x.Name == "permission_editallprojects").Any())
                     projectList = projectsRepository.Items.ToList();
-                else if (currentUser.Roles.Id == 3)
+                else if (currentUser.Roles.Permissions.Where(x => x.Name == "permission_privateprojects").Any())
                 {
                     foreach(Projects pr in projectsRepository.Items) // Единственный способ, которым заработало
                     {
