@@ -9,9 +9,12 @@
 
 namespace ProjectManager.Models
 {
+    using ProjectManager.Models.Repositories;
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
+
     public partial class Resources : IEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -27,5 +30,78 @@ namespace ProjectManager.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProjectResources> ProjectResources { get; set; }
         public virtual WorkingResources WorkingResources { get; set; }
+        [NotMapped]
+        public bool IsMaterial
+        {
+            get
+            {
+                if(this.MaterialResoucres == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+        [NotMapped]
+        public string SalaryFull
+        {
+            get
+            {
+                string salary = this.WorkingResources.Salary.ToString();
+                string costType = this.WorkingResources.SalaryTypes.CostTypes.Type;
+                string dateType = this.WorkingResources.SalaryTypes.DateTypes.Type;
+                return salary + " " + costType + "/" + dateType;
+            }
+        }
+        [NotMapped]
+        public string WorkDayDuration
+        {
+            get
+            {
+                string start = this.WorkingResources.WorkingCalendars.StartTime.ToString();
+                string finish = this.WorkingResources.WorkingCalendars.EndTime.ToString();
+                string duration = this.WorkingResources.WorkingCalendars.Duration.Value.Hours.ToString();
+                return start + "-" + finish + " ("+duration+" часов)";
+            }
+        }
+
+        [NotMapped]
+        public string WorkWeek
+        {          
+            get
+            {
+                string days = "";
+                Repository<WorkingCalendarWeekends> repository = new Repository<WorkingCalendarWeekends>();
+                foreach(WorkingCalendarWeekends week in repository.Items.Where(x => x.WorkingCalendar == this.WorkingResources.WorkingCalendars.Id).ToList())
+                {
+                    if(week.IsWeekend == 1)
+                    {
+                        days+= week.WeekDays.Name + " ";
+                    }
+                }
+                return days;
+            }
+        }
+        [NotMapped]
+        public string CostFull
+        {
+            get
+            {
+                string cost = this.MaterialResoucres.Cost.ToString();
+                string costType = this.MaterialResoucres.CostTypes.Type;
+                return cost + " " + costType;
+            }
+        }
+        [NotMapped]
+        public string Count
+        {
+            get
+            {
+                return this.MaterialResoucres.Count.ToString();
+            }
+        }
     }
 }

@@ -118,6 +118,7 @@
       <DependentUpon>ProjectManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Repositories\ProjectsRepository.cs" />
+    <Compile Include="Models\Repositories\ProjectResourcesRepository.cs" />
     <Compile Include="Models\Resources.cs">
       <DependentUpon>ProjectManagerModel.tt</DependentUpon>
     </Compile>
@@ -158,6 +159,7 @@
     <Compile Include="ViewModels\CreateProjectViewModel.cs" />
     <Compile Include="ViewModels\ProjectPassportViewModel.cs" />
     <Compile Include="ViewModels\ProjectReportViewModel.cs" />
+    <Compile Include="ViewModels\ProjectResourcesCreateViewModel.cs" />
     <Compile Include="ViewModels\ProjectTasksViewModel.cs" />
     <Compile Include="ViewModels\ReportsViewModel.cs" />
     <Compile Include="ViewModels\ProjectResourcesViewModel.cs" />
@@ -179,6 +181,9 @@
     </Compile>
     <Compile Include="Views\ProjectReportPage.xaml.cs">
       <DependentUpon>ProjectReportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProjectResourcesCreatePage.xaml.cs">
+      <DependentUpon>ProjectResourcesCreatePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProjectResourcesPage.xaml.cs">
       <DependentUpon>ProjectResourcesPage.xaml</DependentUpon>
@@ -253,6 +258,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ProjectReportPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProjectResourcesCreatePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
