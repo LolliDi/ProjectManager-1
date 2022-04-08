@@ -46,7 +46,7 @@ namespace ProjectManager.Models
         public virtual ICollection<TaskGroups> TaskGroups1 { get; set; }
 
         [NotMapped]
-        public ObservableCollection<Tasks> Childs
+        public ICollection<Tasks> Childs
         {
             get
             {
