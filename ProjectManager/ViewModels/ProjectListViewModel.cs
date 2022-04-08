@@ -18,7 +18,7 @@ namespace ProjectManager.ViewModels
         private Visibility projectButtonVisibility;
         private int selectedId = -1;
 
-        private readonly IRepository<Projects> projectsRepository = new Repository<Projects>(new ProjectManagerContext());
+        private readonly IRepository<Projects> projectsRepository = new Repository<Projects>();
         private List<Projects> projectList;
         private Users currentUser;
 

@@ -19,8 +19,8 @@
         <StackPanel>
             <Button Content="Перейти в UserAccountViewModel"
                     Command="{Binding Path=ToUserAccountViewModel}"/>
-            <Button Content="Перейти в ProjectMenuViewModel"
-                    Command="{Binding Path=ToProjectMenuViewModel}"/>
+            <Button Content="Перейти в ProjectListViewModel"
+                    Command="{Binding Path=ToProjectListViewModel}"/>
             <Button Content="Перейти во Aouthorization"
                     Command="{Binding Path=ToViewModelAuto}"/>
             <Button Content="Добавить пользователя"

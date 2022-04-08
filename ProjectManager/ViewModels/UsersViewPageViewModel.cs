@@ -24,7 +24,7 @@ namespace ProjectManager.ViewModels
         {
             OpenUserCommand = new LambdaCommand(OpenUser);
             DelUserCommand = new LambdaCommand(DelUser);
-            foreach (Users user in new Repository<Users>(new ProjectManagerContext()).Items.ToList())
+            foreach (Users user in new Repository<Users>().Items.ToList())
             {
                 users.Add(new UsersInfo(user));
             }
@@ -44,7 +44,7 @@ namespace ProjectManager.ViewModels
                         )
                         == MessageBoxResult.Yes)
                     {
-                        new Repository<Users>(new ProjectManagerContext()).Remove(users[selectedIndex].Id);
+                        new Repository<Users>().Remove(users[selectedIndex].Id);
                     }
                     Users = null;
                 }
@@ -61,7 +61,7 @@ namespace ProjectManager.ViewModels
             set
             {
                 List<UsersInfo> nusers = new List<UsersInfo>();
-                foreach (Users user in new Repository<Users>(new ProjectManagerContext()).Items.ToList())
+                foreach (Users user in new Repository<Users>().Items.ToList())
                 {
                     nusers.Add(new UsersInfo(user));
                 }
