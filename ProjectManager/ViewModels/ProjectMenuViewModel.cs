@@ -72,7 +72,7 @@ namespace ProjectManager.ViewModels
         }
         private void OnToProjectResourcePageCommandExecute(object parameter)
         {
-            ProjectMenuNavigationService.CurrentViewModel = new ProjectResourcesViewModel(ProjectMenuNavigationService, null);
+            ProjectMenuNavigationService.CurrentViewModel = new ProjectResourcesViewModel(ProjectMenuNavigationService, CurrentProject);
         }
         private void OnToProjectReportPageCommandExecute(object parameter)
         {

@@ -101,6 +101,9 @@
                     <DataTemplate DataType="{x:Type viewmodels:UserAccountViewModel}">
                         <views:UserAccount/>
                     </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodels:ProjectResourcesCreateViewModel}">
+                        <views:ProjectResourcesCreatePage/>
+                    </DataTemplate>
                 </ContentControl.Resources>
             </ContentControl>
         </ScrollViewer>

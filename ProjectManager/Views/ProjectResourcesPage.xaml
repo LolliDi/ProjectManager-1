@@ -4,8 +4,36 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjectManager.Views"
+             xmlns:models="clr-namespace:ProjectManager.Models"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate x:Key="ResourceTemplate">
+            <StackPanel Orientation="Vertical" Height="100" Background="Aqua">
+                <TextBlock x:Name="Name" Text="{Binding Name}"/>
+                <TextBlock x:Name="Salary_Count"/>
+                <TextBlock x:Name="WorkingTime_Cost"/>
+                <TextBlock x:Name="WorkingCalendar"/>
+            </StackPanel>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding IsMaterial}" Value="True">
+                    <Setter TargetName="Salary_Count" Property="Text" Value="{Binding Count}"/>
+                    <Setter TargetName="WorkingTime_Cost" Property="Text" Value="{Binding CostFull}"/>
+                    <Setter TargetName="WorkingCalendar" Property="Visibility" Value="Hidden"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsMaterial}" Value="False">
+                    <Setter TargetName="Salary_Count" Property="Text" Value="{Binding SalaryFull}"/>
+                    <Setter TargetName="WorkingTime_Cost" Property="Text" Value="{Binding WorkDayDuration}"/>
+                    <Setter TargetName="WorkingCalendar" Property="Text" Value="{Binding WorkWeek}"/>
+                    <Setter TargetName="WorkingCalendar" Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid Background="White">
+        <StackPanel Orientation="Vertical">
+            <ListBox Height="200" ItemTemplate="{DynamicResource ResourceTemplate}" ItemsSource="{Binding Resources}"/>
+            <Button Content="Добавить" Command="{Binding ToProjectResourcesCreateViewModel}"/>
+        </StackPanel>
     </Grid>
 </UserControl>
