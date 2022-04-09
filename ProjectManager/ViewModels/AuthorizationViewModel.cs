@@ -53,7 +53,7 @@ namespace ProjectManager.ViewModels
                 {
                     if (user.Roles.Permissions.Where(x => x.Id == 1).Any())
                     {
-                        navigationService.CurrentViewModel = new ProjectListViewModel(navigationService, user);
+                        navigationService.CurrentViewModel = new UsersViewPageViewModel();
                     }
                     else 
                     {                       
