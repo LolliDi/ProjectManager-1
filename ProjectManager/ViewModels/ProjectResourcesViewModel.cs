@@ -18,11 +18,13 @@ namespace ProjectManager.ViewModels
 
         private List<Resources> resources = new List<Resources>();
         private Repository<Resources> resourcesRepository = new Repository<Resources>();
+        private Repository<ProjectResources> projectResourcesRepository = new Repository<ProjectResources>();
         public ProjectResourcesViewModel(NavigationService navigationService, Projects currentProject)
         {
             this.navigationService = navigationService;
             this.currentProject = currentProject;
-            resources = resourcesRepository.Items.ToList();
+            foreach (var item in projectResourcesRepository.Items.Where(x => x.Project == currentProject.Id))
+                resources.Add(item.Resources);
             ToProjectResourcesCreateViewModel = new LambdaCommand(ToProjectResourcesCreateViewModelCommandExecute);
         }
         public List<Resources> Resources
