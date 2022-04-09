@@ -11,7 +11,8 @@ namespace ProjectManager.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class SalaryTypes : IEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,5 +29,16 @@ namespace ProjectManager.Models
         public virtual DateTypes DateTypes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WorkingResources> WorkingResources { get; set; }
+
+        [NotMapped]
+        public string Type
+        {
+            get
+            {
+                string valute = this.CostTypes.Type;
+                string perTime = this.DateTypes.Type;
+                return valute + "/" + perTime;
+            }
+        }
     }
 }

@@ -13,14 +13,17 @@ namespace ProjectManager.ViewModels
 {
     class ProjectResourcesViewModel : ViewModel
     {
+        private NavigationService navigationService = new NavigationService();
+        private Projects currentProject;
+
         private List<Resources> resources = new List<Resources>();
-        Repository<Resources> resourcesRepository = new Repository<Resources>();
-        NavigationService navigationService = new NavigationService();
-        public ProjectResourcesViewModel(NavigationService navigationService, Projects project)
+        private Repository<Resources> resourcesRepository = new Repository<Resources>();
+        public ProjectResourcesViewModel(NavigationService navigationService, Projects currentProject)
         {
+            this.navigationService = navigationService;
+            this.currentProject = currentProject;
             resources = resourcesRepository.Items.ToList();
             ToProjectResourcesCreateViewModel = new LambdaCommand(ToProjectResourcesCreateViewModelCommandExecute);
-            this.navigationService = navigationService;
         }
         public List<Resources> Resources
         {
@@ -29,7 +32,7 @@ namespace ProjectManager.ViewModels
         public ICommand ToProjectResourcesCreateViewModel { get; set; }        
         private void ToProjectResourcesCreateViewModelCommandExecute(object parameter)
         {
-            navigationService.CurrentViewModel = new ProjectResourcesCreateViewModel(navigationService);
+            navigationService.CurrentViewModel = new ProjectResourcesCreateViewModel(navigationService, currentProject);
         }
     }
 }

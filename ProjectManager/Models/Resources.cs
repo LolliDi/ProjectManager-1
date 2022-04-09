@@ -100,7 +100,7 @@ namespace ProjectManager.Models
         {
             get
             {
-                return this.MaterialResoucres.Count.ToString();
+                return "Количество: " + this.MaterialResoucres.Count.ToString();
             }
         }
     }
