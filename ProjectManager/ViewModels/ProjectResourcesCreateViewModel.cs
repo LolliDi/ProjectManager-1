@@ -66,6 +66,7 @@ namespace ProjectManager.ViewModels
             materialValuteColor;
 
         public ICommand AddResource { get; set; }
+        public ICommand Back { get; set; }
 
         public ProjectResourcesCreateViewModel(NavigationService navigationService, Projects currentProject)
         {
@@ -74,6 +75,7 @@ namespace ProjectManager.ViewModels
             salaryTypes = salaryTypesRepository.Items.ToList();
             valuteTypes = valuteTypesRepository.Items.ToList();
             AddResource = new LambdaCommand(GoAddResource);
+            Back = new LambdaCommand(GoBack);
             nameColor = standartColor;
 
             salaryColor = standartColor;
@@ -326,6 +328,11 @@ namespace ProjectManager.ViewModels
                 AddWorkingResource();
             else
                 AddMaterialResource();
+        }
+
+        private void GoBack(object obj)
+        {
+            navigationService.CurrentViewModel = new ProjectResourcesViewModel(navigationService, currentProject);
         }
 
         private void AddWorkingResource()

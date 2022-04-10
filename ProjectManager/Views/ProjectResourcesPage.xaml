@@ -9,7 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <DataTemplate x:Key="ResourceTemplate">
-            <StackPanel Orientation="Vertical" Height="100" Background="Aqua">
+            <StackPanel Orientation="Vertical" Margin="0 10">
                 <TextBlock x:Name="Name" Text="{Binding Name}"/>
                 <TextBlock x:Name="Salary_Count"/>
                 <TextBlock x:Name="WorkingTime_Cost"/>
@@ -19,7 +19,7 @@
                 <DataTrigger Binding="{Binding IsMaterial}" Value="True">
                     <Setter TargetName="Salary_Count" Property="Text" Value="{Binding Count}"/>
                     <Setter TargetName="WorkingTime_Cost" Property="Text" Value="{Binding CostFull}"/>
-                    <Setter TargetName="WorkingCalendar" Property="Visibility" Value="Hidden"/>
+                    <Setter TargetName="WorkingCalendar" Property="Visibility" Value="Collapsed"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding IsMaterial}" Value="False">
                     <Setter TargetName="Salary_Count" Property="Text" Value="{Binding SalaryFull}"/>
@@ -29,11 +29,43 @@
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
+        <Style x:Key="listBoxResources" TargetType="ListBox">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+            </Style.Resources>
+        </Style>
     </UserControl.Resources>
     <Grid Background="White">
         <StackPanel Orientation="Vertical">
-            <ListBox Height="200" ItemTemplate="{DynamicResource ResourceTemplate}" ItemsSource="{Binding Resources}"/>
-            <Button Content="Добавить" Command="{Binding ToProjectResourcesCreateViewModel}"/>
+            <Border CornerRadius="20">
+                <ListBox 
+                    Height="400" 
+                    Width="500" 
+                    Style="{DynamicResource listBoxResources}"
+                    ItemTemplate="{DynamicResource ResourceTemplate}" 
+                    ItemsSource="{Binding Resources}" FontFamily="Raleway" FontSize="16" 
+                    HorizontalContentAlignment="Stretch">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Style.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="20"/>
+                                </Style>
+                            </Style.Resources>
+                            <Setter Property="Background" Value="#FAFAFA"/>
+                            <Setter Property="Margin" Value="0 10 0 0"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+            </Border>
+            <Button Height="62" 
+                Width="235"
+                Margin="0 10 0 0" 
+                Content="Добавить" 
+                Command="{Binding ToProjectResourcesCreateViewModel}" 
+                Style="{StaticResource SButton}"/>
         </StackPanel>
     </Grid>
 </UserControl>

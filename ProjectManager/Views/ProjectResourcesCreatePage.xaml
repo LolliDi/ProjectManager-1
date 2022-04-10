@@ -62,9 +62,19 @@
                     <ComboBox  Name="CostType" Height="50" DisplayMemberPath="Type" ItemsSource="{Binding ValuteTypes}" SelectedIndex="{Binding ValuteType}" VerticalContentAlignment="Center"/>
                 </GroupBox>
             </StackPanel>
-            <Button
+            <Button 
+                Height="62" 
+                Width="235"
+                Margin="0 10 0 0"
+                Style="{StaticResource SButton}"
                 Visibility="{Binding AddButtonVisibility}"
                 Command="{Binding AddResource}">Добавить</Button>
+            <Button
+                Height="62" 
+                Width="235"
+                Margin="0 5 0 0"
+                Style="{StaticResource SButton}"
+                Command="{Binding Back}">Назад</Button>
         </StackPanel>
 
     </Grid>

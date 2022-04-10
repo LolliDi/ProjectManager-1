@@ -13,26 +13,80 @@
                 <TextBlock Text="{Binding Username}"/>
             </StackPanel>
         </DataTemplate>
+        <Style x:Key="listBoxProject" TargetType="ListBox">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+        <Style TargetType="GroupBox" x:Key="groupBoxProject">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GroupBox">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="0"
+                          BorderThickness="1" CornerRadius="10">
+                                <ContentPresenter 
+                          ContentSource="Header"
+                          RecognizesAccessKey="True" />
+                            </Border>
+                            <Border Grid.Row="1" 
+                                    BorderThickness="1"
+                                    CornerRadius="10"
+                                    BorderBrush="#FF888888">
+                                <ContentPresenter Margin="4" />
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
-    
     <Grid Background="White">
-        <StackPanel>
-            <GroupBox BorderBrush="{Binding TitleBorderColor}" Width="390" Margin="0" HorizontalAlignment="Left">
-                <local:PlaceTextBox Text="{Binding Path=Title}"  PlaceText="Название проекта" Style="{StaticResource PlaceTextBoxNormal}" Margin="0,5,0,0"/>
+        <StackPanel HorizontalAlignment="Center">
+            <GroupBox BorderBrush="{Binding TitleBorderColor}" Width="600" Margin="0" HorizontalAlignment="Center">
+                <local:PlaceTextBox Text="{Binding Path=Title}" Width="600" PlaceText="Название проекта" Style="{StaticResource PlaceTextBoxNormal}" Margin="0,5,0,0"/>
             </GroupBox>
-            <GroupBox Header="Выберите пользователей с доступом к проекту">
-                <ListBox
+            <GroupBox Header="Выберите пользователей с доступом к проекту" FontFamily="Raleway" FontSize="24" Width="600" Margin="0 10 0 0" Style="{DynamicResource groupBoxProject}">
+                <ListBox                  
                     x:Name="UsersListBox"
+                    Style="{DynamicResource listBoxProject}"
                     Height="300" 
+                    Width="570"
+                    Margin="0 10 0 0"
                     ItemsSource="{Binding UsersList}" 
                     ItemTemplate="{DynamicResource UserItem}"
                     SelectionMode="Multiple">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Style.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="20"/>
+                                </Style>
+                            </Style.Resources>
+                            <Setter Property="Background" Value="#FAFAFA"/>
+                            <Setter Property="Margin" Value="0 10 0 0"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
                 </ListBox>
             </GroupBox>
             <Button
+                Height="62" 
+                Width="235"
+                Margin="0 10 0 0"
+                Style="{StaticResource SButton}"
                 CommandParameter="{Binding ElementName=UsersListBox, Path=SelectedItems}"
                 Command="{Binding ToNewProject}">Создать</Button>
             <Button
+                Height="62" 
+                Width="235"
+                Style="{StaticResource SButton}"
+                Margin="0 10 0 0"
                 Command="{Binding ToBack}">Отмена</Button>
         </StackPanel>
         
