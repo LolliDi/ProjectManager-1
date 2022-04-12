@@ -10,13 +10,13 @@
     <UserControl.Resources>
         <DataTemplate x:Key="UserItem">
             <StackPanel>
-                <TextBlock Text="{Binding Username}"/>
+                <TextBlock Text="{Binding Username}" Margin="10, 0"/>
             </StackPanel>
         </DataTemplate>
         <Style x:Key="listBoxProject" TargetType="ListBox">
             <Style.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="20"/>
+                    <Setter Property="CornerRadius" Value="15"/>
                 </Style>
             </Style.Resources>
         </Style>
@@ -30,14 +30,14 @@
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <Border Grid.Row="0"
-                          BorderThickness="1" CornerRadius="10">
+                          BorderThickness="1" CornerRadius="15">
                                 <ContentPresenter 
                           ContentSource="Header"
                           RecognizesAccessKey="True" />
                             </Border>
                             <Border Grid.Row="1" 
                                     BorderThickness="1"
-                                    CornerRadius="10"
+                                    CornerRadius="15"
                                     BorderBrush="#FF888888">
                                 <ContentPresenter Margin="4" />
                             </Border>
@@ -47,18 +47,23 @@
             </Setter>
         </Style>
     </UserControl.Resources>
+    
     <Grid Background="White">
         <StackPanel HorizontalAlignment="Center">
-            <GroupBox BorderBrush="{Binding TitleBorderColor}" Width="600" Margin="0" HorizontalAlignment="Center">
+            <GroupBox BorderBrush="{Binding TitleBorderColor}" Margin="0" HorizontalAlignment="Center">
                 <local:PlaceTextBox Text="{Binding Path=Title}" Width="600" PlaceText="Название проекта" Style="{StaticResource PlaceTextBoxNormal}" Margin="0,5,0,0"/>
             </GroupBox>
-            <GroupBox Header="Выберите пользователей с доступом к проекту" FontFamily="Raleway" FontSize="24" Width="600" Margin="0 10 0 0" Style="{DynamicResource groupBoxProject}">
+            <GroupBox Header="Выберите пользователей с доступом к проекту"
+                      FontFamily="Raleway"
+                      FontSize="16"
+                      Width="600"
+                      Margin="0 10 0 0"
+                      Style="{DynamicResource groupBoxProject}">
                 <ListBox                  
                     x:Name="UsersListBox"
                     Style="{DynamicResource listBoxProject}"
-                    Height="300" 
-                    Width="570"
-                    Margin="0 10 0 0"
+                    Height="190" 
+                    Margin="10"
                     ItemsSource="{Binding UsersList}" 
                     ItemTemplate="{DynamicResource UserItem}"
                     SelectionMode="Multiple">
@@ -69,6 +74,7 @@
                                     <Setter Property="CornerRadius" Value="20"/>
                                 </Style>
                             </Style.Resources>
+                            <Setter Property="Height" Value="40"/>
                             <Setter Property="Background" Value="#FAFAFA"/>
                             <Setter Property="Margin" Value="0 10 0 0"/>
                         </Style>
@@ -76,15 +82,17 @@
                 </ListBox>
             </GroupBox>
             <Button
-                Height="62" 
-                Width="235"
+                FontSize="16"
+                Height="40" 
+                Width="135"
                 Margin="0 10 0 0"
                 Style="{StaticResource SButton}"
                 CommandParameter="{Binding ElementName=UsersListBox, Path=SelectedItems}"
                 Command="{Binding ToNewProject}">Создать</Button>
             <Button
-                Height="62" 
-                Width="235"
+                FontSize="16"
+                Height="40" 
+                Width="135"
                 Style="{StaticResource SButton}"
                 Margin="0 10 0 0"
                 Command="{Binding ToBack}">Отмена</Button>

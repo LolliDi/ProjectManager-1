@@ -9,7 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <DataTemplate x:Key="ResourceTemplate">
-            <StackPanel Orientation="Vertical" Margin="0 10">
+            <StackPanel Orientation="Vertical" Margin="10">
                 <TextBlock x:Name="Name" Text="{Binding Name}"/>
                 <TextBlock x:Name="Salary_Count"/>
                 <TextBlock x:Name="WorkingTime_Cost"/>
@@ -29,39 +29,48 @@
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
-        <Style x:Key="listBoxResources" TargetType="ListBox">
-            <Style.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="20"/>
-                </Style>
-            </Style.Resources>
-        </Style>
+        
+        <ControlTemplate x:Key="ArrowedItemsControl" TargetType="{x:Type ItemsControl}">
+            <Border
+            BorderThickness="2"
+            CornerRadius="15">
+                <Grid>
+                    <Grid.OpacityMask>
+                        <VisualBrush Visual="{Binding ElementName=mask}" />
+                    </Grid.OpacityMask>
+                    <Border Name="mask" Background="#FAFAFA" BorderThickness="0" CornerRadius="20"/>
+                    <ScrollViewer>
+                        <ItemsPresenter/>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </ControlTemplate>
     </UserControl.Resources>
     <Grid Background="White">
-        <StackPanel Orientation="Vertical">
-            <Border CornerRadius="20">
-                <ListBox 
-                    Height="400" 
-                    Width="500" 
-                    Style="{DynamicResource listBoxResources}"
+        <StackPanel Orientation="Vertical" Margin="10">
+            <ListBox
+                Template="{DynamicResource ArrowedItemsControl}"
+                    Height="370" 
+                    Width="540" 
                     ItemTemplate="{DynamicResource ResourceTemplate}" 
                     ItemsSource="{Binding Resources}" FontFamily="Raleway" FontSize="16" 
                     HorizontalContentAlignment="Stretch">
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Style.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="20"/>
-                                </Style>
-                            </Style.Resources>
-                            <Setter Property="Background" Value="#FAFAFA"/>
-                            <Setter Property="Margin" Value="0 10 0 0"/>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                </ListBox>
-            </Border>
-            <Button Height="62" 
-                Width="235"
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Style.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="20"/>
+                            </Style>
+                        </Style.Resources>
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="Margin" Value="10"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+            <Button 
+                FontSize="16"
+                Height="40" 
+                Width="100"
                 Margin="0 10 0 0" 
                 Content="Добавить" 
                 Command="{Binding ToProjectResourcesCreateViewModel}" 

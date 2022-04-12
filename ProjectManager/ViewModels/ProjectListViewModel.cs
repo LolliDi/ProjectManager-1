@@ -44,6 +44,7 @@ namespace ProjectManager.ViewModels
             ToCreateProject = new LambdaCommand(GoCreateProject);
             ToUserAccount = new LambdaCommand(GoUserAccount);
             ToProjectMenu = new LambdaCommand(GoProjectMenu);
+            ProjectButtonVisibility = Visibility.Hidden;
         }
 
 
@@ -77,10 +78,7 @@ namespace ProjectManager.ViewModels
                 SelectedProjectTitle = projectList[selectedId].Name.ToString();
                 SelectedProjectDate = projectList[selectedId].CreatingDate.ToString();
                 SelectedProjectUsers = CreateUserList();
-                if (selectedId == -1)
-                    ProjectButtonVisibility = Visibility.Hidden;
-                else
-                    ProjectButtonVisibility = Visibility.Visible;
+                ProjectButtonVisibility = Visibility.Visible;
             }
         }
 
