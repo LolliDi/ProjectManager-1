@@ -6,5 +6,4 @@
         <ResourceDictionary Source="/ProjectManager;component/CustomControls/PopupControl/PopupControl.xaml"/>
         <ResourceDictionary Source="/ProjectManager;component/CustomControls/FormControl/FormControl.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-
 </ResourceDictionary>
