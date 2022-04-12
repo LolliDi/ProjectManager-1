@@ -46,8 +46,10 @@
             <TextBlock FontSize="40" FontWeight="Bold" Height ="47" Margin="101, 0">Список проектов</TextBlock>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Style="{StaticResource SButton}" Width="307" Height="62"
+                        Command="{Binding ToUserAccount}">Данные пользователя</Button>
+                <Button Style="{StaticResource SButton}" Width="407" Height="62"  Margin="54, 0"
                         Command="{Binding ToCreateProject}">Добавить проект</Button>
-                <Button Style="{StaticResource SButton}" Width="307" Height="62" Margin="54, 0"
+                <Button Style="{StaticResource SButton}" Width="307" Height="62" Margin="0, 0, 54, 0"
                         Command="{Binding ToBack}">Выйти</Button>
             </StackPanel>
         </Grid>
