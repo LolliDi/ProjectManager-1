@@ -10,18 +10,20 @@ using System.Windows.Media;
 
 namespace ProjectManager.CustomControls
 {
-    class PopupControl : ContentControl
+    public class PopupControl : UserControl
     {
         static PopupControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(PopupControl), new FrameworkPropertyMetadata(typeof(PopupControl)));
+
             BackgroundProperty.OverrideMetadata(typeof(PopupControl), new FrameworkPropertyMetadata(new SolidColorBrush(Colors.Black) { Opacity = 0.5 }));
             PaddingProperty.OverrideMetadata(typeof(PopupControl), new FrameworkPropertyMetadata(new Thickness(10)));
-
-            IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(PopupControl), new PropertyMetadata(true));
+            IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(PopupControl), new PropertyMetadata(false));
         }
 
         private FrameworkElement PART_Background;
+
+        public static readonly DependencyProperty IsOpenProperty;
 
         public bool IsOpen
         {
@@ -29,20 +31,17 @@ namespace ProjectManager.CustomControls
             set { SetValue(IsOpenProperty, value); }
         }
 
-        public static readonly DependencyProperty IsOpenProperty;
-
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
             PART_Background = (FrameworkElement)GetTemplateChild("PART_Background");
         }
-
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
             base.OnMouseDown(e);
 
-            if (PART_Background.IsMouseDirectlyOver)
+            if (PART_Background != null && PART_Background.IsMouseDirectlyOver)
             {
                 IsOpen = false;
             }

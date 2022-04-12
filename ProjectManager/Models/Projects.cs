@@ -42,12 +42,7 @@ namespace ProjectManager.Models
         {
             get
             {
-                return new Repository<ProjectTasks>().Items
-                .Select(item => item.Tasks)
-                .Join(new Repository<TaskGroups>().Items, projectTask => projectTask.Id, taskGroup => taskGroup.Id, (projectTask, taskGroup) => taskGroup)
-                .Where(item => item.Depth == 1)
-                .Select(item => item.Tasks)
-                .Distinct().ToList();
+                return ProjectTasks.Select(item => item.Tasks).Where(item => item.TaskGroups1.Count == 0).Distinct().ToList();
             }
         }
 

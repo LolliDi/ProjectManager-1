@@ -2,42 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:custom="clr-namespace:ProjectManager.CustomControls">
     <ResourceDictionary.MergedDictionaries>
-        <!--<ResourceDictionary Source="/CustomControls/HierarchicalDataGrid/HierarchicalDataGrid.xaml"/>-->
-        <!--<ResourceDictionary Source="/CustomControls/PopupControl/PopupControl.xaml"/>-->
+        <ResourceDictionary Source="/ProjectManager;component/CustomControls/TreeGridView/TreeGridView.xaml"/>
+        <ResourceDictionary Source="/ProjectManager;component/CustomControls/PopupControl/PopupControl.xaml"/>
+        <ResourceDictionary Source="/ProjectManager;component/CustomControls/FormControl/FormControl.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-    <Style TargetType="{x:Type custom:PopupControl}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type custom:PopupControl}">
-                    <ControlTemplate.Resources>
-                        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-                    </ControlTemplate.Resources>
-                    <Grid Background="{TemplateBinding Background}"
-                          Visibility="{TemplateBinding IsOpen, Converter={StaticResource BooleanToVisibilityConverter}}"
-                          x:Name="PART_Background">
-                        <Border BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center">
-                            <Grid>
-                                <Grid.OpacityMask>
-                                    <VisualBrush Visual="{Binding ElementName=Border}"/>
-                                </Grid.OpacityMask>
-                                <Border CornerRadius="5"
-                                        x:Name="Border"
-                                        Background="White">
-                                    <ContentControl Content="{TemplateBinding Content}" 
-                                                    Margin="{TemplateBinding Padding}"/>
-                                </Border>
-                            </Grid>
-                            <Border.Effect>
-                                <DropShadowEffect Color="Black" BlurRadius="20" ShadowDepth="20" Opacity="0.5"/>
-                            </Border.Effect>
-                        </Border>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
 </ResourceDictionary>

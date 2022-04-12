@@ -8,19 +8,30 @@
                     <ControlTemplate.Resources>
                         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
                     </ControlTemplate.Resources>
-                    <Border Opacity="0.5"
-                            HorizontalAlignment="Center" VerticalAlignment="Center"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            Visibility="{TemplateBinding IsOpen, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <Border CornerRadius="5" >
+                    <Grid Background="{TemplateBinding Background}"
+                          Visibility="{TemplateBinding IsOpen, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          UseLayoutRounding="True"
+                          x:Name="PART_Background">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                            <Grid>
+                                <Grid.OpacityMask>
+                                    <VisualBrush Visual="{Binding ElementName=Border}"/>
+                                </Grid.OpacityMask>
+                                <Border CornerRadius="5"
+                                        x:Name="Border"
+                                        Background="White">
+                                    <ContentControl Content="{TemplateBinding Content}" 
+                                                    Margin="{TemplateBinding Padding}"/>
+                                </Border>
+                            </Grid>
                             <Border.Effect>
                                 <DropShadowEffect Color="Black" BlurRadius="20" ShadowDepth="20" Opacity="0.5"/>
                             </Border.Effect>
-                            <ContentControl Content="{TemplateBinding Content}"/>
                         </Border>
-                    </Border>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProjectManager.Views.ProjectMenuPage.ProjectTasksPage.Forms
+namespace ProjectManager.Views.Forms
 {
     /// <summary>
-    /// Логика взаимодействия для TaskForm.xaml
+    /// Логика взаимодействия для TaskInfoForm.xaml
     /// </summary>
-    public partial class TaskForm : UserControl
+    public partial class TaskInfoForm : UserControl
     {
-        public TaskForm()
+        public TaskInfoForm()
         {
             InitializeComponent();
         }

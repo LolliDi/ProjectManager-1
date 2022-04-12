@@ -22,7 +22,7 @@ namespace ProjectManager.ViewModels
             MainNavigationService = navigationService;
 
             ProjectMenuNavigationService = new NavigationService();
-            ProjectMenuNavigationService.CurrentViewModel = new ProjectTasksViewModel(ProjectMenuNavigationService, project);
+            ProjectMenuNavigationService.CurrentViewModel = new ProjectTasksViewModel(CurrentProject);
 
             ToProjectTasksPageCommand = new LambdaCommand(OnToProjectTasksPageCommandExecute, CanToProjectTasksPageCommandExecuted);
             ToProjectResourcePageCommand = new LambdaCommand(OnToProjectResourcePageCommandExecute, CanToProjectResourcePageCommandExecuted);
@@ -62,7 +62,7 @@ namespace ProjectManager.ViewModels
 
         private void OnToProjectTasksPageCommandExecute(object parameter)
         {
-            ProjectMenuNavigationService.CurrentViewModel = new ProjectTasksViewModel(ProjectMenuNavigationService, null);
+            ProjectMenuNavigationService.CurrentViewModel = new ProjectTasksViewModel(CurrentProject);
         }
         private void OnToProjectResourcePageCommandExecute(object parameter)
         {
@@ -70,7 +70,7 @@ namespace ProjectManager.ViewModels
         }
         private void OnToProjectReportPageCommandExecute(object parameter)
         {
-            ProjectMenuNavigationService.CurrentViewModel = new ProjectReportViewModel(ProjectMenuNavigationService, null);
+            ProjectMenuNavigationService.CurrentViewModel = new ProjectReportViewModel(ProjectMenuNavigationService, CurrentProject);
         }
         private void OnToAdminPageCommandExecute(object parameter)
         {
