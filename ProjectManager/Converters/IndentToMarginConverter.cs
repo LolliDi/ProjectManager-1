@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectManager.CustomControls;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace ProjectManager.CustomControls
+namespace ProjectManager.Converters
 {
     class IndentToMarginConverter : IMultiValueConverter
     {

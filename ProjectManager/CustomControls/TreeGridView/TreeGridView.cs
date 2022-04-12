@@ -15,7 +15,7 @@ namespace ProjectManager.CustomControls
         static TreeGridView()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TreeGridView), new FrameworkPropertyMetadata(typeof(TreeGridView)));
-            
+
             ColumnsProperty = DependencyProperty.Register(nameof(Columns), typeof(GridViewColumnCollection), typeof(TreeGridView), new PropertyMetadata(new GridViewColumnCollection()));
             TargetColumnProperty = DependencyProperty.Register(nameof(TargetColumn), typeof(IEnumerable), typeof(TreeGridView), new PropertyMetadata(null));
             IndentProperty = DependencyProperty.Register(nameof(Indent), typeof(double), typeof(TreeGridView), new PropertyMetadata(10d));

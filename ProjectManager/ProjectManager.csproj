@@ -47,6 +47,9 @@
     <Reference Include="FontAwesome5.Net, Version=2.1.6.0, Culture=neutral, PublicKeyToken=9cfaf01297a008f8, processorArchitecture=MSIL">
       <HintPath>..\packages\FontAwesome5.2.1.6\lib\net472\FontAwesome5.Net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -72,8 +75,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AttachedProperties\DraggedItemAttachedProperty.cs" />
+    <Compile Include="Converters\DepthToWidthConverter.cs" />
     <Compile Include="CustomControls\PopupControl\PopupControl.cs" />
-    <Compile Include="CustomControls\TreeGridView\IndentToMarginConverter.cs" />
+    <Compile Include="Converters\IndentToMarginConverter.cs" />
     <Compile Include="CustomControls\TreeGridView\TreeGridView.cs" />
     <Compile Include="Models\AddUserPageModel.cs" />
     <Compile Include="Models\CostTypes.cs">
@@ -155,9 +160,11 @@
     <Compile Include="Models\WorkingResources.cs">
       <DependentUpon>ProjectManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\FormNavigationService.cs" />
     <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="ViewModels\Base\ValidationViewModel.cs" />
     <Compile Include="ViewModels\CreateProjectViewModel.cs" />
-    <Compile Include="ViewModels\FormBase\IForm.cs" />
+    <Compile Include="ViewModels\Base\IFormViewModel.cs" />
     <Compile Include="ViewModels\ProjectPassportViewModel.cs" />
     <Compile Include="ViewModels\ProjectReportViewModel.cs" />
     <Compile Include="ViewModels\ProjectTasksViewModel.cs" />
@@ -170,25 +177,39 @@
     <Compile Include="Views\AddUserPage.xaml.cs">
       <DependentUpon>AddUserPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProjectMenuPage\ProjectMenuPage.xaml.cs">
+    <Compile Include="AttachedProperties\FormIsOpenAttachedProperty.cs" />
+    <Compile Include="CustomControls\FormControl\FormControl.cs" />
+    <Compile Include="Views\Forms\TaskConnections\TaskConnectionsViewModel.cs" />
+    <Compile Include="Views\Forms\TaskInfo\CreateTaskInfoViewModel.cs" />
+    <Compile Include="ViewModels\Base\FormViewModel.cs" />
+    <Compile Include="Views\Forms\TaskConnectionsForm.xaml.cs">
+      <DependentUpon>TaskConnectionsForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Forms\TaskInfo\TaskInfoViewModel.cs" />
+    <Compile Include="Views\Forms\TaskInfoForm.xaml.cs">
+      <DependentUpon>TaskInfoForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Forms\TaskResourcesForm.xaml.cs">
+      <DependentUpon>TaskResourcesForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Forms\TaskInfo\UpdateTaskInfoViewModel.cs" />
+    <Compile Include="Views\Forms\TaskResources\TaskResourcesViewModel.cs" />
+    <Compile Include="Views\ProjectMenuPage.xaml.cs">
       <DependentUpon>ProjectMenuPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CreateProjectView.xaml.cs">
       <DependentUpon>CreateProjectView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProjectMenuPage\ProjectPassportPage.xaml.cs">
+    <Compile Include="Views\ProjectPassportPage.xaml.cs">
       <DependentUpon>ProjectPassportPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProjectMenuPage\ProjectReportPage.xaml.cs">
+    <Compile Include="Views\ProjectReportPage.xaml.cs">
       <DependentUpon>ProjectReportPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProjectMenuPage\ProjectResourcesPage.xaml.cs">
+    <Compile Include="Views\ProjectResourcesPage.xaml.cs">
       <DependentUpon>ProjectResourcesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProjectMenuPage\ProjectTasksPage\Forms\TaskForm.xaml.cs">
-      <DependentUpon>TaskForm.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ProjectMenuPage\ProjectTasksPage\ProjectTasksPage.xaml.cs">
+    <Compile Include="Views\ProjectTasksPage.xaml.cs">
       <DependentUpon>ProjectTasksPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserAccount.xaml.cs">
@@ -201,6 +222,10 @@
     <Compile Include="Views\UsersViewPage.xaml.cs">
       <DependentUpon>UsersViewPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="CustomControls\FormControl\FormControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomControls\PopupControl\PopupControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -229,6 +254,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Forms\TaskConnectionsForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Forms\TaskInfoForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Forms\TaskResourcesForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -253,23 +290,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\ProjectMenuPage\ProjectMenuPage.xaml">
+    <Page Include="Views\ProjectMenuPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ProjectMenuPage\ProjectPassportPage.xaml">
+    <Page Include="Views\ProjectPassportPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ProjectMenuPage\ProjectReportPage.xaml">
+    <Page Include="Views\ProjectReportPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ProjectMenuPage\ProjectResourcesPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ProjectMenuPage\ProjectTasksPage\Forms\TaskForm.xaml">
+    <Page Include="Views\ProjectResourcesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -277,7 +310,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ProjectMenuPage\ProjectTasksPage\ProjectTasksPage.xaml">
+    <Page Include="Views\ProjectTasksPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

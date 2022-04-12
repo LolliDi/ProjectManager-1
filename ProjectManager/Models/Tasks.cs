@@ -9,6 +9,7 @@
 
 namespace ProjectManager.Models
 {
+    using ProjectManager.Models.Repositories;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -58,5 +59,22 @@ namespace ProjectManager.Models
                 return childs;
             }
         }
+        [NotMapped]
+        public int Depth
+        {
+            get
+            {
+                return TaskGroups1.Count == 0 ? 0 : TaskGroups1.First().Depth;
+            }
+        }
+        [NotMapped]
+        public TaskTypes ConnectionType
+        {
+            get
+            {
+                return TaskConnections1.Count == 0 ? null : TaskConnections1.First().TaskTypes;
+            }
+        }
+
     }
 }

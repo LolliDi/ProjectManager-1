@@ -2,31 +2,41 @@
 using ProjectManager.Models;
 using ProjectManager.Models.Repositories;
 using ProjectManager.Services;
+using ProjectManager.ViewModels.TaskInfo;
+using ProjectManager.Views.Forms;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace ProjectManager.ViewModels
 {
     class ProjectTasksViewModel : ViewModel
     {
-        public ProjectTasksViewModel(NavigationService navigationService, Projects project)
+        public ProjectTasksViewModel(Projects project)
         {
             taskGroupsRepository = new Repository<TaskGroups>();
             projectTaskResourcesRepository = new Repository<ProjectTaskResources>();
             projectTasksRepository = new Repository<ProjectTasks>();
 
-            CurrentProject = project;
-            Tasks = CurrentProject.ProjectRootTasks;
+            TaskInfoForm = new FormNavigationService();
+            TaskConnectionsForm = new FormNavigationService();
+            TaskResourcesForm = new FormNavigationService();
 
-            AddTaskCommand = new LambdaCommand(OnAddTaskCommandExecute);
-            UpdateTaskCommand = new LambdaCommand(OnUpdateTaskCommandExecute, CanUpdateTaskCommandExecuted);
-            RemoveTaskCommand = new LambdaCommand(OnRemoveTaskCommandExecute, CanRemoveTaskCommandExecuted);
-            ChangeTasksResourcesCommand = new LambdaCommand(OnChangeTasksResourcesCommandExecute, CanChangeTasksResourcesCommandExecuted);
+            CurrentProject = project;
+            Tasks = new CollectionViewSource() { Source = CurrentProject.ProjectRootTasks };
+
+            CreateTaskInfoCommand = new LambdaCommand(OnCreateTaskInfoCommandExecute);
+            UpdateTaskInfoCommand = new LambdaCommand(OnUpdateTaskInfoCommandExecute, CanUpdateTaskInfoCommandExecuted);
+            RemoveTaskInfoCommand = new LambdaCommand(OnRemoveTaskInfoCommandExecute, CanRemoveTaskInfoCommandExecuted);
+            ChangeTaskResourcesCommand = new LambdaCommand(OnChangeTasksResourcesCommandExecute, CanChangeTasksResourcesCommandExecuted);
+            ChangeTaskConnectionsCommand = new LambdaCommand(OnChangeTaskConnectionsCommandExecute, CanChangeTaskConnectionsCommandExecuted);
+            SelectedItemChangedCommand = new LambdaCommand(OnSelectedItemChangedCommandExecute);
         }
 
         #region Fields
@@ -39,56 +49,90 @@ namespace ProjectManager.ViewModels
 
         #region Properties
 
-        public NavigationService NavigationService { get; set; }
-        public ICollection<Tasks> Tasks { get; set; }
+        public CollectionViewSource Tasks { get; }
+        public FormNavigationService TaskInfoForm { get; set; }
+        public FormNavigationService TaskConnectionsForm { get; set; }
+        public FormNavigationService TaskResourcesForm { get; set; }
         public Projects CurrentProject { get; set; }
+        public Tasks SelectedTask { get; set; }
 
         #endregion
 
         #region Commands
 
-        public ICommand AddTaskCommand { get; set; }
-        public ICommand UpdateTaskCommand { get; set; }
-        public ICommand RemoveTaskCommand { get; set; }
-        public ICommand ChangeTasksResourcesCommand { get; set; }
-        public ICommand ChangeSubtaskCommand { get; set; }
-        public ICommand CloseFormCommand { get; set; }
-        public ICommand SubmitFormCommand { get; set; }
-        public ICommand AddTaskConnectionCommand { get; set; }
-        public ICommand ChangeTaskConnectionCommand { get; set; }
-        public ICommand RemoveTaskConnectionCommand { get; set; }
-
+        public ICommand CreateTaskInfoCommand { get; set; }
+        public ICommand UpdateTaskInfoCommand { get; set; }
+        public ICommand RemoveTaskInfoCommand { get; set; }
+        public ICommand ChangeTaskResourcesCommand { get; set; }
+        public ICommand ChangeTaskConnectionsCommand { get; set; }
+        public ICommand SelectedItemChangedCommand { get; set; }
         #endregion
 
         #region Methods
-        private void OnAddTaskCommandExecute(object parameter)
-        {
 
-        }
-        private void OnUpdateTaskCommandExecute(object parameter)
-        {
+        #region Menu Command Methods
 
-        }
-        private bool CanUpdateTaskCommandExecuted(object parameter)
+        private void OnCreateTaskInfoCommandExecute(object parameter)
         {
-            return true;
+            TaskInfoForm.IsOpen = true;
+            TaskInfoForm.CurrentViewModel = new CreateTaskInfoViewModel(new Repository<Tasks>(), new Repository<ProjectTasks>(), TaskInfoForm, CurrentProject) { Header = "Добавление задачи" };
         }
-        private void OnRemoveTaskCommandExecute(object parameter)
+        private void OnUpdateTaskInfoCommandExecute(object parameter)
         {
-
+            TaskInfoForm.IsOpen = true;
+            TaskInfoForm.CurrentViewModel = new UpdateTaskInfoViewModel(new Repository<Tasks>(), TaskInfoForm, CurrentProject, SelectedTask) { Header = "Редактирование задачи" };
         }
-        private bool CanRemoveTaskCommandExecuted(object parameter)
+        private bool CanUpdateTaskInfoCommandExecuted(object parameter)
         {
-            return true;
+            return SelectedTask != null;
+        }
+        private void OnRemoveTaskInfoCommandExecute(object parameter)
+        {
+            if (MessageBoxResult.Yes == MessageBox.Show("Вы точно хотите удалить данный элемент?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question))
+            {
+                taskGroupsRepository.Remove(SelectedTask.Id);
+            }
+        }
+        private bool CanRemoveTaskInfoCommandExecuted(object parameter)
+        {
+            return SelectedTask != null;
         }
         private void OnChangeTasksResourcesCommandExecute(object parameter)
         {
-
+            TaskResourcesForm.IsOpen = true;
+            TaskResourcesForm.CurrentViewModel = new TaskResourcesViewModel(TaskResourcesForm, CurrentProject, SelectedTask)
+            {
+                Header = "Редактирование ресурсов задачи"
+            };
         }
         private bool CanChangeTasksResourcesCommandExecuted(object parameter)
         {
-            return true;
+            return SelectedTask != null;
         }
+        #endregion
+
+        private void OnSelectedItemChangedCommandExecute(object parameter)
+        {
+            SelectedTask = (Tasks)parameter;
+        }
+        private void OnChangeTaskConnectionsCommandExecute(object obj)
+        {
+            TaskConnectionsForm.IsOpen = true;
+            TaskConnectionsForm.CurrentViewModel = new TaskConnectionsViewModel(
+                new Repository<TaskConnections>(),
+                new Repository<TaskGroups>(),
+                TaskConnectionsForm,
+                CurrentProject,
+                SelectedTask)
+            {
+                Header = "Редактирование связей задачи"
+            };
+        }
+        private bool CanChangeTaskConnectionsCommandExecuted(object arg)
+        {
+            return SelectedTask != null;
+        }
+
         #endregion
     }
 }
