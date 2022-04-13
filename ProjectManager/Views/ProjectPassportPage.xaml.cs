@@ -18,7 +18,7 @@ namespace ProjectManager.Views
     /// <summary>
     /// Логика взаимодействия для ProjectPassportPage.xaml
     /// </summary>
-    public partial class ProjectPassportPage : Page
+    public partial class ProjectPassportPage : UserControl
     {
         public ProjectPassportPage()
         {

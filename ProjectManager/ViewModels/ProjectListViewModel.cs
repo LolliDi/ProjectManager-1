@@ -18,7 +18,7 @@ namespace ProjectManager.ViewModels
         private Visibility projectButtonVisibility;
         private int selectedId = -1;
 
-        private readonly IRepository<Projects> projectsRepository;
+        private readonly IRepository<Projects> projectsRepository = new Repository<Projects>();
         private List<Projects> projectList;
         private Users currentUser;
 
@@ -26,21 +26,25 @@ namespace ProjectManager.ViewModels
 
         public ICommand ToBack { get; set; }
         public ICommand ToCreateProject { get; set; }
-        public ICommand ToProjectPage { get; set; }
+        public ICommand ToUserAccount { get; set; }
+        public ICommand ToProjectMenu { get; set; }
 
         public ProjectListViewModel(NavigationService navigationService, Users currentUser)
         {
             this.currentUser = currentUser;
             this.navigationService = navigationService;
+
             selectedProjectName = "Выберите проект";
             selectedProjectDate = "";
             selectedProjectUsers = "";
-            projectsRepository = new Repository<Projects>(new ProjectManagerContext());
-            ProjectList = projectsRepository.Items.ToList();
+
+            ProjectList = new List<Projects>();
 
             ToBack = new LambdaCommand(GoBack);
-            ToBack = new LambdaCommand(GoCreateProject);
-            ToBack = new LambdaCommand(GoProjectPage);
+            ToCreateProject = new LambdaCommand(GoCreateProject);
+            ToUserAccount = new LambdaCommand(GoUserAccount);
+            ToProjectMenu = new LambdaCommand(GoProjectMenu);
+            ProjectButtonVisibility = Visibility.Hidden;
         }
 
 
@@ -49,13 +53,13 @@ namespace ProjectManager.ViewModels
             get => projectList;
             set 
             {
-                if (currentUser.Roles.Id == 1)
+                if (currentUser.Roles.Permissions.Where(x => x.Name == "permission_viewallprojects" || x.Name == "permission_editallprojects").Any())
                     projectList = projectsRepository.Items.ToList();
-                else if (currentUser.Roles.Id == 3)
+                else if (currentUser.Roles.Permissions.Where(x => x.Name == "permission_privateprojects").Any())
                 {
                     foreach(Projects pr in projectsRepository.Items) // Единственный способ, которым заработало
                     {
-                        projectList = new List<Projects>();
+                        projectList = value;
                         if (pr.Users.Where(x => x.Id == currentUser.Id).Any())
                             projectList.Add(pr);
                     }
@@ -74,10 +78,7 @@ namespace ProjectManager.ViewModels
                 SelectedProjectTitle = projectList[selectedId].Name.ToString();
                 SelectedProjectDate = projectList[selectedId].CreatingDate.ToString();
                 SelectedProjectUsers = CreateUserList();
-                if (selectedId == -1)
-                    ProjectButtonVisibility = Visibility.Hidden;
-                else
-                    ProjectButtonVisibility = Visibility.Visible;
+                ProjectButtonVisibility = Visibility.Visible;
             }
         }
 
@@ -125,12 +126,17 @@ namespace ProjectManager.ViewModels
 
         private void GoCreateProject(object obj)
         {
-
+            navigationService.CurrentViewModel = new CreateProjectViewModel(navigationService, currentUser);
         }
 
-        private void GoProjectPage(object obj)
+        private void GoUserAccount(object obj)
         {
+            navigationService.CurrentViewModel = new UserAccountViewModel(currentUser, navigationService);
+        }
 
+        private void GoProjectMenu(object obj)
+        {
+            navigationService.CurrentViewModel = new ProjectMenuViewModel(navigationService, projectList[selectedId], currentUser);
         }
 
     }

@@ -1,11 +1,80 @@
-﻿<UserControl x:Class="ProjectManager.Views.ResourcesPage"
+﻿<UserControl x:Class="ProjectManager.Views.ProjectResourcesPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjectManager.Views"
+             xmlns:models="clr-namespace:ProjectManager.Models"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate x:Key="ResourceTemplate">
+            <StackPanel Orientation="Vertical" Margin="10">
+                <TextBlock x:Name="Name" Text="{Binding Name}"/>
+                <TextBlock x:Name="Salary_Count"/>
+                <TextBlock x:Name="WorkingTime_Cost"/>
+                <TextBlock x:Name="WorkingCalendar"/>
+            </StackPanel>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding IsMaterial}" Value="True">
+                    <Setter TargetName="Salary_Count" Property="Text" Value="{Binding Count}"/>
+                    <Setter TargetName="WorkingTime_Cost" Property="Text" Value="{Binding CostFull}"/>
+                    <Setter TargetName="WorkingCalendar" Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsMaterial}" Value="False">
+                    <Setter TargetName="Salary_Count" Property="Text" Value="{Binding SalaryFull}"/>
+                    <Setter TargetName="WorkingTime_Cost" Property="Text" Value="{Binding WorkDayDuration}"/>
+                    <Setter TargetName="WorkingCalendar" Property="Text" Value="{Binding WorkWeek}"/>
+                    <Setter TargetName="WorkingCalendar" Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+        
+        <ControlTemplate x:Key="ArrowedItemsControl" TargetType="{x:Type ItemsControl}">
+            <Border
+            BorderThickness="2"
+            CornerRadius="15">
+                <Grid>
+                    <Grid.OpacityMask>
+                        <VisualBrush Visual="{Binding ElementName=mask}" />
+                    </Grid.OpacityMask>
+                    <Border Name="mask" Background="#FAFAFA" BorderThickness="0" CornerRadius="20"/>
+                    <ScrollViewer>
+                        <ItemsPresenter/>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+    </UserControl.Resources>
     <Grid Background="White">
+        <StackPanel Orientation="Vertical" Margin="10">
+            <ListBox
+                Template="{DynamicResource ArrowedItemsControl}"
+                    Height="370" 
+                    Width="540" 
+                    ItemTemplate="{DynamicResource ResourceTemplate}" 
+                    ItemsSource="{Binding Resources}" FontFamily="Raleway" FontSize="16" 
+                    HorizontalContentAlignment="Stretch">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Style.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="20"/>
+                            </Style>
+                        </Style.Resources>
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="Margin" Value="10"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+            <Button 
+                FontSize="16"
+                Height="40" 
+                Width="100"
+                Margin="0 10 0 0" 
+                Content="Добавить" 
+                Command="{Binding ToProjectResourcesCreateViewModel}" 
+                Style="{StaticResource SButton}"/>
+        </StackPanel>
     </Grid>
 </UserControl>

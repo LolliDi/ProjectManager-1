@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ProjectManager.Views"
              xmlns:viewmodels="clr-namespace:ProjectManager.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="1080" d:DesignWidth="1920">
+             d:DesignHeight="450" d:DesignWidth="800">
     
     <UserControl.Resources>
         <ControlTemplate x:Key="ArrowedItemsControl" TargetType="{x:Type ItemsControl}">
@@ -18,16 +18,18 @@
                         <VisualBrush Visual="{Binding ElementName=mask}" />
                     </Grid.OpacityMask>
                     <Border Name="mask" Background="#FAFAFA" BorderThickness="0" CornerRadius="20"/>
-                    <ItemsPresenter/>
+                    <ScrollViewer>
+                        <ItemsPresenter/>
+                    </ScrollViewer>
                 </Grid>
             </Border>
-
         </ControlTemplate>
+        
         <DataTemplate x:Key="ProjectItem">
-            <Border CornerRadius="20" Background="White" Width = "1127" Height ="150px" Margin="10">
-                <Grid Margin="25">
-                    <TextBlock FontSize="56" Text="{Binding Name}"></TextBlock>
-                    <TextBlock FontSize="56" HorizontalAlignment="Right" Text="{Binding User}"></TextBlock>
+            <Border CornerRadius="20" Background="White" Width="470" Height ="75px" Margin="10">
+                <Grid Margin="20">
+                    <TextBlock FontSize="24" Text="{Binding Name}"></TextBlock>
+                    <TextBlock FontSize="24" HorizontalAlignment="Right" Text="{Binding User}"></TextBlock>
                 </Grid>
             </Border>
         </DataTemplate>
@@ -43,35 +45,38 @@
             <RowDefinition Height="22*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Column="0" Grid.ColumnSpan="2">
-            <TextBlock FontSize="40" FontWeight="Bold" Height ="47" Margin="101, 0">Список проектов</TextBlock>
+            <TextBlock FontSize="24" FontWeight="Bold" Margin="20, 0" HorizontalAlignment="Left" VerticalAlignment="Center">Список проектов</TextBlock>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Style="{StaticResource SButton}" Width="307" Height="62"
+                <Button Style="{StaticResource SButton}" Width="130" Height="31" FontSize="10"
+                        Command="{Binding ToUserAccount}">Данные пользователя</Button>
+                <Button Style="{StaticResource SButton}" Width="150" Height="31"  Margin="10, 0" FontSize="10"
                         Command="{Binding ToCreateProject}">Добавить проект</Button>
-                <Button Style="{StaticResource SButton}" Width="307" Height="62" Margin="54, 0"
+                <Button Style="{StaticResource SButton}" Width="80" Height="31" Margin="0, 0, 10, 0" FontSize="10"
                         Command="{Binding ToBack}">Выйти</Button>
             </StackPanel>
         </Grid>
-        <StackPanel Grid.Row="1" Margin="56" >
+        <Grid Grid.Row="1" Margin="16" >
             <ListBox
-                Height="835" 
+                x:Name="projectList"
                 Template="{DynamicResource ArrowedItemsControl}"
                 ItemsSource="{Binding ProjectList}"
                 ItemTemplate="{DynamicResource ProjectItem }"
                 SelectedIndex="{Binding SelectedProject}">
             </ListBox>
-        </StackPanel>
-        <Grid Grid.Row="1" Grid.Column="1" Height="835" Margin="56">
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1" Margin="16">
             <Grid.OpacityMask>
                 <VisualBrush Visual="{Binding ElementName=mask}" />
             </Grid.OpacityMask>
             <Border Name="mask" Background="#FAFAFA" BorderThickness="0" CornerRadius="20"/>
             <StackPanel Orientation="Vertical" Margin="10">
-                <TextBlock x:Name="selectedProjectName" FontSize="32" TextAlignment="Center" TextWrapping="Wrap" Text="{Binding SelectedProjectTitle, FallbackValue='Пустое название'}"/>
-                <TextBlock x:Name="selectedProjectDate" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedProjectDate, FallbackValue='Дата создания: 00.00.0000 00:00:00'}"/>
-                <ScrollViewer Height="650" >
-                    <TextBlock FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedProjectUsers, FallbackValue='Список пользователей:'}"/>
+                <TextBlock x:Name="selectedProjectName" FontSize="16" TextAlignment="Center" TextWrapping="Wrap" Text="{Binding SelectedProjectTitle, FallbackValue='Пустое название'}"/>
+                <TextBlock x:Name="selectedProjectDate" FontSize="12" TextWrapping="Wrap" Text="{Binding SelectedProjectDate, FallbackValue='Дата создания: 00.00.0000 00:00:00'}"/>
+                <ScrollViewer Height="220" >
+                    <TextBlock FontSize="12" TextWrapping="Wrap" Text="{Binding SelectedProjectUsers, FallbackValue='Список пользователей:'}"/>
                 </ScrollViewer>
-                <Button Width="212" Height="62" Margin="10" VerticalAlignment="Bottom" Style="{StaticResource SButton}">Открыть</Button>
+                <Button  VerticalAlignment="Bottom" Style="{StaticResource SButton}" Visibility="{Binding ProjectButtonVisibility}" FontSize="10" Width="80" Height="31"
+                        Command="{Binding ToProjectMenu}">Открыть</Button>
             </StackPanel>
         </Grid>
     </Grid>

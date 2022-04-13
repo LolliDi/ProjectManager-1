@@ -20,7 +20,7 @@ namespace ProjectManager.ViewModels
             this.navigationService = navigationService;
         }
 
-        UsersRepository usersRepository = new UsersRepository(new Models.ProjectManagerContext());
+        UsersRepository usersRepository = new UsersRepository();
         public ICommand AutoCommand { get; set; }
 
         string login, pass;

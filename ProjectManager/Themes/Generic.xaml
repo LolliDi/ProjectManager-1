@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:custom="clr-namespace:ProjectManager.CustomControls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/ProjectManager;component/CustomControls/TreeGridView/TreeGridView.xaml"/>
+        <ResourceDictionary Source="/ProjectManager;component/CustomControls/PopupControl/PopupControl.xaml"/>
+        <ResourceDictionary Source="/ProjectManager;component/CustomControls/FormControl/FormControl.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

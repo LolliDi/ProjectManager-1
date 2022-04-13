@@ -1,18 +1,28 @@
-﻿<UserControl x:Class="ProjectManager.Views.ProjectMenuPage"
+﻿<UserControl x:Class="ProjectManager.Views.ProjectTasksPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ProjectManager.Views"
+             xmlns:custom="clr-namespace:ProjectManager.CustomControls"
+             xmlns:viewmodels="clr-namespace:ProjectManager.ViewModels" 
+             xmlns:forms="clr-namespace:ProjectManager.Views.Forms"
+             xmlns:fa5="http://schemas.fontawesome.com/icons/"
+             xmlns:local="clr-namespace:ProjectManager.Views" 
+             xmlns:views="clr-namespace:Views.ProjectManager" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             d:DataContext="{d:DesignInstance Type=viewmodels:ProjectTasksViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <Style TargetType="Button" BasedOn="{StaticResource SButton}">
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="Padding" Value="20 10"/>
-            <Setter Property="Margin" Value="5"/>
-        </Style>
+        <ResourceDictionary>
+            <Style TargetType="Button" BasedOn="{StaticResource SButton}">
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="Padding" Value="8"/>
+                <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="BorderBrush" Value="LightSeaGreen"/>
+            </Style>
+        </ResourceDictionary>
     </UserControl.Resources>
+
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -23,20 +33,145 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.ColumnSpan="2" 
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Center"
-                    Margin="10">
-            
-            <Button Content="Ресурсы"
-                    Command="{Binding ToResourcePageCommand}"/>
-            <Button Content="Отчеты"
-                    Command="{Binding ToReportsPageCommand}"/>
-            <Button Content="Паспорт проекта"
-                    Command="{Binding ToProjectPassportPageCommand}"/>
-            
-        </StackPanel>
-        <DataGrid Grid.Row="1"/>
+        <!--Форма задачи-->
+        <custom:FormControl Grid.ColumnSpan="2"
+                            Grid.RowSpan="2"
+                            Panel.ZIndex="1"
+                            Padding="15"
+                            Header="{Binding Header}"
+                            IsOpen="{Binding DataContext.TaskInfoForm.IsOpen, RelativeSource={RelativeSource AncestorType=local:ProjectTasksPage, Mode=FindAncestor}, Mode=TwoWay}"
+                            SubmitCommand="{Binding SubmitCommand}"
+                            CancelCommand="{Binding CancelCommand}"
+                            DataContext="{Binding TaskInfoForm.CurrentViewModel}">
+            <forms:TaskInfoForm/>
+        </custom:FormControl>
+
+        <!--Форма ресурсов задачи-->
+        <custom:FormControl Grid.ColumnSpan="2"
+                            Grid.RowSpan="2"
+                            Panel.ZIndex="1"
+                            Padding="15"
+                            Header="{Binding Header}"
+                            IsOpen="{Binding DataContext.TaskConnectionsForm.IsOpen, RelativeSource={RelativeSource AncestorType=local:ProjectTasksPage, Mode=FindAncestor}, Mode=TwoWay}"
+                            SubmitCommand="{Binding SubmitCommand}"
+                            CancelCommand="{Binding CancelCommand}"
+                            DataContext="{Binding TaskConnectionsForm.CurrentViewModel}">
+            <forms:TaskConnectionsForm/>
+        </custom:FormControl>
+
+        <!--Форма связей задачи-->
+        <custom:FormControl Grid.ColumnSpan="2"
+                            Grid.RowSpan="2"
+                            Panel.ZIndex="1"
+                            Padding="15"
+                            Header="{Binding Header}"
+                            IsOpen="{Binding DataContext.TaskResourcesForm.IsOpen, RelativeSource={RelativeSource AncestorType=local:ProjectTasksPage, Mode=FindAncestor}, Mode=TwoWay}"
+                            SubmitCommand="{Binding SubmitCommand}"
+                            CancelCommand="{Binding CancelCommand}"
+                            DataContext="{Binding TaskResourcesForm.CurrentViewModel}">
+            <forms:TaskResourcesForm/>
+        </custom:FormControl>
+
+        <ToolBar Grid.Row="0"
+                 Grid.ColumnSpan="2"
+                 Background="White">
+            <ToolBar.Resources>
+                <Style TargetType="fa5:SvgAwesome">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Width" Value="16"/>
+                    <Setter Property="Height" Value="16"/>
+                </Style>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="4"/>
+                    <Setter Property="Padding" Value="4"/>
+                </Style>
+            </ToolBar.Resources>
+            <Button ToolTip="Добавить задачу" Command="{Binding CreateTaskInfoCommand}" Margin="4 0 0 0">
+                <Border Background="LightSeaGreen">
+                    <fa5:SvgAwesome Icon="Solid_Book"/>
+                </Border>
+            </Button>
+            <Button ToolTip="Редактировать задачу" Command="{Binding UpdateTaskInfoCommand}">
+                <Border Background="SandyBrown">
+                    <fa5:SvgAwesome Icon="Solid_PencilAlt"/>
+                </Border>
+            </Button>
+            <Button ToolTip="Удалить задачу" Command="{Binding RemoveTaskInfoCommand}">
+                <Border Background="IndianRed">
+                    <fa5:SvgAwesome Icon="Solid_Minus"/>
+                </Border>
+            </Button>
+            <Separator/>
+            <Button ToolTip="Редактировать связи задачи" Command="{Binding ChangeTaskConnectionsCommand}">
+                <Border Background="SandyBrown">
+                    <fa5:SvgAwesome Icon="Solid_Tasks"/>
+                </Border>
+            </Button>
+            <Button ToolTip="Изменить ресурсы задачи" Command="{Binding ChangeTaskResourcesCommand}">
+                <Border Background="SandyBrown">
+                    <fa5:SvgAwesome Icon="Solid_Boxes"/>
+                </Border>
+            </Button>
+        </ToolBar>
+
+        <custom:TreeGridView Grid.Row="1" 
+                             ItemsSource="{Binding Tasks.View}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectedItemChanged">
+                    <i:InvokeCommandAction Command="{Binding SelectedItemChangedCommand}" 
+                                           CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=custom:TreeGridView, Mode=FindAncestor}}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <custom:TreeGridView.Style>
+                <Style TargetType="custom:TreeGridView" BasedOn="{StaticResource TreeGridViewStyle}"/>
+            </custom:TreeGridView.Style>
+            <custom:TreeGridView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Childs}"/>
+            </custom:TreeGridView.ItemTemplate>
+            <custom:TreeGridView.Columns>
+                <GridViewColumn Header="Наименование задачи">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <ToggleButton/>
+                                <TextBlock Text="{Binding Name, TargetNullValue='?'}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                <GridViewColumn Header="Дата начала">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding StartDate, TargetNullValue='?'}" HorizontalAlignment="Right"/>
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                <GridViewColumn Header="Дата конца">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding EndDate, TargetNullValue='?'}" HorizontalAlignment="Right"/>
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                <GridViewColumn Header="Длительность">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Duration, StringFormat='{}{0} дней', TargetNullValue='?  дней'}" HorizontalAlignment="Right"/>
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                <GridViewColumn Header="Процент завершения">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding CompletionPercentage, StringFormat='{}{0} %', TargetNullValue='?  %'}" HorizontalAlignment="Right"/>
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+            </custom:TreeGridView.Columns>
+        </custom:TreeGridView>
+
+        <GridSplitter Grid.Row="1" Width="5"/>
+
         <TextBlock Text="Диаграмма Ганта"
                    Grid.Column="1"
                    Grid.Row="1"

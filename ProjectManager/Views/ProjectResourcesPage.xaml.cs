@@ -18,9 +18,9 @@ namespace ProjectManager.Views
     /// <summary>
     /// Логика взаимодействия для ResourcesPage.xaml
     /// </summary>
-    public partial class ResourcesPage : UserControl
+    public partial class ProjectResourcesPage : UserControl
     {
-        public ResourcesPage()
+        public ProjectResourcesPage()
         {
             InitializeComponent();
         }

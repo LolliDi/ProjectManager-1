@@ -9,9 +9,13 @@
 
 namespace ProjectManager.Models
 {
+    using ProjectManager.Models.Repositories;
     using System;
     using System.Collections.Generic;
-    
+    using System.Collections.ObjectModel;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
+
     public partial class Tasks : IEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -41,5 +45,36 @@ namespace ProjectManager.Models
         public virtual ICollection<TaskGroups> TaskGroups { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TaskGroups> TaskGroups1 { get; set; }
+
+        [NotMapped]
+        public ICollection<Tasks> Childs
+        {
+            get
+            {
+                var childs = new ObservableCollection<Tasks>();
+                foreach(var taskCollection in TaskGroups)
+                {
+                    childs.Add(taskCollection.Tasks1);
+                }
+                return childs;
+            }
+        }
+        [NotMapped]
+        public int Depth
+        {
+            get
+            {
+                return TaskGroups1.Count == 0 ? 0 : TaskGroups1.First().Depth;
+            }
+        }
+        [NotMapped]
+        public TaskTypes ConnectionType
+        {
+            get
+            {
+                return TaskConnections1.Count == 0 ? null : TaskConnections1.First().TaskTypes;
+            }
+        }
+
     }
 }

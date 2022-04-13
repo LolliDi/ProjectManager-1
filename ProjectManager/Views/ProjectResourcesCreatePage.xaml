@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="ProjectManager.Views.ProjectResourcesCreatePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:views="clr-namespace:ProjectManager.Views"
+             xmlns:local="clr-namespace:ProjectManager"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="White">
+        <StackPanel>
+            <GroupBox BorderBrush="{Binding NameColor}" Width="390" Margin="0">
+                <local:PlaceTextBox Text="{Binding Name}"  PlaceText="Название" Style="{StaticResource PlaceTextBoxNormal}" Margin="0,5,0,0"/>
+            </GroupBox>
+            <GroupBox Header="Тип ресурса" FontFamily="Raleway" FontSize="24" Width="376" Padding="4">
+                <ComboBox  Name="RoleComboBox" Height="50" ItemsSource="{Binding Path=DataRoles}" SelectedValue="{Binding SelectedRole}" VerticalContentAlignment="Center" SelectedIndex="{Binding ResourceType}">
+                    <ComboBoxItem Content="Рабочий ресурс"/>
+                    <ComboBoxItem Content="Материал"/>
+                </ComboBox>
+            </GroupBox>
+            <StackPanel Visibility="{Binding WorkingResourceVisibility}">
+                <GroupBox BorderBrush="{Binding SalaryColor}" Width="390" Margin="0">
+                    <local:PlaceTextBox Text="{Binding Salary}"  PlaceText="Зарплата" Style="{StaticResource PlaceTextBoxNormal}" Margin="0,5,0,0"/>
+                </GroupBox>
+                <GroupBox BorderBrush="{Binding SalaryTypeColor}" Header="Тип зарплаты" FontFamily="Raleway" FontSize="24" Width="376" Padding="4">
+                    <ComboBox  Name="SalaryType" Height="50" DisplayMemberPath="Type" ItemsSource="{Binding SalaryTypes}" SelectedIndex="{Binding SalaryType}" VerticalContentAlignment="Center"/>
+                </GroupBox>
+                <GroupBox BorderBrush="{Binding WorkingDayStartColor}" Width="390" Margin="0">
+                    <local:PlaceTextBox Text="{Binding WorkingDayStart}"  PlaceText="Начало рабочего дня" Style="{StaticResource PlaceTextBoxNormal}" Margin="0,5,0,0"/>
+                </GroupBox>
+                <GroupBox BorderBrush="{Binding WorkingDayEndColor}" Width="390" Margin="0">
+                    <local:PlaceTextBox Text="{Binding WorkingDayEnd}"  PlaceText="Конец раб. дня" Style="{StaticResource PlaceTextBoxNormal}" Margin="0,5,0,0"/>
+                </GroupBox>
+                <GroupBox BorderBrush="{Binding WorkingDayColor}" Header="Рабочие дни" FontFamily="Raleway" FontSize="24" Width="376" Padding="4">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <CheckBox Grid.ColumnSpan="2" IsChecked="{Binding IsMondayWorking}">Понедельник</CheckBox>
+                            <CheckBox Grid.ColumnSpan="2" IsChecked="{Binding IsTuesdayWorking}">Вторник</CheckBox>
+                            <CheckBox Grid.ColumnSpan="2" IsChecked="{Binding IsWednesdayWorking}">Среда</CheckBox>
+                            <CheckBox Grid.ColumnSpan="2" IsChecked="{Binding IsThursdayWorking}">Четверг</CheckBox>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <CheckBox Grid.ColumnSpan="2" IsChecked="{Binding IsFridayWorking}">Пятница</CheckBox>
+                            <CheckBox Grid.ColumnSpan="2" IsChecked="{Binding IsSaturdayWorking}">Суббота</CheckBox>
+                            <CheckBox Grid.ColumnSpan="2" IsChecked="{Binding IsSundayWorking}">Воскресенье</CheckBox>
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+            </StackPanel>
+            <StackPanel Visibility="{Binding MaterialResourceVisibility}">
+                <GroupBox BorderBrush="{Binding MaterialCountColor}" Width="390" Margin="0">
+                    <local:PlaceTextBox Text="{Binding Count}"  PlaceText="Количество" Style="{StaticResource PlaceTextBoxNormal}" Margin="0,5,0,0"/>
+                </GroupBox>
+                <GroupBox BorderBrush="{Binding MaterialCostColor}" Width="390" Margin="0">
+                    <local:PlaceTextBox Text="{Binding Cost}"  PlaceText="Стоимость" Style="{StaticResource PlaceTextBoxNormal}" Margin="0,5,0,0"/>
+                </GroupBox>
+                <GroupBox BorderBrush="{Binding MaterialValuteColor}" Header="Валюта" FontFamily="Raleway" FontSize="24" Width="376" Padding="4">
+                    <ComboBox  Name="CostType" Height="50" DisplayMemberPath="Type" ItemsSource="{Binding ValuteTypes}" SelectedIndex="{Binding ValuteType}" VerticalContentAlignment="Center"/>
+                </GroupBox>
+            </StackPanel>
+            <Button 
+                Height="62" 
+                Width="235"
+                Margin="0 10 0 0"
+                Style="{StaticResource SButton}"
+                Visibility="{Binding AddButtonVisibility}"
+                Command="{Binding AddResource}">Добавить</Button>
+            <Button
+                Height="62" 
+                Width="235"
+                Margin="0 5 0 0"
+                Style="{StaticResource SButton}"
+                Command="{Binding Back}">Назад</Button>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

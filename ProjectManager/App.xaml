@@ -4,7 +4,12 @@
              xmlns:local="clr-namespace:ProjectManager"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-        <Style TargetType="local:PlaceTextBox">
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/Generic.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            
+            <Style TargetType="local:PlaceTextBox">
             <Setter Property="Background" Value="White"/>
             <Setter Property="PlaceBrush" Value="#404040"/>
             <Setter Property="Padding" Value="14,17"/>
@@ -14,8 +19,8 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
-                        <Border BorderThickness="1" CornerRadius="10" Background="{TemplateBinding Background}">
-                            <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        <Border BorderBrush="#CFCFCF" BorderThickness="1" CornerRadius="10" Background="{TemplateBinding Background}">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" SnapsToDevicePixels="True"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -40,13 +45,14 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border BorderThickness="0" 
-                                CornerRadius="10" 
-                                Background="{TemplateBinding Background}"
-                                Padding="{TemplateBinding Padding}"
-                                Margin="{TemplateBinding Margin}">
+                        <Border BorderThickness="{TemplateBinding BorderThickness}" 
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            CornerRadius="10" 
+                            Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}"
+                            Margin="{TemplateBinding Margin}">
                             <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -57,11 +63,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
 
-        
-        
-        
         <Style TargetType="local:PlaceTextBox" BasedOn="{StaticResource {x:Type local:PlaceTextBox}}" x:Key="PlaceTextBoxNormal">
             <Setter Property="Width" Value="376"/>
             <Setter Property="Height" Value="62"/>
@@ -146,5 +148,7 @@
             <Setter Property="FontFamily" Value="Raleway"/>
             <Setter Property="FontSize" Value="32"/>
         </Style>
+        </ResourceDictionary>
+
     </Application.Resources>
 </Application>
