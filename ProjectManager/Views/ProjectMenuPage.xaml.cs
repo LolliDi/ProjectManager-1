@@ -15,20 +15,9 @@ using System.Windows.Shapes;
 
 namespace ProjectManager.Views
 {
-    /// <summary>
-<<<<<<< HEAD:ProjectManager/Views/AddUserPage.xaml.cs
-    /// Логика взаимодействия для AddUserPage.xaml
-    /// </summary>
-    public partial class AddUserPage : UserControl
-    {
-        public AddUserPage()
-=======
-    /// Логика взаимодействия для ProjectMenuPage.xaml
-    /// </summary>
     public partial class ProjectMenuPage : UserControl
     {
         public ProjectMenuPage()
->>>>>>> Добавлена свойство проверки роли пользователя на администратора.:ProjectManager/Views/ProjectMenuPage.xaml.cs
         {
             InitializeComponent();
         }

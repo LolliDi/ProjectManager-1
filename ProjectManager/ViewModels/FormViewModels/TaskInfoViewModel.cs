@@ -32,6 +32,8 @@ namespace ProjectManager.ViewModels.TaskInfo
             TaskCompletionPercentage = CurrentTask.CompletionPercentage.ToString();
         }
 
+        private bool isTaskDurationEditing;
+
         #region Properties
 
         public Tasks CurrentTask { get; set; }
@@ -58,16 +60,19 @@ namespace ProjectManager.ViewModels.TaskInfo
             {
                 ClearErrors();
 
-                if (DateTime.Compare(value, TaskEndDate) > 0)
+                if (!isTaskDurationEditing)
                 {
-                    CurrentTask.StartDate = value;
-                    TaskEndDate = value;
+                    if (DateTime.Compare(value, TaskEndDate) > 0)
+                    {
+                        CurrentTask.StartDate = value;
+                        TaskEndDate = value;
+                    }
+                    else
+                    {
+                        CurrentTask.StartDate = value;
+                    }
+                    TaskDuration = (TaskEndDate - TaskStartDate).Days.ToString();
                 }
-                else
-                {
-                    CurrentTask.StartDate = value;
-                }
-                //TaskDuration = (TaskEndDate - TaskStartDate).Days.ToString();
 
                 OnPropertyChanged();
             }
@@ -92,7 +97,10 @@ namespace ProjectManager.ViewModels.TaskInfo
                 {
                     CurrentTask.EndDate = value;
                 }
-                //TaskDuration = (TaskEndDate - TaskStartDate).Days.ToString();
+                if (!isTaskDurationEditing)
+                {
+                    TaskDuration = (TaskEndDate - TaskStartDate).Days.ToString();
+                }
 
                 OnPropertyChanged();
             }
@@ -104,6 +112,7 @@ namespace ProjectManager.ViewModels.TaskInfo
             {
                 ClearErrors();
 
+                isTaskDurationEditing = true;
                 if (!Regex.IsMatch(value, "[0-9]*"))
                 {
                     AddError("Введите число");
@@ -119,6 +128,7 @@ namespace ProjectManager.ViewModels.TaskInfo
                 }
 
                 CurrentTask.Duration = parsedValue;
+                isTaskDurationEditing = false;
 
                 OnPropertyChanged();
             }

@@ -181,21 +181,21 @@
     </Compile>
     <Compile Include="AttachedProperties\FormIsOpenAttachedProperty.cs" />
     <Compile Include="CustomControls\FormControl\FormControl.cs" />
-    <Compile Include="Views\Forms\TaskConnections\TaskConnectionsViewModel.cs" />
-    <Compile Include="Views\Forms\TaskInfo\CreateTaskInfoViewModel.cs" />
+    <Compile Include="ViewModels\FormViewModels\TaskConnectionsViewModel.cs" />
+    <Compile Include="ViewModels\FormViewModels\CreateTaskInfoViewModel.cs" />
     <Compile Include="ViewModels\Base\FormViewModel.cs" />
-    <Compile Include="Views\Forms\TaskConnectionsForm.xaml.cs">
+    <Compile Include="Views\FormViews\TaskConnectionsForm.xaml.cs">
       <DependentUpon>TaskConnectionsForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Forms\TaskInfo\TaskInfoViewModel.cs" />
-    <Compile Include="Views\Forms\TaskInfoForm.xaml.cs">
+    <Compile Include="ViewModels\FormViewModels\TaskInfoViewModel.cs" />
+    <Compile Include="Views\FormViews\TaskInfoForm.xaml.cs">
       <DependentUpon>TaskInfoForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Forms\TaskResourcesForm.xaml.cs">
+    <Compile Include="Views\FormViews\TaskResourcesForm.xaml.cs">
       <DependentUpon>TaskResourcesForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Forms\TaskInfo\UpdateTaskInfoViewModel.cs" />
-    <Compile Include="Views\Forms\TaskResources\TaskResourcesViewModel.cs" />
+    <Compile Include="ViewModels\FormViewModels\UpdateTaskInfoViewModel.cs" />
+    <Compile Include="ViewModels\FormViewModels\TaskResourcesViewModel.cs" />
     <Compile Include="Views\ProjectMenuPage.xaml.cs">
       <DependentUpon>ProjectMenuPage.xaml</DependentUpon>
     </Compile>
@@ -208,7 +208,6 @@
     <Compile Include="Views\ProjectReportPage.xaml.cs">
       <DependentUpon>ProjectReportPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProjectMenuPage\ProjectResourcesPage.xaml.cs">
     <Compile Include="Views\ProjectResourcesCreatePage.xaml.cs">
       <DependentUpon>ProjectResourcesCreatePage.xaml</DependentUpon>
     </Compile>
@@ -260,15 +259,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Forms\TaskConnectionsForm.xaml">
+    <Page Include="Views\FormViews\TaskConnectionsForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Forms\TaskInfoForm.xaml">
+    <Page Include="Views\FormViews\TaskInfoForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Forms\TaskResourcesForm.xaml">
+    <Page Include="Views\FormViews\TaskResourcesForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

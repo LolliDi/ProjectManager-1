@@ -24,9 +24,9 @@ namespace ProjectManager.ViewModels
             projectTaskResourcesRepository = new Repository<ProjectTaskResources>();
             projectTasksRepository = new Repository<ProjectTasks>();
 
-            TaskInfoForm = new FormNavigationService();
-            TaskConnectionsForm = new FormNavigationService();
-            TaskResourcesForm = new FormNavigationService();
+            TaskInfoForm = new FormNavigationService() { OnClosingFormCallback = OnTaskFormClosing };
+            TaskConnectionsForm = new FormNavigationService() { OnClosingFormCallback = OnTaskFormClosing };
+            TaskResourcesForm = new FormNavigationService() { OnClosingFormCallback = OnTaskFormClosing };
 
             CurrentProject = project;
             Tasks = new CollectionViewSource() { Source = CurrentProject.ProjectRootTasks };
@@ -75,12 +75,18 @@ namespace ProjectManager.ViewModels
         private void OnCreateTaskInfoCommandExecute(object parameter)
         {
             TaskInfoForm.IsOpen = true;
-            TaskInfoForm.CurrentViewModel = new CreateTaskInfoViewModel(new Repository<Tasks>(), new Repository<ProjectTasks>(), TaskInfoForm, CurrentProject) { Header = "Добавление задачи" };
+            TaskInfoForm.CurrentViewModel = new CreateTaskInfoViewModel(new Repository<Tasks>(), new Repository<ProjectTasks>(), TaskInfoForm, CurrentProject) 
+            {
+                Header = "Добавление задачи"
+            };
         }
         private void OnUpdateTaskInfoCommandExecute(object parameter)
         {
             TaskInfoForm.IsOpen = true;
-            TaskInfoForm.CurrentViewModel = new UpdateTaskInfoViewModel(new Repository<Tasks>(), TaskInfoForm, CurrentProject, SelectedTask) { Header = "Редактирование задачи" };
+            TaskInfoForm.CurrentViewModel = new UpdateTaskInfoViewModel(new Repository<Tasks>(), TaskInfoForm, CurrentProject, SelectedTask)
+            {
+                Header = "Редактирование задачи"
+            };
         }
         private bool CanUpdateTaskInfoCommandExecuted(object parameter)
         {
@@ -90,7 +96,8 @@ namespace ProjectManager.ViewModels
         {
             if (MessageBoxResult.Yes == MessageBox.Show("Вы точно хотите удалить данный элемент?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question))
             {
-                taskGroupsRepository.Remove(SelectedTask.Id);
+                projectTasksRepository.Remove(SelectedTask.ProjectTasks.FirstOrDefault().Id);
+                RefreshTasksCollection();
             }
         }
         private bool CanRemoveTaskInfoCommandExecuted(object parameter)
@@ -100,7 +107,7 @@ namespace ProjectManager.ViewModels
         private void OnChangeTasksResourcesCommandExecute(object parameter)
         {
             TaskResourcesForm.IsOpen = true;
-            TaskResourcesForm.CurrentViewModel = new TaskResourcesViewModel(TaskResourcesForm, CurrentProject, SelectedTask)
+            TaskResourcesForm.CurrentViewModel = new TaskResourcesViewModel(projectTaskResourcesRepository, TaskResourcesForm, CurrentProject, SelectedTask)
             {
                 Header = "Редактирование ресурсов задачи"
             };
@@ -131,6 +138,16 @@ namespace ProjectManager.ViewModels
         private bool CanChangeTaskConnectionsCommandExecuted(object arg)
         {
             return SelectedTask != null;
+        }
+
+        private void OnTaskFormClosing()
+        {
+            RefreshTasksCollection();
+        }
+
+        private void RefreshTasksCollection()
+        {
+            Tasks.Source = CurrentProject.ProjectRootTasks;
         }
 
         #endregion

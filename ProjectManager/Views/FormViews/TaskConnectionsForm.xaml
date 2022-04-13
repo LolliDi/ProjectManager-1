@@ -19,6 +19,7 @@
             <Setter Property="Margin" Value="5"/>
         </Style>
     </UserControl.Resources>
+    
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -27,33 +28,36 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition Height="*"/>
             <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" 
+
+        <Grid Grid.ColumnSpan="2" Margin="0 0 0 10">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" 
                    Grid.Column="0"
-                   Text="{Binding CurrentTask.Name, StringFormat='Редактируется: 0'}" 
-                   FontSize="16"
-                   Margin="0 10"/>
-        <TextBlock Grid.Row="0"
-                   Grid.Column="1"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Right">
-            <TextBlock.Style>
-                <Style TargetType="TextBlock">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsEditMode}" Value="True">
-                            <Setter Property="Text" Value="Режим: редактирование"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding IsEditMode}" Value="False">
-                            <Setter Property="Text" Value="Режим: добавлние"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
+                   Text="{Binding CurrentTask.Name, StringFormat='Редактируется: {0}'}"/>
+            <TextBlock Grid.Row="1"
+                   Grid.Column="1">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsEditMode}" Value="True">
+                                <Setter Property="Text" Value="Режим: редактирование"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsEditMode}" Value="False">
+                                <Setter Property="Text" Value="Режим: добавлние"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </Grid>
 
         <TextBlock Text="Задача"
                     Grid.Row="1"
@@ -61,7 +65,7 @@
         <ComboBox Grid.Row="1"
                     Grid.Column="1"
                     ItemsSource="{Binding CurrentProjectTasks}"
-                    SelectedItem="{Binding SelectedConnectionTask}">
+                    SelectedItem="{Binding SelectedTaskConnection}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}"/>
@@ -91,8 +95,17 @@
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <ListView ItemsSource="{Binding CurrentTaskConnections}"
-                              SelectedItem="{Binding SelectedListTask}">
+                    <ListView ItemsSource="{Binding CurrentTaskConnectionViewSource.View}"
+                              SelectedItem="{Binding SelectedListTaskConnection}">
+                        <ListView.Style>
+                            <Style TargetType="ListView">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsEditMode}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListView.Style>
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
@@ -100,36 +113,15 @@
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding Name}"/>
+                                                    <TextBlock Text="{Binding Tasks1.Name}"/>
                                                 </StackPanel>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                    <GridViewColumn Header="Дата начала">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding StartDate}" HorizontalAlignment="Right"/>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                    <GridViewColumn Header="Дата конца">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding EndDate}" HorizontalAlignment="Right"/>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                    <GridViewColumn Header="Длительность">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Duration, StringFormat='{}{0} дней', TargetNullValue='?'}" HorizontalAlignment="Right"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
                                     <GridViewColumn Header="Тип связи">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding ConnectionType, TargetNullValue='?'}" HorizontalAlignment="Right"/>
+                                                <TextBlock Text="{Binding Tasks1.ConnectionType.Type, TargetNullValue='?'}" HorizontalAlignment="Right"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -147,13 +139,17 @@
                         </Style>
                     </StackPanel.Resources>
                     <Button Padding="5"
-                            BorderThickness="0"
-                            Background="LightSeaGreen"
-                            ToolTip="Добавить связь"
-                            Command="{Binding AddTaskConnectionCommand}">
-                        <fa5:SvgAwesome Icon="Solid_Plus" Width="10"/>
+                            BorderThickness="0">
                         <Button.Style>
                             <Style TargetType="Button" BasedOn="{StaticResource SideButtonStyle}">
+                                <Setter Property="ToolTip" Value="Добавить связь"/>
+                                <Setter Property="Command" Value="{Binding AddTaskConnectionCommand}"/>
+                                <Setter Property="Background" Value="LightSeaGreen"/>
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <fa5:SvgAwesome Icon="Solid_Plus" Width="10"/>
+                                    </Setter.Value>
+                                </Setter>
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding IsEditMode}" Value="True">
                                         <Setter Property="Command" Value="{Binding SaveChangesCommand}"/>
@@ -162,6 +158,7 @@
                                                 <fa5:SvgAwesome Icon="Solid_Save" Width="10"/>
                                             </Setter.Value>
                                         </Setter>
+                                        <Setter Property="ToolTip" Value="Сохранить связь"/>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -188,11 +185,29 @@
                     </Button>
                     <Button Padding="5"
                             BorderThickness="0"
-                            Background="Salmon"
-                            ToolTip="Удалить связь"
-                            Command="{Binding RemoveTaskConnectionCommand}"
-                            Style="{StaticResource SideButtonStyle}">
-                        <fa5:SvgAwesome Icon="Solid_Minus" Width="10"/>
+                            Background="Salmon">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource SideButtonStyle}">
+                                <Setter Property="Command" Value="{Binding RemoveTaskConnectionCommand}"/>
+                                <Setter Property="ToolTip" Value="Удалить связь"/>
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <fa5:SvgAwesome Icon="Solid_Minus" Width="10"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsEditMode}" Value="True">
+                                        <Setter Property="ToolTip" Value="Отмена"/>
+                                        <Setter Property="Command" Value="{Binding CancelEditModeCommand}"/>
+                                        <Setter Property="Content">
+                                            <Setter.Value>
+                                                <fa5:SvgAwesome Icon="Solid_Stop" Width="10"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                     </Button>
                 </StackPanel>
             </Grid>
@@ -214,8 +229,6 @@
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Name}"/>
-                        <FrameworkElement Width="10"/>
-                        <TextBlock Text="{Binding Depth}"/>
                     </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>

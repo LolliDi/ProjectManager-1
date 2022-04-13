@@ -6,7 +6,9 @@
              xmlns:local="clr-namespace:ProjectManager.Views.Forms"
              xmlns:ap="clr-namespace:ProjectManager.AttachedProperties"
              xmlns:fa5="http://schemas.fontawesome.com/icons/" 
-             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+             xmlns:viewmodels="clr-namespace:ProjectManager.ViewModels" 
+             d:DataContext="{d:DesignInstance Type=viewmodels:TaskResourcesViewModel}"
              mc:Ignorable="d">
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -23,9 +25,23 @@
         <ScrollViewer HorizontalScrollBarVisibility="Auto" 
                       VerticalScrollBarVisibility="Auto"
                       Grid.Row="1">
-            <ListView ItemsSource="{Binding CurrentTaskResources}"
+            <ListView ItemsSource="{Binding CurrentTaskResourcesViewSource.View}"
+                      SelectedItem="{Binding SelectedCurrentTaskResource}"
                       ap:DraggedItemAttachedProperty.DraggedItem="{Binding DraggedProjectResource}"
                       AllowDrop="True">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Tag" Value="{Binding DataContext, RelativeSource={RelativeSource AncestorType=ListView, Mode=FindAncestor}}"/>
+                        <Setter Property="ContextMenu">
+                            <Setter.Value>
+                                <ContextMenu DataContext="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Mode=Self}}">
+                                    <MenuItem Header="Удалить"
+                                              Command="{Binding RemoveTaskResourceCommand}"/>
+                                </ContextMenu>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Drop" >
                         <i:InvokeCommandAction Command="{Binding DropItemCommand}" PassEventArgsToCommand="True"/>
@@ -34,19 +50,34 @@
                 <ListView.View>
                     <GridView>
                         <GridView.Columns>
+                            <GridViewColumn Header="Тип">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock>
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsMaterial}" Value="False">
+                                                                <Setter Property="Text" Value="Трудовой"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding IsMaterial}" Value="True">
+                                                                <Setter Property="Text" Value="Материальный"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                             <GridViewColumn Header="Наименование">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="{Binding Name}"/>
                                         </StackPanel>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Header="Количество">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding MaterialResoucres.Count}" HorizontalAlignment="Right"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -94,19 +125,34 @@
                 <ListView.View>
                     <GridView>
                         <GridView.Columns>
+                            <GridViewColumn Header="Тип">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock>
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsMaterial}" Value="False">
+                                                                <Setter Property="Text" Value="Трудовой"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding IsMaterial}" Value="True">
+                                                                <Setter Property="Text" Value="Материальный"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                             <GridViewColumn Header="Наименование">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="{Binding Name}"/>
                                         </StackPanel>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Header="Количество">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding MaterialResoucres.Count}" HorizontalAlignment="Right"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
