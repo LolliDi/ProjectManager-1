@@ -22,6 +22,8 @@ namespace ProjectManager.ViewModels
         private Users currentUser;
         private Repository<Users> usersRepository;
 
+        private object selectedUsers;
+
 
         private SolidColorBrush standartColor = new SolidColorBrush(Color.FromRgb(250, 250, 250));
 
@@ -29,8 +31,6 @@ namespace ProjectManager.ViewModels
         private SolidColorBrush titleBorderColor;
         private List<Users> usersList;
 
-        public ICommand ToNewProject { get; set; }
-        public ICommand ToBack { get; set; }
         public ProjectCreateViewModel(FormNavigationService navigationService, Users currentUser) : base(navigationService)
         {
             this.currentUser = currentUser;
@@ -41,10 +41,15 @@ namespace ProjectManager.ViewModels
             titleBorderColor = standartColor;
             UsersList = new List<Users>();
 
-            ToNewProject = new LambdaCommand(GoNewProject);
-            ToBack = new LambdaCommand(GoBack);
+            selectedUsers = new object();
         }
-       
+
+        protected override void OnSubmitCommandExecute(object parameter)
+        {
+            GoNewProject();
+            base.OnSubmitCommandExecute(parameter);
+        }
+
         public string Title
         {
             get => title;
@@ -55,7 +60,7 @@ namespace ProjectManager.ViewModels
         {
             get => titleBorderColor;
             set => Set(ref titleBorderColor, ref value);
-        }
+        }       
 
         public List<Users> UsersList
         {
@@ -74,7 +79,13 @@ namespace ProjectManager.ViewModels
             }
         }
 
-        private void GoNewProject(object obj)
+        public object SelectedUsers
+        {
+            get => selectedUsers;
+            set => Set(ref selectedUsers, ref value);
+        }
+
+        private void GoNewProject()
         {
             Projects newProject = new Projects();
             if (title.Length < 1 || title.Length > 50)
@@ -83,22 +94,16 @@ namespace ProjectManager.ViewModels
             newProject.CreatingDate = DateTime.Now;
             newProject.User = currentUser.Id;
             newProject.Users.Add(usersRepository.Items.Where(x => x.Id == currentUser.Id).FirstOrDefault()); //Приходится делать так, потому что разные контексты
-            var selectedUsers = ((IEnumerable<object>)obj).Cast<object>().ToList();
-            if (selectedUsers.Count > 0)
+            var selectedUsersList = ((IEnumerable<object>)selectedUsers).Cast<object>().ToList();
+            if (selectedUsersList.Count > 0)
             {
-                foreach (var item in selectedUsers)
+                foreach (var item in selectedUsersList)
                 {
                     newProject.Users.Add((Users)item);
                 }
             }
             ProjectsRepository projectsRepository = new ProjectsRepository();
-            projectsRepository.Add(newProject);
-            NavigationService.CurrentViewModel = new ProjectListViewModel(NavigationService, currentUser);
-        }
-        private void GoBack(object obj)
-        {
-            NavigationService.CurrentViewModel = new ProjectListViewModel(NavigationService, currentUser);
-        }
-
+            projectsRepository.Add(newProject);          
+        }        
     }
 }

@@ -41,7 +41,8 @@
         <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=Title}"></TextBox>
 
         <TextBlock Grid.Column="0" Grid.Row="1">Пользователи в проекте</TextBlock>
-        <ListBox Grid.Column="1" Grid.Row="1"                   
+        <ListBox Grid.Column="1" Grid.Row="1" 
+                    x:Name="UsersListBox"
                     ItemsSource="{Binding UsersList}" 
                     SelectionMode="Multiple">
         </ListBox>
