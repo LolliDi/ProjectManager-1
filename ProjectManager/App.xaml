@@ -11,15 +11,15 @@
             
             <Style TargetType="local:PlaceTextBox">
             <Setter Property="Background" Value="White"/>
-            <Setter Property="PlaceBrush" Value="#404040"/>
-            <Setter Property="Padding" Value="14,17"/>
-            <Setter Property="PlaceMargin" Value="14,17"/>
-            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="PlaceBrush" Value="Gray"/>
+            <Setter Property="Padding" Value="14,0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="PlaceMargin" Value="14,5,0,0"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
-                        <Border BorderBrush="#CFCFCF" BorderThickness="1" CornerRadius="10" Background="{TemplateBinding Background}">
+                        <Border BorderBrush="#CFCFCF" BorderThickness="1" CornerRadius="15" Background="{TemplateBinding Background}">
                             <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" SnapsToDevicePixels="True"/>
                         </Border>
                     </ControlTemplate>
@@ -40,14 +40,13 @@
 
         <Style TargetType="Button" x:Key="SButton">
             <Setter Property="Background" Value="#b060FFD9"/>
-            <Setter Property="FontSize" Value="24"/>
             <Setter Property="FontFamily" Value="Raleway"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border BorderThickness="{TemplateBinding BorderThickness}" 
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            CornerRadius="10" 
+                            CornerRadius="15" 
                             Background="{TemplateBinding Background}"
                             Padding="{TemplateBinding Padding}"
                             Margin="{TemplateBinding Margin}">

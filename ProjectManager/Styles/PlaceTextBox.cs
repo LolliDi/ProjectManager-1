@@ -37,6 +37,8 @@ namespace ProjectManager
                 new PropertyMetadata(Brushes.LightGray, (d, e) => ((PlaceTextBox)d).PlaceChanged()));
 
 
+
+
         /// <summary>Margin for PlaceText</summary>
         public Thickness PlaceMargin
         {

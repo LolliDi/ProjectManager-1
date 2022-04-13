@@ -6,6 +6,8 @@
              xmlns:local="clr-namespace:ProjectManager"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <Border Style="{StaticResource ShadowBorder}" Height="767" Width="552">
