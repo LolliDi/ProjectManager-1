@@ -9,9 +9,12 @@
 
 namespace ProjectManager.Models
 {
+    using ProjectManager.Models.Repositories;
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
+
     public partial class Projects : IEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -33,5 +36,15 @@ namespace ProjectManager.Models
         public virtual ICollection<ProjectTasks> ProjectTasks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Users> Users { get; set; }
+
+        [NotMapped]
+        public ICollection<Tasks> ProjectRootTasks
+        {
+            get
+            {
+                return ProjectTasks.Select(item => item.Tasks).Where(item => item.TaskGroups1.Count == 0).Distinct().ToList();
+            }
+        }
+
     }
 }

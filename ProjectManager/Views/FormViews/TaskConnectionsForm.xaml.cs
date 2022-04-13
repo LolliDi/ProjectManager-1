@@ -13,11 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProjectManager.Views
+namespace ProjectManager.Views.Forms
 {
-    public partial class ProjectMenuPage : UserControl
+    /// <summary>
+    /// Логика взаимодействия для TaskConnectionsForm.xaml
+    /// </summary>
+    public partial class TaskConnectionsForm : UserControl
     {
-        public ProjectMenuPage()
+        public TaskConnectionsForm()
         {
             InitializeComponent();
         }

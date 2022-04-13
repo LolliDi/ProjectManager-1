@@ -2,7 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:custom="clr-namespace:ProjectManager.CustomControls">
     <ResourceDictionary.MergedDictionaries>
-        <!--<ResourceDictionary Source="/CustomControls/HierarchicalDataGrid/HierarchicalDataGrid.xaml"/>-->
+        <ResourceDictionary Source="/ProjectManager;component/CustomControls/TreeGridView/TreeGridView.xaml"/>
+        <ResourceDictionary Source="/ProjectManager;component/CustomControls/PopupControl/PopupControl.xaml"/>
+        <ResourceDictionary Source="/ProjectManager;component/CustomControls/FormControl/FormControl.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-
 </ResourceDictionary>

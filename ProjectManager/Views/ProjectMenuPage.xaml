@@ -29,56 +29,56 @@
 
         <ScrollViewer HorizontalScrollBarVisibility="Auto"
                       VerticalScrollBarVisibility="Disabled">
-            <Grid>
+        <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Orientation="Horizontal"
+            <StackPanel Orientation="Horizontal"
                             Margin="10"
                             Grid.Column="0">
-                    <Button Content="Задачи"
-                        Command="{Binding ToProjectTasksPageCommand}"/>
-                    <Button Content="Ресурсы"
-                        Command="{Binding ToProjectResourcePageCommand}"/>
-                    <Button Content="Отчеты"
-                        Command="{Binding ToProjectReportPageCommand}"/>
-                    <Button Content="Паспорт проекта"
-                        Command="{Binding ToProjectPassportPageCommand}"/>
-                    <Button Content="Меню администратора"
+                <Button Content="Задачи"
+                    Command="{Binding ToProjectTasksPageCommand}"/>
+                <Button Content="Ресурсы"
+                    Command="{Binding ToProjectResourcePageCommand}"/>
+                <Button Content="Отчеты"
+                    Command="{Binding ToProjectReportPageCommand}"/>
+                <Button Content="Паспорт проекта"
+                    Command="{Binding ToProjectPassportPageCommand}"/>
+                <Button Content="Меню администратора"
                             Command="{Binding ToAdminPageCommand}">
-                        <Button.Style>
-                            <Style TargetType="Button" BasedOn="{StaticResource MenuSButton}">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource MenuSButton}">
                                 <Style.Resources>
                                     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
                                 </Style.Resources>
                                 <Setter Property="Visibility" Value="Collapsed"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding CurrentUser.IsAdministrator}" Value="True">
-                                        <Setter Property="Visibility" Value="Visible"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
-                </StackPanel>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding CurrentUser.IsAdministrator}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
 
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Right"
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
                             Margin="10"
                             Grid.Column="1">
                     <StackPanel Margin="0 0 10 0">
                         <TextBlock  Text="{Binding CurrentProject.Name, StringFormat='Текущий проект: {0}', FallbackValue='\{Текущий проект\}'}"/>
                     </StackPanel>
-                    <StackPanel Margin="0 0 10 0">
-                        <TextBlock Text="{Binding CurrentUser.Username, StringFormat='Логин: {0}', FallbackValue='\{Логин\}'}"/>
-                        <TextBlock Text="{Binding CurrentUser.Roles.Name, StringFormat='Роль: {0}', FallbackValue='\{Роль\}'}"/>
-                    </StackPanel>
-
-                    <Button Content="Выйти"
-                        Command="{Binding ToAuthorizationPageCommand}"/>
+                <StackPanel Margin="0 0 10 0">
+                    <TextBlock Text="{Binding CurrentUser.Username, StringFormat='Логин: {0}', FallbackValue='\{Логин\}'}"/>
+                    <TextBlock Text="{Binding CurrentUser.Roles.Name, StringFormat='Роль: {0}', FallbackValue='\{Роль\}'}"/>
                 </StackPanel>
-            </Grid>
+                
+                <Button Content="Выйти"
+                    Command="{Binding ToAuthorizationPageCommand}"/>
+            </StackPanel>
+        </Grid>
         </ScrollViewer>
 
         <ScrollViewer HorizontalScrollBarVisibility="Disabled"
@@ -94,6 +94,9 @@
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type viewmodels:ProjectPassportViewModel}">
                         <views:ProjectPassportPage/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodels:ProjectReportViewModel}">
+                        <views:ProjectReportPage/>
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type viewmodels:AuthorizationViewModel}">
                         <views:AuthorizationPage/>
