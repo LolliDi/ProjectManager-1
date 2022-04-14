@@ -55,8 +55,8 @@
         <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding User.Persons.Patronymic}"></TextBox>
 
         <TextBlock Grid.Column="0" Grid.Row="5">Возраст</TextBlock>
-        <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding User.Persons.Age}"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=Age}"></TextBox>
 
-
+        
     </Grid>
 </UserControl>

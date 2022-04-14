@@ -41,7 +41,22 @@
         <TextBlock Grid.Column="0" Grid.Row="0">Логин</TextBlock>
         <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=Login}" ></TextBox>
 
-        <TextBlock Grid.Column="0" Grid.Row="1">Роль</TextBlock>
-        <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Path=DataRoles}" SelectedValue="{Binding SelectedRole}" ></ComboBox>
+        <TextBlock Grid.Column="0" Grid.Row="1">Пароль</TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Password}" ></TextBox>
+
+        <TextBlock Grid.Column="0" Grid.Row="2">Роль</TextBlock>
+        <ComboBox Grid.Column="1" Grid.Row="2" ItemsSource="{Binding Path=DataRoles}" SelectedValue="{Binding SelectedRole}" ></ComboBox>
+
+        <TextBlock Grid.Column="0" Grid.Row="3">Имя</TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Name}"></TextBox>
+
+        <TextBlock Grid.Column="0" Grid.Row="4">Фамилия</TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding LastName}"></TextBox>
+
+        <TextBlock Grid.Column="0" Grid.Row="5">Отчество</TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Patronymic}"></TextBox>
+
+        <TextBlock Grid.Column="0" Grid.Row="6">Возраст</TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding User.Persons.Age}"></TextBox>
     </Grid>
 </UserControl>
