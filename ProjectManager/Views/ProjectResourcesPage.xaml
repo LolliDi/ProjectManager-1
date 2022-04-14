@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjectManager.Views"
-             xmlns:models="clr-namespace:ProjectManager.Models"
+             xmlns:models="clr-namespace:ProjectManager.Models" xmlns:custom="clr-namespace:ProjectManager.CustomControls" 
+             xmlns:forms="clr-namespace:ProjectManager.Views.Forms"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -46,7 +47,19 @@
             </Border>
         </ControlTemplate>
     </UserControl.Resources>
+    
     <Grid Background="White">
+        <custom:FormControl Grid.ColumnSpan="2"
+                            Grid.RowSpan="2"
+                            Panel.ZIndex="1"
+                            Padding="15"
+                            Header="{Binding Header}"
+                            IsOpen="{Binding DataContext.ProjectResourcesForm.IsOpen, RelativeSource={RelativeSource AncestorType=local:ProjectResourcesPage, Mode=FindAncestor}, Mode=TwoWay}"
+                            SubmitCommand="{Binding SubmitCommand}"
+                            CancelCommand="{Binding CancelCommand}"
+                            DataContext="{Binding ProjectResourcesForm.CurrentViewModel}">
+            <forms:ResourcesCreatePageForm/>
+        </custom:FormControl>
         <StackPanel Orientation="Vertical" Margin="10">
             <ListBox
                 Template="{DynamicResource ArrowedItemsControl}"

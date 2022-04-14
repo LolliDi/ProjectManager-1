@@ -171,12 +171,12 @@
     <Compile Include="ViewModels\CreateProjectViewModel.cs" />
     <Compile Include="ViewModels\Base\IFormViewModel.cs" />
     <Compile Include="ViewModels\FormViewModels\ProjectCreateViewModel.cs" />
+    <Compile Include="ViewModels\FormViewModels\ProjectResourcesCreateViewModel.cs" />
     <Compile Include="ViewModels\ProjectPassportViewModel.cs" />
     <Compile Include="ViewModels\ProjectReportViewModel.cs" />
-    <Compile Include="ViewModels\ProjectResourcesCreateViewModel.cs" />
+    <Compile Include="ViewModels\ProjectResourcesViewModel.cs" />
     <Compile Include="ViewModels\ProjectTasksViewModel.cs" />
     <Compile Include="ViewModels\ReportsViewModel.cs" />
-    <Compile Include="ViewModels\ProjectResourcesViewModel.cs" />
     <Compile Include="ViewModels\ProjectMenuViewModel.cs" />
     <Compile Include="ViewModels\AddUserPageViewModel.cs" />
     <Compile Include="ViewModels\UserAccountViewModel.cs" />

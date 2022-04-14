@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProjectManager.Views.FormViews
+namespace ProjectManager.Views.Forms
 {
     /// <summary>
     /// Логика взаимодействия для ResourcesCreatePageForm.xaml
