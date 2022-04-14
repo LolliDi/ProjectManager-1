@@ -60,11 +60,13 @@
                                                     HorizontalAlignment="Right">
                                             <Button Content="Подтвердить"
                                                     HorizontalAlignment="Left"
-                                                    Command="{TemplateBinding SubmitCommand}"/>
+                                                    Command="{TemplateBinding SubmitCommand}"
+                                                    CommandParameter="{TemplateBinding SubmitCommandParameter}"/>
                                             <FrameworkElement Width="10"/>
                                             <Button Content="Отмена"
                                                     HorizontalAlignment="Right"
-                                                    Command="{TemplateBinding CancelCommand}"/>
+                                                    Command="{TemplateBinding CancelCommand}"
+                                                    CommandParameter="{TemplateBinding CancelCommandParameter}"/>
                                         </StackPanel>
                                     </Grid>
                                 </Border>
