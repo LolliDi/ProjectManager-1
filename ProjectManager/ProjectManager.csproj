@@ -77,6 +77,10 @@
     </ApplicationDefinition>
     <Compile Include="AttachedProperties\DraggedItemAttachedProperty.cs" />
     <Compile Include="Converters\DepthToWidthConverter.cs" />
+    <Compile Include="CustomControls\GanttChartControl\GanttChart.cs" />
+    <Compile Include="CustomControls\GanttChartControl\GanttChartDay.cs" />
+    <Compile Include="CustomControls\GanttChartControl\GanttChartTask.cs" />
+    <Compile Include="CustomControls\GanttChartControl\GanttChartWeek.cs" />
     <Compile Include="CustomControls\PopupControl\PopupControl.cs" />
     <Compile Include="Converters\IndentToMarginConverter.cs" />
     <Compile Include="CustomControls\TreeGridView\TreeGridView.cs" />
@@ -238,6 +242,10 @@
       <DependentUpon>UsersViewPage.xaml</DependentUpon>
     </Compile>
     <Page Include="CustomControls\FormControl\FormControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\GanttChartControl\GanttChart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
