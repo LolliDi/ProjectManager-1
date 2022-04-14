@@ -19,8 +19,8 @@
             <Image Width="370" Margin="0 0 0 40" Source="..\Resources\AuthorisationLogo.png" Stretch="UniformToFill"/>
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock TextAlignment="Center" Margin="0 10" FontSize="12" TextWrapping="Wrap"  Style="{StaticResource STBLOCK}"><Run Text="Войдите в аккаунт чтобы получить доступ в проектам"/></TextBlock>
-                <local:PlaceTextBox Margin="0 4" Width="250" Height="30" PlaceText ="Логин" Text="{Binding GetLogin, FallbackValue='admin'}"/>
-                <local:PlaceTextBox FontFamily="pack://application:,,,/#password" Margin="0 0 0 8" Width="250" Height="30"  PlaceText ="Пароль" Text="{Binding GetPass , FallbackValue='admin'}"/>
+                <local:PlaceTextBox Margin="0 4" Width="250" Height="30" PlaceText ="Логин" Text="{Binding GetLogin}"/>
+                <local:PlaceTextBox FontFamily="pack://application:,,,/#password" Margin="0 0 0 8" Width="250" Height="30"  PlaceText ="Пароль" Text="{Binding GetPass }"/>
                 <Button Style="{StaticResource SButton}" FontSize="16" BorderBrush="Transparent" Height="30" Width="250"  Command="{Binding AutoCommand}" Content="Войти"/>
             </StackPanel>
         </StackPanel>
