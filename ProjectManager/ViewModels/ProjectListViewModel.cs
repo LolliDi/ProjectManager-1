@@ -29,6 +29,8 @@ namespace ProjectManager.ViewModels
         public ICommand ToUserAccount { get; set; }
         public ICommand ToProjectMenu { get; set; }
 
+        public FormNavigationService UserAccountForm { get; set; }
+
         public ProjectListViewModel(NavigationService navigationService, Users currentUser)
         {
             this.currentUser = currentUser;
@@ -43,6 +45,9 @@ namespace ProjectManager.ViewModels
             ToBack = new LambdaCommand(GoBack);
             ToCreateProject = new LambdaCommand(GoCreateProject);
             ToUserAccount = new LambdaCommand(GoUserAccount);
+
+            UserAccountForm = new FormNavigationService() { OnClosingFormCallback = OnTaskFormClosing };
+
             ToProjectMenu = new LambdaCommand(GoProjectMenu);
             ProjectButtonVisibility = Visibility.Hidden;
         }
@@ -131,13 +136,20 @@ namespace ProjectManager.ViewModels
 
         private void GoUserAccount(object obj)
         {
-            navigationService.CurrentViewModel = new UserAccountViewModel(currentUser, navigationService);
+            UserAccountForm.IsOpen = true;
+            UserAccountForm.CurrentViewModel = new UserAccountViewModel(currentUser, UserAccountForm)
+            {
+                Header = "Данные текущего пользователя"
+            };
         }
 
         private void GoProjectMenu(object obj)
         {
             navigationService.CurrentViewModel = new ProjectMenuViewModel(navigationService, projectList[selectedId], currentUser);
         }
-
+        private void OnTaskFormClosing()
+        {
+            ;
+        }
     }
 }

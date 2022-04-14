@@ -1,9 +1,11 @@
-﻿<UserControl x:Class="ProjectManager.Views.FormViews.UserAccountForm"
+﻿<UserControl x:Class="ProjectManager.Views.Forms.UserAccountForm"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjectManager.Views.FormViews"
+             xmlns:viewmodels="clr-namespace:ProjectManager.ViewModels" 
+             d:DataContext="{d:DesignInstance Type=viewmodels:UserAccountViewModel}"
              mc:Ignorable="d" 
              >
 
@@ -38,7 +40,9 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-
+        
+        
+        
         <TextBlock Grid.Column="0" Grid.Row="0">Логин</TextBlock>
         <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding User.Username}" IsEnabled="False"></TextBox>
 
@@ -46,16 +50,16 @@
         <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding User.Roles.Name}" IsEnabled="False"></TextBox>
 
         <TextBlock Grid.Column="0" Grid.Row="2">Имя</TextBlock>
-        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding User.Persons.Name}"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Name}"></TextBox>
 
         <TextBlock Grid.Column="0" Grid.Row="3">Фамилия</TextBlock>
-        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding User.Persons.Surname}"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Surname}"></TextBox>
 
         <TextBlock Grid.Column="0" Grid.Row="4">Отчество</TextBlock>
-        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding User.Persons.Patronymic}"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Patronymic}"></TextBox>
 
         <TextBlock Grid.Column="0" Grid.Row="5">Возраст</TextBlock>
-        <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=Age}"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Age}"></TextBox>
 
         
     </Grid>

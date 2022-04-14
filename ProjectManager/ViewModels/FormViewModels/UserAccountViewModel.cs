@@ -13,28 +13,24 @@ using ProjectManager.Commands;
 
 namespace ProjectManager.ViewModels
 {
-    class UserAccountViewModel : ViewModel
+    class UserAccountViewModel : FormViewModel
     {
         private Users user;
         private string name = "", surname = "", patronymic = "";
         private Nullable<int> age;
         NavigationService NavigationService;
-        public ICommand Back { get; set; }
-        public ICommand Redact { get; set; }
-        public UserAccountViewModel(Users user, NavigationService NavigationService)
+        public UserAccountViewModel(Users user, FormNavigationService NavigationService) : base (NavigationService)
         {
             this.user = user;
             this.NavigationService = NavigationService;
-            if(user != null && user.Persons != null)
+            if (user != null && user.Persons != null)
             {
                 name = user.Persons.Name;
                 surname = user.Persons.Surname;
                 patronymic = user.Persons.Patronymic;
                 age = user.Persons.Age;
-            }            
-            Back = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new ProjectListViewModel(NavigationService,user));
-            Redact = new LambdaCommand(RedactUser);
-        }       
+            }
+        }
         public string Name
         {
             get { return name; }
@@ -67,7 +63,13 @@ namespace ProjectManager.ViewModels
                 this.user = value;
             }
         }
-        private void RedactUser(object obj)
+
+        protected override void OnSubmitCommandExecute(object parameter)
+        {
+            RedactUser();
+            base.OnSubmitCommandExecute(parameter);
+        }
+        private bool RedactUser()
         {
             Repository<Persons> repository = new Repository<Persons>();
             UsersRepository usersRepository = new UsersRepository();
@@ -80,10 +82,12 @@ namespace ProjectManager.ViewModels
             }
             else
             {
-                Persons person = new Persons() { Age = this.Age, Name = this.Name, Patronymic = this.Patronymic, Surname = this.Surname, Id = user.Id};               
+                Persons person = new Persons() { Age = this.Age, Name = this.Name, Patronymic = this.Patronymic, Surname = this.Surname, Id = user.Id };
                 repository.Add(person);
-            }                                    
+            }
             usersRepository.Update(user);
+
+            return true;
         }
     }
 }
