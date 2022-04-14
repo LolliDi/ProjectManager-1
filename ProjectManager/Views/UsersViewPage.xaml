@@ -6,45 +6,98 @@
              xmlns:local="clr-namespace:ProjectManager"
              xmlns:views="clr-namespace:ProjectManager.Views"
              xmlns:viewmodels="clr-namespace:ProjectManager.ViewModels"
+              xmlns:fa5="http://schemas.fontawesome.com/icons/"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
-
-
-            <Border Style="{StaticResource ShadowBorder}" Width="550" Height="835">
-                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-
-
-                    <ListView SelectedIndex="{Binding SelectedIndex}" Background="Transparent" BorderThickness="0" ItemsSource="{Binding Users}" Width="550" Height="700" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <ListView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </ItemsPanelTemplate>
-                        </ListView.ItemsPanel>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Border Style="{StaticResource CapturedBorder}" Background="White" Height="80" Width="450" CornerRadius="5" Margin="5" Padding="10,0">
-                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                                        <TextBlock  Style="{StaticResource STBLOCK}" FontSize="24" Text="{Binding Login}"/>
-                                        <TextBlock Style="{StaticResource STBLOCK}" FontSize="24" Text="{Binding UserInfo}" HorizontalAlignment="Center"/>
-                                    </StackPanel>
-                                </Border>
-
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Width="212" Margin="5,14" Style="{StaticResource AddUserButton}" Command="{Binding OpenUserCommand}">
-                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Style="{StaticResource STBLOCK}" FontSize="24">Открыть</TextBlock>
-                        </Button>
-                        <Button Width="212" Margin="5,14" Style="{StaticResource AddUserButton}" Command="{Binding DelUserCommand}">
-                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Style="{StaticResource STBLOCK}" FontSize="24">Удалить</TextBlock>
-                        </Button>
-                    </StackPanel>
-                    
-                </StackPanel>
+    
+    <UserControl.Resources>
+        <ControlTemplate x:Key="ArrowedItemsControl" TargetType="{x:Type ItemsControl}">
+            <Border
+            BorderThickness="2"
+            CornerRadius="15">
+                <Grid>
+                    <Grid.OpacityMask>
+                        <VisualBrush Visual="{Binding ElementName=mask}" />
+                    </Grid.OpacityMask>
+                    <Border Name="mask" Background="#FAFAFA" BorderThickness="0" CornerRadius="20"/>
+                    <ScrollViewer>
+                        <ItemsPresenter/>
+                    </ScrollViewer>
+                </Grid>
             </Border>
+        </ControlTemplate>
+    </UserControl.Resources>
+    
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ToolBar Grid.Row="0"
+                 Grid.ColumnSpan="2"
+                 Background="White">
+
+            <ToolBar.Resources>
+                <Style TargetType="fa5:SvgAwesome">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Width" Value="16"/>
+                    <Setter Property="Height" Value="16"/>
+                </Style>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="4"/>
+                    <Setter Property="Padding" Value="4"/>
+                </Style>
+            </ToolBar.Resources>
+
+            <Button 
+                ToolTip="Добавить пользователя"
+                Command="{Binding AddUser}"
+                Margin="4 0 0 0">
+                <Border Background="LightSeaGreen" >
+                    <fa5:SvgAwesome Icon="Solid_Plus"/>
+                </Border>
+            </Button>
+            <Button 
+                ToolTip="Редактировать данные о пользователе"
+                Command="{Binding OpenUserCommand}">
+                <Border Background="SandyBrown">
+                    <fa5:SvgAwesome Icon="Solid_PencilAlt"/>
+                </Border>
+            </Button>
+
+            <Button ToolTip="Удалить пользователя" 
+                 Command="{Binding DelUserCommand}">
+                <Border Background="IndianRed">
+                    <fa5:SvgAwesome Icon="Solid_Minus"/>
+                </Border>
+            </Button>
+        </ToolBar>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <ListView SelectedIndex="{Binding SelectedIndex}" 
+                              ItemsSource="{Binding Users}"  
+                              ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                              Template="{DynamicResource ArrowedItemsControl}">
+                    <!--<ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>-->
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="White" CornerRadius="4" Margin="5" Padding="4">
+                                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                    <TextBlock  Style="{StaticResource STBLOCK}" FontSize="24" Text="{Binding Login}"/>
+                                    <TextBlock Style="{StaticResource STBLOCK}" FontSize="24" Text="{Binding UserInfo}" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+               
         </ScrollViewer>
     </Grid>
 </UserControl>
