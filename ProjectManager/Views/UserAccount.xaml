@@ -16,18 +16,18 @@
                 <TextBlock Text="{Binding User.Roles.Name}" Style="{StaticResource STBLOCK}"/>
             </GroupBox>
             <GroupBox Header="Имя">
-                <TextBox Text="{Binding User.Persons.Name}" Style="{StaticResource STextBox}"/>
+                <TextBox Text="{Binding Name}" Style="{StaticResource STextBox}"/>
             </GroupBox>
             <GroupBox Header="Фамилия">
-                <TextBox Text="{Binding User.Persons.Surname}" Style="{StaticResource STextBox}"/>
+                <TextBox Text="{Binding Surname}" Style="{StaticResource STextBox}"/>
             </GroupBox>
             <GroupBox Header="Отчество">
-                <TextBox Text="{Binding User.Persons.Patronymic}" Style="{StaticResource STextBox}"/>
+                <TextBox Text="{Binding Patronymic}" Style="{StaticResource STextBox}"/>
             </GroupBox>
             <GroupBox Header="Возраст">
-                <TextBox Text="{Binding User.Persons.Age}" Style="{StaticResource STextBox}"/>
+                <TextBox Text="{Binding Age}" Style="{StaticResource STextBox}"/>
             </GroupBox>
-            <Button x:Name="btnRedact" Content="Редактировать" Style="{StaticResource SButton}" Margin="0 10 0 0" Height="62" Width="235"/>
+            <Button x:Name="btnRedact" Content="Редактировать" Command="{Binding Path=Redact}" Style="{StaticResource SButton}" Margin="0 10 0 0" Height="62" Width="235"/>
             <Button x:Name="btnBack" Content="Назад" Command="{Binding Path=Back}" Style="{StaticResource SButton}" Margin="0 5 0 0" Height="62" Width="235"/>
         </StackPanel>
     </Grid>

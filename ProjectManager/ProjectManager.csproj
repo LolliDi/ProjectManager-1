@@ -172,6 +172,7 @@
     <Compile Include="ViewModels\Base\IFormViewModel.cs" />
     <Compile Include="ViewModels\FormViewModels\AddUserPageViewModelForm.cs" />
     <Compile Include="ViewModels\FormViewModels\ProjectCreateViewModel.cs" />
+    <Compile Include="ViewModels\FormViewModels\UserAccountViewModel.cs" />
     <Compile Include="ViewModels\ProjectPassportViewModel.cs" />
     <Compile Include="ViewModels\ProjectReportViewModel.cs" />
     <Compile Include="ViewModels\ProjectResourcesCreateViewModel.cs" />
@@ -180,7 +181,6 @@
     <Compile Include="ViewModels\ProjectResourcesViewModel.cs" />
     <Compile Include="ViewModels\ProjectMenuViewModel.cs" />
     <Compile Include="ViewModels\AddUserPageViewModel.cs" />
-    <Compile Include="ViewModels\UserAccountViewModel.cs" />
     <Compile Include="ViewModels\UsersViewPageViewModel.cs" />
     <Compile Include="Views\AddUserPage.xaml.cs">
       <DependentUpon>AddUserPage.xaml</DependentUpon>
