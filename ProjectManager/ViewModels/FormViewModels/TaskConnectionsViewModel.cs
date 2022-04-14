@@ -148,20 +148,26 @@ namespace ProjectManager.ViewModels
         }
         private void OnParentTaskChangedCommandExecute(object patameter)
         {
-            TaskGroups taskGroup = CurrentTask.TaskGroups1.FirstOrDefault() ?? new TaskGroups();
-
-            taskGroup.Parent = SelectedParentTask.Id;
-            taskGroup.Child = CurrentTask.Id;
-            taskGroup.Tasks = SelectedParentTask;
-            taskGroup.Tasks1 = CurrentTask;
-
-            if (taskGroup.Id == 0)
+            if(MessageBoxResult.Yes == MessageBox
+                .Show("Родительская задача станет недоступной для редактирования и удаления. " +
+                "Ее данные будут автоматически высчитываться исходя из дочерних задач. Продолжить?", "Предупреждение", 
+                MessageBoxButton.YesNo, MessageBoxImage.Warning))
             {
-                taskGroupsRepository.Add(taskGroup);
-            }
-            else
-            {
-                taskGroupsRepository.Update(taskGroup);
+                TaskGroups taskGroup = CurrentTask.TaskGroups1.FirstOrDefault() ?? new TaskGroups();
+
+                taskGroup.Parent = SelectedParentTask.Id;
+                taskGroup.Child = CurrentTask.Id;
+                taskGroup.Tasks = SelectedParentTask;
+                taskGroup.Tasks1 = CurrentTask;
+
+                if (taskGroup.Id == 0)
+                {
+                    taskGroupsRepository.Add(taskGroup);
+                }
+                else
+                {
+                    taskGroupsRepository.Update(taskGroup);
+                }
             }
         }
         private bool CanAddTaskConnectionCommandExecuted(object parameter)

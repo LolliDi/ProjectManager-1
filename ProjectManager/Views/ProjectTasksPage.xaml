@@ -172,10 +172,8 @@
 
         <GridSplitter Grid.Row="1" Width="5"/>
 
-        <TextBlock Text="Диаграмма Ганта"
-                   Grid.Column="1"
-                   Grid.Row="1"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"/>
+        <custom:GanttChart Grid.Column="1"
+                           Grid.Row="1"
+                           TasksCollection="{Binding ProjectTasks}"/>
     </Grid>
 </UserControl>

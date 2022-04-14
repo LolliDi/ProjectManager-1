@@ -77,6 +77,10 @@
     </ApplicationDefinition>
     <Compile Include="AttachedProperties\DraggedItemAttachedProperty.cs" />
     <Compile Include="Converters\DepthToWidthConverter.cs" />
+    <Compile Include="CustomControls\GanttChartControl\GanttChart.cs" />
+    <Compile Include="CustomControls\GanttChartControl\GanttChartDay.cs" />
+    <Compile Include="CustomControls\GanttChartControl\GanttChartTask.cs" />
+    <Compile Include="CustomControls\GanttChartControl\GanttChartWeek.cs" />
     <Compile Include="CustomControls\PopupControl\PopupControl.cs" />
     <Compile Include="Converters\IndentToMarginConverter.cs" />
     <Compile Include="CustomControls\TreeGridView\TreeGridView.cs" />
@@ -166,6 +170,7 @@
     <Compile Include="ViewModels\Base\ValidationViewModel.cs" />
     <Compile Include="ViewModels\CreateProjectViewModel.cs" />
     <Compile Include="ViewModels\Base\IFormViewModel.cs" />
+    <Compile Include="ViewModels\FormViewModels\ProjectCreateViewModel.cs" />
     <Compile Include="ViewModels\ProjectPassportViewModel.cs" />
     <Compile Include="ViewModels\ProjectReportViewModel.cs" />
     <Compile Include="ViewModels\ProjectResourcesCreateViewModel.cs" />
@@ -184,6 +189,15 @@
     <Compile Include="ViewModels\FormViewModels\TaskConnectionsViewModel.cs" />
     <Compile Include="ViewModels\FormViewModels\CreateTaskInfoViewModel.cs" />
     <Compile Include="ViewModels\Base\FormViewModel.cs" />
+    <Compile Include="Views\FormViews\AddUserPageForm.xaml.cs">
+      <DependentUpon>AddUserPageForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormViews\ProjectCreateForm.xaml.cs">
+      <DependentUpon>ProjectCreateForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormViews\ResourcesCreatePageForm.xaml.cs">
+      <DependentUpon>ResourcesCreatePageForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FormViews\TaskConnectionsForm.xaml.cs">
       <DependentUpon>TaskConnectionsForm.xaml</DependentUpon>
     </Compile>
@@ -196,6 +210,9 @@
     </Compile>
     <Compile Include="ViewModels\FormViewModels\UpdateTaskInfoViewModel.cs" />
     <Compile Include="ViewModels\FormViewModels\TaskResourcesViewModel.cs" />
+    <Compile Include="Views\FormViews\UserAccountForm.xaml.cs">
+      <DependentUpon>UserAccountForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProjectMenuPage.xaml.cs">
       <DependentUpon>ProjectMenuPage.xaml</DependentUpon>
     </Compile>
@@ -231,6 +248,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CustomControls\GanttChartControl\GanttChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomControls\PopupControl\PopupControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -259,6 +280,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\FormViews\AddUserPageForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FormViews\ProjectCreateForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FormViews\ResourcesCreatePageForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\FormViews\TaskConnectionsForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -268,6 +301,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FormViews\TaskResourcesForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FormViews\UserAccountForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -358,6 +395,7 @@
       <DependentUpon>ProjectManagerModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <Resource Include="password.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -383,6 +421,8 @@
       <DependentUpon>ProjectManagerModel.edmx</DependentUpon>
       <LastGenOutput>ProjectManagerModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\AuthorisationRightSide.png" />
+    <Resource Include="Resources\AuthorisationLogo.png" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">
