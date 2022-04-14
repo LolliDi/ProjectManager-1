@@ -74,7 +74,7 @@ namespace ProjectManager.ViewModels
         }
         private void OnToAdminPageCommandExecute(object parameter)
         {
-            MessageBox.Show("Это еще не добавили!", "Упс...", MessageBoxButton.OK, MessageBoxImage.Error);
+            ProjectMenuNavigationService.CurrentViewModel = new UsersViewPageViewModel(ProjectMenuNavigationService);
         }
         private void OnToAuthorizationPageCommandExecute(object parameter)
         {

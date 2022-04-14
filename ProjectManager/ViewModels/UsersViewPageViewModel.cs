@@ -1,6 +1,7 @@
 ﻿using ProjectManager.Commands;
 using ProjectManager.Models;
 using ProjectManager.Models.Repositories;
+using ProjectManager.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,12 +17,14 @@ namespace ProjectManager.ViewModels
     {
         public ICommand OpenUserCommand { get; set; }
         public ICommand DelUserCommand { get; set; }
+        public ICommand AddUser { get; set; }
 
         int selectedIndex = 0;
 
         List<UsersInfo> users = new List<UsersInfo>();
-        public UsersViewPageViewModel()
+        public UsersViewPageViewModel(NavigationService NavigationService)
         {
+            AddUser = new LambdaCommand(x => NavigationService.CurrentViewModel = new AddUserPageViewModel(NavigationService));
             OpenUserCommand = new LambdaCommand(OpenUser);
             DelUserCommand = new LambdaCommand(DelUser);
             foreach (Users user in new Repository<Users>().Items.ToList())

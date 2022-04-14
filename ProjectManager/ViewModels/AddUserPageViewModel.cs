@@ -1,6 +1,7 @@
 ﻿using ProjectManager.Commands;
 using ProjectManager.Models;
 using ProjectManager.Models.Repositories;
+using ProjectManager.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,9 +20,9 @@ namespace ProjectManager.ViewModels
         static Repository<Roles> rolesRepository = new Repository<Roles>();
         public ICommand BackPageCommand { get; set; } //для кнопки отмена
         public ICommand AddUserCommand { get; set; } //для конопки добавить пользователя
-        public AddUserPageViewModel()
+        public AddUserPageViewModel(NavigationService NavigationService)
         {
-            BackPageCommand = new LambdaCommand(BackPage);
+            BackPageCommand = new LambdaCommand(parameter => NavigationService.CurrentViewModel = new UsersViewPageViewModel(NavigationService));
             AddUserCommand = new LambdaCommand(AddUser);
         }
 
