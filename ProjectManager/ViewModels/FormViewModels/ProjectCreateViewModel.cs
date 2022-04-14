@@ -3,9 +3,11 @@ using ProjectManager.Models;
 using ProjectManager.Models.Repositories;
 using ProjectManager.Services;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,20 +19,17 @@ namespace ProjectManager.ViewModels
 {
     class ProjectCreateViewModel : FormViewModel
     {
-
         private FormNavigationService NavigationService;
         private Users currentUser;
         private Repository<Users> usersRepository;
-
-        private object selectedUsers;
-
 
         private SolidColorBrush standartColor = new SolidColorBrush(Color.FromRgb(250, 250, 250));
 
         private string title = "";
         private SolidColorBrush titleBorderColor;
         private List<Users> usersList;
-        private List<object> SelectedItems { get; }
+
+        private IList selectedUsers;
 
         public ProjectCreateViewModel(FormNavigationService navigationService, Users currentUser) : base(navigationService)
         {
@@ -41,14 +40,18 @@ namespace ProjectManager.ViewModels
 
             titleBorderColor = standartColor;
             UsersList = new List<Users>();
-
-            selectedUsers = new object();
         }
 
         protected override void OnSubmitCommandExecute(object parameter)
         {
-            GoNewProject();
-            base.OnSubmitCommandExecute(parameter);
+            if(GoNewProject())
+                base.OnSubmitCommandExecute(parameter);
+        }
+
+        public IList SelectedUsers
+        {
+            get => selectedUsers;
+            set => selectedUsers = value;
         }
 
         public string Title
@@ -80,16 +83,16 @@ namespace ProjectManager.ViewModels
             }
         }
 
-        private void GoNewProject()
+        private bool GoNewProject()
         {
             Projects newProject = new Projects();
             if (title.Length < 1 || title.Length > 50)
-                return;
+                return false;
             newProject.Name = title;
             newProject.CreatingDate = DateTime.Now;
             newProject.User = currentUser.Id;
             newProject.Users.Add(usersRepository.Items.Where(x => x.Id == currentUser.Id).FirstOrDefault()); //Приходится делать так, потому что разные контексты
-            var selectedUsersList = ((IEnumerable<object>)selectedUsers).Cast<object>().ToList();
+            var selectedUsersList = selectedUsers;
             if (selectedUsersList.Count > 0)
             {
                 foreach (var item in selectedUsersList)
@@ -99,6 +102,7 @@ namespace ProjectManager.ViewModels
             }
             ProjectsRepository projectsRepository = new ProjectsRepository();
             projectsRepository.Add(newProject);
+            return true;
         }        
     }
 }
