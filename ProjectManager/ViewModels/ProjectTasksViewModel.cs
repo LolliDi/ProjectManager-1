@@ -23,6 +23,7 @@ namespace ProjectManager.ViewModels
             taskGroupsRepository = new Repository<TaskGroups>();
             projectTaskResourcesRepository = new Repository<ProjectTaskResources>();
             projectTasksRepository = new Repository<ProjectTasks>();
+            tasksRepository = new Repository<Tasks>();
 
             TaskInfoForm = new FormNavigationService() { OnClosingFormCallback = OnTaskFormClosing };
             TaskConnectionsForm = new FormNavigationService() { OnClosingFormCallback = OnTaskFormClosing };
@@ -30,6 +31,7 @@ namespace ProjectManager.ViewModels
 
             CurrentProject = project;
             Tasks = new CollectionViewSource() { Source = CurrentProject.ProjectRootTasks };
+            ProjectTasks = projectTasksRepository.Items.Where(item => item.Projects.Id == CurrentProject.Id).Select(item => item.Tasks).ToList();
 
             CreateTaskInfoCommand = new LambdaCommand(OnCreateTaskInfoCommandExecute);
             UpdateTaskInfoCommand = new LambdaCommand(OnUpdateTaskInfoCommandExecute, CanUpdateTaskInfoCommandExecuted);
@@ -41,14 +43,21 @@ namespace ProjectManager.ViewModels
 
         #region Fields
 
+        private readonly IRepository<Tasks> tasksRepository;
         private readonly IRepository<TaskGroups> taskGroupsRepository;
         private readonly IRepository<ProjectTasks> projectTasksRepository;
         private readonly IRepository<ProjectTaskResources> projectTaskResourcesRepository;
+        private List<Tasks> projectTasks;
 
         #endregion
 
         #region Properties
 
+        public List<Tasks> ProjectTasks
+        {
+            get => projectTasks;
+            set => Set(ref projectTasks, ref value);
+        }
         public CollectionViewSource Tasks { get; }
         public FormNavigationService TaskInfoForm { get; set; }
         public FormNavigationService TaskConnectionsForm { get; set; }
@@ -96,6 +105,7 @@ namespace ProjectManager.ViewModels
         {
             if (MessageBoxResult.Yes == MessageBox.Show("Вы точно хотите удалить данный элемент?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question))
             {
+                tasksRepository.Remove(SelectedTask.Id);
                 projectTasksRepository.Remove(SelectedTask.ProjectTasks.FirstOrDefault().Id);
                 RefreshTasksCollection();
             }
@@ -144,10 +154,15 @@ namespace ProjectManager.ViewModels
         {
             RefreshTasksCollection();
         }
+        private void OnTaskFormCreating()
+        {
+            RefreshTasksCollection();
+        }
 
         private void RefreshTasksCollection()
         {
             Tasks.Source = CurrentProject.ProjectRootTasks;
+            ProjectTasks = projectTasksRepository.Items.Where(item => item.Projects.Id == CurrentProject.Id).Select(item => item.Tasks).ToList();
         }
 
         #endregion
