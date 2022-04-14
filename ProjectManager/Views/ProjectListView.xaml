@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjectManager.Views"
-             xmlns:viewmodels="clr-namespace:ProjectManager.ViewModels"
+             xmlns:viewmodels="clr-namespace:ProjectManager.ViewModels" xmlns:forms="clr-namespace:ProjectManager.Views.Forms" xmlns:custom="clr-namespace:ProjectManager.CustomControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     
@@ -56,6 +56,17 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <custom:FormControl Grid.ColumnSpan="2"
+                            Grid.RowSpan="2"
+                            Panel.ZIndex="1"
+                            Padding="15"
+                            Header="{Binding Header}"
+                            IsOpen="{Binding DataContext.ProjectCreateForm.IsOpen, RelativeSource={RelativeSource AncestorType=local:ProjectListView, Mode=FindAncestor}, Mode=TwoWay}"
+                            SubmitCommand="{Binding SubmitCommand}"
+                            CancelCommand="{Binding CancelCommand}"
+                            DataContext="{Binding ProjectCreateForm.CurrentViewModel}">
+            <forms:ProjectCreateForm/>
+        </custom:FormControl>
         <Grid Grid.Column="0" Grid.ColumnSpan="2">
             <!--<TextBlock FontSize="24" FontWeight="Bold" Margin="20, 0" HorizontalAlignment="Left" VerticalAlignment="Center">Список проектов
                 </TextBlock>-->

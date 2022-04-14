@@ -18,7 +18,7 @@ namespace ProjectManager.ViewModels
     class ProjectCreateViewModel : FormViewModel
     {
 
-        private NavigationService NavigationService;
+        private FormNavigationService NavigationService;
         private Users currentUser;
         private Repository<Users> usersRepository;
 
@@ -30,6 +30,7 @@ namespace ProjectManager.ViewModels
         private string title = "";
         private SolidColorBrush titleBorderColor;
         private List<Users> usersList;
+        private List<object> SelectedItems { get; }
 
         public ProjectCreateViewModel(FormNavigationService navigationService, Users currentUser) : base(navigationService)
         {
@@ -79,12 +80,6 @@ namespace ProjectManager.ViewModels
             }
         }
 
-        public object SelectedUsers
-        {
-            get => selectedUsers;
-            set => Set(ref selectedUsers, ref value);
-        }
-
         private void GoNewProject()
         {
             Projects newProject = new Projects();
@@ -103,7 +98,7 @@ namespace ProjectManager.ViewModels
                 }
             }
             ProjectsRepository projectsRepository = new ProjectsRepository();
-            projectsRepository.Add(newProject);          
+            projectsRepository.Add(newProject);
         }        
     }
 }

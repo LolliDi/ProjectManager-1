@@ -24,6 +24,8 @@ namespace ProjectManager.ViewModels
 
         private NavigationService navigationService;
 
+        public FormNavigationService ProjectCreateForm { get; set; }
+
         public ICommand ToBack { get; set; }
         public ICommand ToCreateProject { get; set; }
         public ICommand ToUserAccount { get; set; }
@@ -41,7 +43,10 @@ namespace ProjectManager.ViewModels
             ProjectList = new List<Projects>();
 
             ToBack = new LambdaCommand(GoBack);
+
             ToCreateProject = new LambdaCommand(GoCreateProject);
+            ProjectCreateForm = new FormNavigationService() { OnClosingFormCallback = OnTaskFormClosing };
+
             ToUserAccount = new LambdaCommand(GoUserAccount);
             ToProjectMenu = new LambdaCommand(GoProjectMenu);
             ProjectButtonVisibility = Visibility.Hidden;
@@ -126,7 +131,12 @@ namespace ProjectManager.ViewModels
 
         private void GoCreateProject(object obj)
         {
-            navigationService.CurrentViewModel = new CreateProjectViewModel(navigationService, currentUser);
+            ProjectCreateForm.IsOpen = true;
+            ProjectCreateForm.CurrentViewModel = new ProjectCreateViewModel(ProjectCreateForm, currentUser)
+            {
+                Header = "Создание проекта"
+            };
+            //navigationService.CurrentViewModel = new CreateProjectViewModel(navigationService, currentUser);
         }
 
         private void GoUserAccount(object obj)
@@ -137,6 +147,11 @@ namespace ProjectManager.ViewModels
         private void GoProjectMenu(object obj)
         {
             navigationService.CurrentViewModel = new ProjectMenuViewModel(navigationService, projectList[selectedId], currentUser);
+        }
+
+        private void OnTaskFormClosing()
+        {
+            ProjectList = new List<Projects>();
         }
 
     }
