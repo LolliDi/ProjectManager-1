@@ -21,8 +21,6 @@ namespace ProjectManager.ViewModels
         private Repository<Resources> resourcesRepository = new Repository<Resources>();
         private Repository<ProjectResources> projectResourcesRepository = new Repository<ProjectResources>();
 
-        public ICommand ToProjectResourcesCreateViewModel { get; set; }
-
         public FormNavigationService ProjectResourcesForm { get; set; }
 
         public ProjectResourcesViewModel(NavigationService navigationService, Projects currentProject)
@@ -58,11 +56,6 @@ namespace ProjectManager.ViewModels
             };
         }
 
-        private void OnTaskFormClosing()
-        {
-            Resources = new List<Resources>();
-        }
-
         private void ToProjectResourcesEditViewModelCommandExecute(object parameter)
         {
             MessageBox.Show("В разработке", "Инфомация", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -71,6 +64,11 @@ namespace ProjectManager.ViewModels
         private void ToProjectResourcesDeleteViewModelCommandExecute(object parameter)
         {
             MessageBox.Show("В разработке", "Инфомация", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void OnTaskFormClosing()
+        {
+            Resources = new List<Resources>();
         }
     }
 }
