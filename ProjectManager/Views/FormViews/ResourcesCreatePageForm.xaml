@@ -1,0 +1,96 @@
+﻿<UserControl x:Class="ProjectManager.Views.FormViews.ResourcesCreatePageForm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProjectManager.Views.FormViews"
+             mc:Ignorable="d" 
+             >
+
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="Grid">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="ListBox">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="0">Название</TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Name}" ></TextBox>
+
+        <TextBlock Grid.Column="0" Grid.Row="1">Тип ресурса</TextBlock>
+        <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Path=DataRoles}" SelectedValue="{Binding SelectedRole}" >
+            <ComboBoxItem Content="Рабочий ресурс"/>
+            <ComboBoxItem Content="Материал"/>
+        </ComboBox>
+
+
+        <!--Рабочий ресурс-->
+        <TextBlock Grid.Column="0" Grid.Row="2" Visibility="{Binding WorkingResourceVisibility}">Зарплата</TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Salary}" Visibility="{Binding WorkingResourceVisibility}"></TextBox>
+
+        <TextBlock Grid.Column="0" Grid.Row="3" Visibility="{Binding WorkingResourceVisibility}">Тип зарплаты</TextBlock>
+        <ComboBox Grid.Column="1" Grid.Row="3" ItemsSource="{Binding Path=DataRoles}" SelectedValue="{Binding SelectedRole}" Visibility="{Binding WorkingResourceVisibility}"/>
+
+        <TextBlock Grid.Column="0" Grid.Row="4" Visibility="{Binding WorkingResourceVisibility}">Начало рабочего дня</TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding WorkingDayStart}" Visibility="{Binding WorkingResourceVisibility}"></TextBox>
+
+        <TextBlock Grid.Column="0" Grid.Row="5" Visibility="{Binding WorkingResourceVisibility}">Конец рабочего дня</TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="5"  Text="{Binding WorkingDayEnd}" Visibility="{Binding WorkingResourceVisibility}"></TextBox>
+
+        <TextBlock Grid.Column="0" Grid.Row="6" Visibility="{Binding WorkingResourceVisibility}">Рабочие дни</TextBlock>
+        <Grid Grid.Column="1" Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <CheckBox Grid.ColumnSpan="2" IsChecked="{Binding IsMondayWorking}">Понедельник</CheckBox>
+                <CheckBox Grid.ColumnSpan="2" IsChecked="{Binding IsTuesdayWorking}">Вторник</CheckBox>
+                <CheckBox Grid.ColumnSpan="2" IsChecked="{Binding IsWednesdayWorking}">Среда</CheckBox>
+                <CheckBox Grid.ColumnSpan="2" IsChecked="{Binding IsThursdayWorking}">Четверг</CheckBox>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <CheckBox Grid.ColumnSpan="2" IsChecked="{Binding IsFridayWorking}">Пятница</CheckBox>
+                <CheckBox Grid.ColumnSpan="2" IsChecked="{Binding IsSaturdayWorking}">Суббота</CheckBox>
+                <CheckBox Grid.ColumnSpan="2" IsChecked="{Binding IsSundayWorking}">Воскресенье</CheckBox>
+            </StackPanel>
+        </Grid>
+
+        <!--Материал-->
+        <TextBlock Grid.Column="0" Grid.Row="2" Visibility="{Binding MaterialResourceVisibility}">Количество</TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Count}" Visibility="{Binding MaterialResourceVisibility}"></TextBox>
+
+        <TextBlock Grid.Column="0" Grid.Row="4" Visibility="{Binding MaterialResourceVisibility}">Стоймость</TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Cost}" Visibility="{Binding MaterialResourceVisibility}"></TextBox>
+
+        <TextBlock Grid.Column="0" Grid.Row="3" Visibility="{Binding MaterialResourceVisibility}">Валюта</TextBlock>
+        <ComboBox Grid.Column="1" Grid.Row="3" ItemsSource="{Binding ValuteTypes}" SelectedIndex="{Binding ValuteType}" Visibility="{Binding MaterialResourceVisibility}"/>
+
+    </Grid>
+</UserControl>

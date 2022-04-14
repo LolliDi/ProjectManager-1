@@ -191,6 +191,9 @@
     <Compile Include="Views\FormViews\ProjectCreateForm.xaml.cs">
       <DependentUpon>ProjectCreateForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\FormViews\ResourcesCreatePageForm.xaml.cs">
+      <DependentUpon>ResourcesCreatePageForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FormViews\TaskConnectionsForm.xaml.cs">
       <DependentUpon>TaskConnectionsForm.xaml</DependentUpon>
     </Compile>
@@ -274,6 +277,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FormViews\ProjectCreateForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FormViews\ResourcesCreatePageForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
