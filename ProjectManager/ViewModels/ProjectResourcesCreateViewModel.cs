@@ -395,6 +395,7 @@ namespace ProjectManager.ViewModels
                 MaterialCountColor = FieldColorCheck(Count);
                 MaterialCostColor = FieldColorCheck(Cost);
                 MaterialValuteColor = FieldColorCheck(valuteType);
+                return;
             }
 
             //Добавление ресурса и связи с проектом
