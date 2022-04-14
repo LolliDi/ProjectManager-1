@@ -185,6 +185,9 @@
     <Compile Include="ViewModels\FormViewModels\TaskConnectionsViewModel.cs" />
     <Compile Include="ViewModels\FormViewModels\CreateTaskInfoViewModel.cs" />
     <Compile Include="ViewModels\Base\FormViewModel.cs" />
+    <Compile Include="Views\FormViews\AddUserPageForm.xaml.cs">
+      <DependentUpon>AddUserPageForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FormViews\ProjectCreateForm.xaml.cs">
       <DependentUpon>ProjectCreateForm.xaml</DependentUpon>
     </Compile>
@@ -200,6 +203,9 @@
     </Compile>
     <Compile Include="ViewModels\FormViewModels\UpdateTaskInfoViewModel.cs" />
     <Compile Include="ViewModels\FormViewModels\TaskResourcesViewModel.cs" />
+    <Compile Include="Views\FormViews\UserAccountForm.xaml.cs">
+      <DependentUpon>UserAccountForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProjectMenuPage.xaml.cs">
       <DependentUpon>ProjectMenuPage.xaml</DependentUpon>
     </Compile>
@@ -263,6 +269,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\FormViews\AddUserPageForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\FormViews\ProjectCreateForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -276,6 +286,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FormViews\TaskResourcesForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FormViews\UserAccountForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
