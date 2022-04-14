@@ -3,10 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="clr-namespace:ProjectManager"
+             xmlns:local="clr-namespace:ProjectManager.Views"
              xmlns:views="clr-namespace:ProjectManager.Views"
              xmlns:viewmodels="clr-namespace:ProjectManager.ViewModels"
-              xmlns:fa5="http://schemas.fontawesome.com/icons/"
+             xmlns:fa5="http://schemas.fontawesome.com/icons/"
+             xmlns:custom="clr-namespace:ProjectManager.CustomControls"
+             xmlns:forms="clr-namespace:ProjectManager.Views.Forms"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     
@@ -26,6 +28,13 @@
                 </Grid>
             </Border>
         </ControlTemplate>
+
+        <DataTemplate x:Key="ResourceTemplate">
+            <StackPanel Height="75" Orientation="Vertical" >
+                <TextBlock   FontSize="24" Text="{Binding Login, StringFormat={} Логин: {0} }"/>
+                <TextBlock  FontSize="24" Text="{Binding UserInfo, StringFormat={} Данные пользователя: {0}}"/>
+            </StackPanel>
+        </DataTemplate>
     </UserControl.Resources>
     
     <Grid Background="White">
@@ -33,6 +42,18 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+
+        <custom:FormControl Grid.ColumnSpan="2"
+                            Grid.RowSpan="2"
+                            Panel.ZIndex="1"
+                            Padding="15"
+                            Header="{Binding Header}"
+                            IsOpen="{Binding DataContext.AddUserPageForm.IsOpen, RelativeSource={RelativeSource AncestorType=local:UsersViewPage, Mode=FindAncestor}, Mode=TwoWay}"
+                            SubmitCommand="{Binding SubmitCommand}"
+                            CancelCommand="{Binding CancelCommand}"
+                            DataContext="{Binding AddUserPageForm.CurrentViewModel}">
+            <forms:AddUserPageForm/>
+        </custom:FormControl>
 
         <ToolBar Grid.Row="0"
                  Grid.ColumnSpan="2"
@@ -75,26 +96,34 @@
         </ToolBar>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <StackPanel>
+            <StackPanel Margin="10">
                 <ListView SelectedIndex="{Binding SelectedIndex}" 
                               ItemsSource="{Binding Users}"  
                               ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                              Template="{DynamicResource ArrowedItemsControl}">
+                              Template="{DynamicResource ArrowedItemsControl}"
+                              ItemTemplate ="{DynamicResource ResourceTemplate}">
                     <!--<ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>-->
-                    <ListView.ItemTemplate>
+                    <!--<ListView.ItemTemplate>
                         <DataTemplate>
-                            <Border Background="White" CornerRadius="4" Margin="5" Padding="4">
-                                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                                    <TextBlock  Style="{StaticResource STBLOCK}" FontSize="24" Text="{Binding Login}"/>
-                                    <TextBlock Style="{StaticResource STBLOCK}" FontSize="24" Text="{Binding UserInfo}" HorizontalAlignment="Center"/>
-                                </StackPanel>
+                            <Border Background="White"  CornerRadius="20" Margin="10" Padding="10 5">
                             </Border>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
+                    </ListView.ItemTemplate>-->
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Style.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="20"/>
+                                </Style>
+                            </Style.Resources>
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="Margin" Value="10"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
                 </ListView>
             </StackPanel>
                

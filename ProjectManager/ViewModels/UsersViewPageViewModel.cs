@@ -18,19 +18,38 @@ namespace ProjectManager.ViewModels
         public ICommand OpenUserCommand { get; set; }
         public ICommand DelUserCommand { get; set; }
         public ICommand AddUser { get; set; }
+        
 
         int selectedIndex = 0;
 
         List<UsersInfo> users = new List<UsersInfo>();
+        public FormNavigationService AddUserPageForm { get; set; }
+
         public UsersViewPageViewModel(NavigationService NavigationService)
         {
-            AddUser = new LambdaCommand(x => NavigationService.CurrentViewModel = new AddUserPageViewModel(NavigationService));
+            AddUser = new LambdaCommand(OnAddUserCommandExecuted);
             OpenUserCommand = new LambdaCommand(OpenUser);
             DelUserCommand = new LambdaCommand(DelUser);
+            AddUserPageForm = new FormNavigationService() { OnClosingFormCallback = OnTaskFormClosing };
             foreach (Users user in new Repository<Users>().Items.ToList())
             {
                 users.Add(new UsersInfo(user));
             }
+        }
+
+        private void OnAddUserCommandExecuted(object parameter)
+        {
+            AddUserPageForm.IsOpen = true;
+            AddUserPageForm.CurrentViewModel = new AddUserPageViewModelForm(AddUserPageForm) {Header = "Довавление пользователя"};
+        }
+        private void OnTaskFormClosing()
+        {
+            RefreshTasksCollection();
+        }
+
+        private void RefreshTasksCollection()
+        {
+            Users = null;
         }
 
         public void DelUser(object obj)
@@ -54,7 +73,7 @@ namespace ProjectManager.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Пошел ты нахер, козёл", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -94,7 +113,23 @@ namespace ProjectManager.ViewModels
                 {
                     if (us.Persons != null)
                     {
-                        userInfo = us.Persons.Surname + " " + us.Persons.Name + " " + us.Persons.Patronymic + " " + us.Persons.Age;
+                        userInfo = "";
+                        if (us.Persons.Surname != "")
+                        {
+                            userInfo += us.Persons.Surname + " ";
+                        }
+                        if (us.Persons.Name != "")
+                        {
+                            userInfo += us.Persons.Name + " ";
+                        }
+                        if (us.Persons.Patronymic != "")
+                        {
+                            userInfo += us.Persons.Patronymic + " ";
+                        }                       
+                        if (us.Persons.Age !=null)
+                        {
+                            userInfo += "(" + us.Persons.Age+ " лет)";
+                        }
                     }
                 }
                 catch

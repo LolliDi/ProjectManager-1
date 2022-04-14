@@ -81,7 +81,6 @@ namespace ProjectManager.ViewModels
 
                 if (messageError.Length > 0) //выбиваем ошибку, если что то не заполнено
                 {
-                    throw new Exception(messageError);
                 }
 
                 usersRepository.Add(new Users() { Username = Login, Password = Password, Role = (rolesRepository.Items.FirstOrDefault(x => x.Name == SelectedRole)).Id }); //бобавили основные данные
@@ -159,6 +158,7 @@ namespace ProjectManager.ViewModels
                 AddUserPageModel.selectedRole = value;
             }
         }
+
         public string Age // ввод возраста с обработкой ввода символов
         {
             get => ""+ AddUserPageModel.ageText;

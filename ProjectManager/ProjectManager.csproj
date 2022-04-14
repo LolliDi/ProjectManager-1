@@ -170,6 +170,7 @@
     <Compile Include="ViewModels\Base\ValidationViewModel.cs" />
     <Compile Include="ViewModels\CreateProjectViewModel.cs" />
     <Compile Include="ViewModels\Base\IFormViewModel.cs" />
+    <Compile Include="ViewModels\FormViewModels\AddUserPageViewModelForm.cs" />
     <Compile Include="ViewModels\FormViewModels\ProjectCreateViewModel.cs" />
     <Compile Include="ViewModels\ProjectPassportViewModel.cs" />
     <Compile Include="ViewModels\ProjectReportViewModel.cs" />
