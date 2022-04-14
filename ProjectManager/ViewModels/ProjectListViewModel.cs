@@ -24,12 +24,13 @@ namespace ProjectManager.ViewModels
 
         private NavigationService navigationService;
 
+        public FormNavigationService ProjectCreateForm { get; set; }
+        public FormNavigationService UserAccountForm { get; set; }
+
         public ICommand ToBack { get; set; }
         public ICommand ToCreateProject { get; set; }
         public ICommand ToUserAccount { get; set; }
-        public ICommand ToProjectMenu { get; set; }
-
-        public FormNavigationService UserAccountForm { get; set; }
+        public ICommand ToProjectMenu { get; set; }      
 
         public ProjectListViewModel(NavigationService navigationService, Users currentUser)
         {
@@ -43,9 +44,11 @@ namespace ProjectManager.ViewModels
             ProjectList = new List<Projects>();
 
             ToBack = new LambdaCommand(GoBack);
-            ToCreateProject = new LambdaCommand(GoCreateProject);
-            ToUserAccount = new LambdaCommand(GoUserAccount);
 
+            ToCreateProject = new LambdaCommand(GoCreateProject);
+            ProjectCreateForm = new FormNavigationService() { OnClosingFormCallback = OnTaskFormClosing };
+
+            ToUserAccount = new LambdaCommand(GoUserAccount);
             UserAccountForm = new FormNavigationService() { OnClosingFormCallback = OnTaskFormClosing };
 
             ToProjectMenu = new LambdaCommand(GoProjectMenu);
@@ -131,7 +134,11 @@ namespace ProjectManager.ViewModels
 
         private void GoCreateProject(object obj)
         {
-            navigationService.CurrentViewModel = new CreateProjectViewModel(navigationService, currentUser);
+            ProjectCreateForm.IsOpen = true;
+            ProjectCreateForm.CurrentViewModel = new ProjectCreateViewModel(ProjectCreateForm, currentUser)
+            {
+                Header = "Создание проекта"
+            };
         }
 
         private void GoUserAccount(object obj)
@@ -147,9 +154,11 @@ namespace ProjectManager.ViewModels
         {
             navigationService.CurrentViewModel = new ProjectMenuViewModel(navigationService, projectList[selectedId], currentUser);
         }
+
         private void OnTaskFormClosing()
         {
-            ;
+            ProjectList = new List<Projects>();
         }
+
     }
 }

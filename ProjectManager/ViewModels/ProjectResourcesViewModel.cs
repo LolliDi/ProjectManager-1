@@ -20,19 +20,30 @@ namespace ProjectManager.ViewModels
         private List<Resources> resources = new List<Resources>();
         private Repository<Resources> resourcesRepository = new Repository<Resources>();
         private Repository<ProjectResources> projectResourcesRepository = new Repository<ProjectResources>();
+
+        public ICommand ToProjectResourcesCreateViewModel { get; set; }
+
+        public FormNavigationService ProjectResourcesForm { get; set; }
+
         public ProjectResourcesViewModel(NavigationService navigationService, Projects currentProject)
         {
             this.navigationService = navigationService;
             this.currentProject = currentProject;
-            foreach (var item in projectResourcesRepository.Items.Where(x => x.Project == currentProject.Id))
-                resources.Add(item.Resources);
+            Resources = new List<Resources>();
             ToProjectResourcesCreateViewModel = new LambdaCommand(ToProjectResourcesCreateViewModelCommandExecute);
-            ToProjectResourcesEditViewModel = new LambdaCommand(ToProjectResourcesEditViewModelCommandExecute);
-            ToProjectResourcesDeleteViewModel = new LambdaCommand(ToProjectResourcesDeleteViewModelCommandExecute);
+            ProjectResourcesForm = new FormNavigationService() { OnClosingFormCallback = OnTaskFormClosing };
         }
+
         public List<Resources> Resources
         {
-            get { return resources; }
+            get => resources;
+            set 
+            {
+                var newResourcesList = value;
+                foreach (var item in projectResourcesRepository.Items.Where(x => x.Project == currentProject.Id))
+                    newResourcesList.Add(item.Resources);
+                Set(ref resources, ref newResourcesList);
+            }
         }
         public ICommand ToProjectResourcesCreateViewModel { get; set; }
         public ICommand ToProjectResourcesEditViewModel { get; set; }
@@ -40,7 +51,16 @@ namespace ProjectManager.ViewModels
 
         private void ToProjectResourcesCreateViewModelCommandExecute(object parameter)
         {
-            navigationService.CurrentViewModel = new ProjectResourcesCreateViewModel(navigationService, currentProject);
+            ProjectResourcesForm.IsOpen = true;
+            ProjectResourcesForm.CurrentViewModel = new ProjectResourcesCreateViewModel(ProjectResourcesForm, currentProject)
+            {
+                Header = "Добавление ресурса"
+            };
+        }
+
+        private void OnTaskFormClosing()
+        {
+            Resources = new List<Resources>();
         }
 
         private void ToProjectResourcesEditViewModelCommandExecute(object parameter)

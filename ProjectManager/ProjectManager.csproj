@@ -81,6 +81,7 @@
     <Compile Include="CustomControls\GanttChartControl\GanttChartDay.cs" />
     <Compile Include="CustomControls\GanttChartControl\GanttChartTask.cs" />
     <Compile Include="CustomControls\GanttChartControl\GanttChartWeek.cs" />
+    <Compile Include="CustomControls\MultiselectListBox\MultiselectListBox.cs" />
     <Compile Include="CustomControls\PopupControl\PopupControl.cs" />
     <Compile Include="Converters\IndentToMarginConverter.cs" />
     <Compile Include="CustomControls\TreeGridView\TreeGridView.cs" />
@@ -173,12 +174,12 @@
     <Compile Include="ViewModels\FormViewModels\AddUserPageViewModelForm.cs" />
     <Compile Include="ViewModels\FormViewModels\ProjectCreateViewModel.cs" />
     <Compile Include="ViewModels\FormViewModels\UserAccountViewModel.cs" />
+    <Compile Include="ViewModels\FormViewModels\ProjectResourcesCreateViewModel.cs" />
     <Compile Include="ViewModels\ProjectPassportViewModel.cs" />
     <Compile Include="ViewModels\ProjectReportViewModel.cs" />
-    <Compile Include="ViewModels\ProjectResourcesCreateViewModel.cs" />
+    <Compile Include="ViewModels\ProjectResourcesViewModel.cs" />
     <Compile Include="ViewModels\ProjectTasksViewModel.cs" />
     <Compile Include="ViewModels\ReportsViewModel.cs" />
-    <Compile Include="ViewModels\ProjectResourcesViewModel.cs" />
     <Compile Include="ViewModels\ProjectMenuViewModel.cs" />
     <Compile Include="ViewModels\AddUserPageViewModel.cs" />
     <Compile Include="ViewModels\UsersViewPageViewModel.cs" />

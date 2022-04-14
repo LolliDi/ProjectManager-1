@@ -14,9 +14,9 @@ using System.Windows.Media;
 
 namespace ProjectManager.ViewModels
 {
-    class ProjectResourcesCreateViewModel : ViewModel
+    class ProjectResourcesCreateViewModel : FormViewModel
     {
-        private NavigationService navigationService;
+        private FormNavigationService navigationService;
         private Projects currentProject;
 
         private int resourceType = -1, salaryType = -1, valuteType = -1;
@@ -65,17 +65,12 @@ namespace ProjectManager.ViewModels
             materialCostColor,
             materialValuteColor;
 
-        public ICommand AddResource { get; set; }
-        public ICommand Back { get; set; }
-
-        public ProjectResourcesCreateViewModel(NavigationService navigationService, Projects currentProject)
+        public ProjectResourcesCreateViewModel(FormNavigationService navigationService, Projects currentProject) : base(navigationService)
         {
             this.navigationService = navigationService;
             this.currentProject = currentProject;
             salaryTypes = salaryTypesRepository.Items.ToList();
             valuteTypes = valuteTypesRepository.Items.ToList();
-            AddResource = new LambdaCommand(GoAddResource);
-            Back = new LambdaCommand(GoBack);
             nameColor = standartColor;
 
             salaryColor = standartColor;
@@ -87,6 +82,13 @@ namespace ProjectManager.ViewModels
             materialCountColor = standartColor;
             materialCostColor = standartColor;
             materialValuteColor = standartColor;
+
+        }
+
+        protected override void OnSubmitCommandExecute(object parameter)
+        {
+            if(GoAddResource())
+                base.OnSubmitCommandExecute(parameter);
         }
 
         #region VisibilityProperties
@@ -211,7 +213,7 @@ namespace ProjectManager.ViewModels
         public string Salary
         {
             get => salary;
-            set 
+            set
             {
                 if (int.TryParse(value, out int num))
                     salary = value;
@@ -247,7 +249,7 @@ namespace ProjectManager.ViewModels
         public string Count
         {
             get => count;
-            set 
+            set
             {
                 if (int.TryParse(value, out int num))
                     count = value;
@@ -322,20 +324,15 @@ namespace ProjectManager.ViewModels
         }
         #endregion
 
-        private void GoAddResource(object obj)
+        private bool GoAddResource()
         {
             if (resourceType == 0)
-                AddWorkingResource();
+                return AddWorkingResource();
             else
-                AddMaterialResource();
+                return AddMaterialResource();
         }
 
-        private void GoBack(object obj)
-        {
-            navigationService.CurrentViewModel = new ProjectResourcesViewModel(navigationService, currentProject);
-        }
-
-        private void AddWorkingResource()
+        private bool AddWorkingResource()
         {
             if (name.Length == 0 || salary.Length == 0 || salaryType == -1 || workingDayStart.Length == 0 || workingDayEnd.Length == 0 || !HasWorkingDays())
             {
@@ -345,7 +342,7 @@ namespace ProjectManager.ViewModels
                 WorkingDayStartColor = FieldColorCheck(WorkingDayStart);
                 WorkingDayEndColor = FieldColorCheck(WorkingDayEnd);
                 WorkingDayColor = FieldColorCheck();
-                return;
+                return false;
             }
             //Добавление календаря
             Repository<WorkingCalendars> workingCalendars = new Repository<WorkingCalendars>();
@@ -354,7 +351,7 @@ namespace ProjectManager.ViewModels
             TimeSpan endTime = TimeSpan.Parse(workingDayEnd);
             newWorkingCalendar.StartTime = startTime;
             newWorkingCalendar.EndTime = endTime;
-            if(startTime < endTime)
+            if (startTime < endTime)
                 newWorkingCalendar.Duration = TimeSpan.FromMinutes(endTime.TotalMinutes - startTime.TotalMinutes);
             else
                 newWorkingCalendar.Duration = TimeSpan.FromMinutes(1440 + endTime.TotalMinutes - startTime.TotalMinutes);
@@ -383,19 +380,18 @@ namespace ProjectManager.ViewModels
             newWorkingResource.SalaryType = salaryTypes[salaryType].Id;
             newWorkingResource.WorkingCalendar = newCalendarId;
             workingResourcesRepository.Add(newWorkingResource);
-
-            navigationService.CurrentViewModel = new ProjectResourcesViewModel(navigationService, currentProject);
+            return true;
         }
 
-        private void AddMaterialResource()
+        private bool AddMaterialResource()
         {
-            if (name.Length == 0 || count.Length == 0 || cost.Length == 0 || valuteType != -1)
+            if (name.Length == 0 || count.Length == 0 || cost.Length == 0 || valuteType == -1)
             {
                 NameColor = FieldColorCheck(Name);
                 MaterialCountColor = FieldColorCheck(Count);
                 MaterialCostColor = FieldColorCheck(Cost);
                 MaterialValuteColor = FieldColorCheck(valuteType);
-                return;
+                return false;
             }
 
             //Добавление ресурса и связи с проектом
@@ -406,8 +402,7 @@ namespace ProjectManager.ViewModels
             var newResourceId = resourcesRepository.Add(new Resources() { Name = name }).Id;
             projectResourcesRepository.Add(new ProjectResources() { Project = currentProject.Id, Resource = newResourceId });
             materialResoucresRepository.Add(new MaterialResoucres() { Id = newResourceId, Count = Convert.ToInt32(count), Cost = Convert.ToInt32(cost), CostType = valuteTypes[valuteType].Id });
-
-            navigationService.CurrentViewModel = new ProjectResourcesViewModel(navigationService, currentProject);
+            return true;
         }
 
         private bool HasWorkingDays()
