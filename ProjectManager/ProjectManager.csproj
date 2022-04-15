@@ -397,7 +397,9 @@
       <DependentUpon>ProjectManagerModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
-    <Resource Include="password.ttf" />
+    <Resource Include="password.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -423,8 +425,15 @@
       <DependentUpon>ProjectManagerModel.edmx</DependentUpon>
       <LastGenOutput>ProjectManagerModel.cs</LastGenOutput>
     </Content>
-    <Resource Include="Resources\AuthorisationRightSide.png" />
-    <Resource Include="Resources\AuthorisationLogo.png" />
+    <Resource Include="Resources\Icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\AuthorisationRightSide.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\AuthorisationLogo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">
