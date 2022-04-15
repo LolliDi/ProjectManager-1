@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace ProjectManager.CustomControls
 {
@@ -62,8 +63,9 @@ namespace ProjectManager.CustomControls
         private ObservableCollection<GanttChartWeek> weekControls;
         private ObservableCollection<GanttChartDay> daysOfTheWeekControls;
         private ObservableCollection<GanttChartTask> taskControls;
-        private ObservableCollection<Tasks> taskCollection;
+        private List<Tasks> sortedTasksCollection;
         private int initRowsCount;
+
 
         public override void OnApplyTemplate()
         {
@@ -76,12 +78,10 @@ namespace ProjectManager.CustomControls
             daysOfTheWeekControls = new ObservableCollection<GanttChartDay>();
             taskControls = new ObservableCollection<GanttChartTask>();
 
-            if(TasksCollection != null)
-            {
-                taskCollection = new ObservableCollection<Tasks>(TasksCollection);
-                taskCollection.CollectionChanged += TaskCollection_CollectionChanged;
-            }
-
+            InitGanttChart();
+        }
+        private void InitGanttChart()
+        {
             Binding ColumnDefinitionBinding = new Binding() { Path = new PropertyPath(nameof(DayColumnWidth)), Source = this };
 
             var pastDaysOffset = 14;
@@ -90,7 +90,12 @@ namespace ProjectManager.CustomControls
             currentWeekDate = currentWeekDate.AddDays(-1 * diff);
             var dayDate = currentWeekDate;
 
-            for (int i = 0; i < 50; i++)
+            var minDate = TasksCollection.Min(item => item.StartDate);
+            var maxDate = TasksCollection.Max(item => item.EndDate);
+
+            var totalProjectDuration = (maxDate - minDate).GetValueOrDefault() == TimeSpan.MinValue ? (maxDate - minDate).GetValueOrDefault().Days : 50;
+
+            for (int i = 0; i < totalProjectDuration; i++)
             {
                 var columnDefinition = new ColumnDefinition();
                 columnDefinition.SetBinding(WidthProperty, ColumnDefinitionBinding);
@@ -187,15 +192,10 @@ namespace ProjectManager.CustomControls
             }
         }
 
-
         private static void OnTasksCollectionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if(((GanttChart)d).taskCollection != null)
-            {
-                ((GanttChart)d).taskCollection.CollectionChanged -= ((GanttChart)d).TaskCollection_CollectionChanged;
-                ((GanttChart)d).taskCollection = new ObservableCollection<Tasks>((IEnumerable<Tasks>)e.NewValue);
-                ((GanttChart)d).taskCollection.CollectionChanged += ((GanttChart)d).TaskCollection_CollectionChanged;
-            }
+            var sortedTasksCollection = ((GanttChart)d).TasksCollection.OrderBy(item => item.Id).ThenBy(item => item.TaskGroups.FirstOrDefault()?.Child).ThenBy(item => item.TaskGroups1.FirstOrDefault()?.Child).ToList();
+            ((GanttChart)d).sortedTasksCollection = sortedTasksCollection;
             ((GanttChart)d).ClearTaskControls();
             ((GanttChart)d).InitTaskControls();
         }
@@ -203,10 +203,10 @@ namespace ProjectManager.CustomControls
         {
             if (TasksCollection != null)
             {
-                for (int i = 0; i < TasksCollection.Count; i++)
+                for (int i = 0; i < sortedTasksCollection.Count; i++)
                 {
                     //Tasks
-                    var task = TasksCollection.ElementAt(i);
+                    var task = sortedTasksCollection.ElementAt(i);
 
                     //Создание контрола и стиля
                     var taskContent = new Border()
@@ -237,6 +237,31 @@ namespace ProjectManager.CustomControls
                         ContentControl = taskControl
                     });
                     PART_Grid.Children.Add(taskControl);
+
+                    //TaskConnections
+                    var taskConnections = task.TaskConnections1;
+                    foreach (var taskConnection in taskConnections)
+                    {
+                        var arrow = new Polygon()
+                        {
+                            Points = new PointCollection()
+                            {
+                                new Point(0, 0),
+                                new Point(10, 0),
+                                new Point(5, 10),
+                            }
+                        };
+                        var line = new Polyline()
+                        {
+                            Points = new PointCollection()
+                            {
+                                new Point(-25, -25),
+                                new Point(0, -25),
+                                new Point(0, 25),
+                            }
+                        };
+                        //var taskConnectionControl = ;
+                    }
                 }
             }
         }
@@ -290,37 +315,6 @@ namespace ProjectManager.CustomControls
             });
             PART_Grid.Children.Add(taskControl);
 
-        }
-
-        private void TaskCollection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            switch (e.Action)
-            {
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
-                    foreach (var item in e.NewItems)
-                    {
-                        AddTaskControl((Tasks)item);
-                    }
-                    break;
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
-                    foreach (var item in e.OldItems)
-                    {
-                        RemoveTaskControl((Tasks)item);
-                    }
-                    break;
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
-                    foreach (var item in e.OldItems)
-                    {
-                        UpdateTaskControl((Tasks)item);
-                    }
-                    break;
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
-                    ClearTaskControls();
-                    break;
-                default:
-                    break;
-            }
         }
 
         private void UpdateTaskControl(Tasks task)
