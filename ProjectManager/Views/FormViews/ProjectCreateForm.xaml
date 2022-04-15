@@ -44,6 +44,7 @@
         <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Top">Пользователи в проекте</TextBlock>
         <customcontrols:MultiselectListBox 
             Grid.Column="1" Grid.Row="1"
+            Margin="5"
             Height="200"
             x:Name="UsersListBox"
             ItemsSource="{Binding UsersList}"

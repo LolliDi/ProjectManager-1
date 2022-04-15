@@ -28,7 +28,7 @@
         </ControlTemplate>
         
         <DataTemplate x:Key="ProjectItem">
-            <Border CornerRadius="20" Background="White" Width="470"   Margin="10" Padding="10 7">
+            <Border CornerRadius="20" Background="White" Margin="10" Padding="10 7">
                 <Grid Margin="20" >
                     <TextBlock FontSize="24" Text="{Binding Name}"></TextBlock>
                     <TextBlock FontSize="24" HorizontalAlignment="Right" Text="{Binding User}"></TextBlock>
@@ -51,8 +51,8 @@
 
     <Grid Background="White">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -97,7 +97,8 @@
                 Template="{DynamicResource ArrowedItemsControl}"
                 ItemsSource="{Binding ProjectList}"
                 ItemTemplate="{DynamicResource ProjectItem }"
-                SelectedIndex="{Binding SelectedProject}">
+                SelectedIndex="{Binding SelectedProject}"
+                HorizontalContentAlignment="Stretch">
             </ListBox>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1" Margin="16 0">
