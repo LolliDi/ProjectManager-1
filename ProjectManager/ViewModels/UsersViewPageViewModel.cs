@@ -40,7 +40,7 @@ namespace ProjectManager.ViewModels
         private void OnAddUserCommandExecuted(object parameter)
         {
             AddUserPageForm.IsOpen = true;
-            AddUserPageForm.CurrentViewModel = new AddUserPageViewModelForm(AddUserPageForm) {Header = "Довавление пользователя"};
+            AddUserPageForm.CurrentViewModel = new AddUserPageViewModelForm(AddUserPageForm) {Header = "Добавление пользователя"};
         }
         private void OnTaskFormClosing()
         {
