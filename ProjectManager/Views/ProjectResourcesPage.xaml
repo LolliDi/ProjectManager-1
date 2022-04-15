@@ -57,6 +57,18 @@
             <RowDefinition Height="auto"  ScrollViewer.CanContentScroll="False"/>
             <RowDefinition Height="auto"  ScrollViewer.CanContentScroll="False"/>
         </Grid.RowDefinitions>
+        <!--Форма добавления ресурса-->
+        <custom:FormControl Grid.ColumnSpan="2"
+                            Grid.RowSpan="2"
+                            Panel.ZIndex="1"
+                            Padding="15"
+                            Header="{Binding Header}"
+                            IsOpen="{Binding DataContext.ProjectResourcesForm.IsOpen, RelativeSource={RelativeSource AncestorType=local:ProjectResourcesPage, Mode=FindAncestor}, Mode=TwoWay}"
+                            SubmitCommand="{Binding SubmitCommand}"
+                            CancelCommand="{Binding CancelCommand}"
+                            DataContext="{Binding ProjectResourcesForm.CurrentViewModel}">
+            <forms:ResourcesCreatePageForm/>
+        </custom:FormControl>
         <ToolBar Grid.Row="0"
                  Grid.ColumnSpan="2"
                  Background="White">
